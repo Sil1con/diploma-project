@@ -1,9 +1,10 @@
-@use '../../../shared/styles/mixins/position';
-@use '../../../shared/styles/mixins/shadows';
-@use '../../../shared/styles/variables/fonts';
-@use '../../../shared/styles/variables/colors';
-@use '../../../shared/styles/variables/dimensions';
+@use '../../shared/styles/mixins/position';
+@use '../../shared/styles/mixins/shadows';
+@use '../../shared/styles/variables/fonts';
+@use '../../shared/styles/variables/colors';
+@use '../../shared/styles/variables/dimensions';
 
+//scss styles for <app-header>
 :host {
     width: 100%;
     display: flex;

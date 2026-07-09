@@ -1,10 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 $montserrat: 'Montserrat', sans-serif;
+$footer-text-color: #8E8E8E;
 
-@mixin customize-text($font: $montserrat, $size: 20px, $weight: 500) {
+@mixin customize-text($font: $montserrat, $text-color: black, $size: 20px, $weight: 500) {
     margin: 0;
     font-family: $font;
     font-size: $size;
     font-weight: $weight;
+    color: $text-color;
 }

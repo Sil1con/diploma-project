@@ -1,0 +1,57 @@
+@use '../../shared/styles/mixins/position';
+@use '../../shared/styles/mixins/shadows';
+@use '../../shared/styles/variables/fonts';
+@use '../../shared/styles/variables/colors';
+@use '../../shared/styles/variables/dimensions';
+
+//scss styles for <app-footer>
+:host {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+footer {
+    @include position.horizontally-centered-content;
+    @include shadows.shadow;
+    justify-content: space-between;
+    margin-top: 1000px;
+    padding: dimensions.$component-padding;
+    
+    height: 60px;
+    width: 100%;
+    max-width: (dimensions.$maximum-width - (2 * dimensions.$component-padding));
+    
+    border-radius: 25px;
+    background-color: colors.$component-background;
+}
+
+.footer-text {
+    @include fonts.customize-text($text-color: fonts.$footer-text-color, $size: 14px, $weight: 600);
+}
+
+.footer-left-div, .footer-right-div, .footer-left-text {
+    @include position.horizontally-centered-content;
+}
+
+.data-protection-icon {
+    margin-left: 10px;
+    height: 35px;
+}
+
+.footer-left-text {
+    margin-left: 15px;
+}
+
+.delimiter {
+    margin: 0 20px;
+}
+
+.update-status-icon {
+    margin: 0 15px;
+    height: 12px;
+    width: 12px;
+
+    border-radius: 50%;
+    background-color: #47C77C;
+}

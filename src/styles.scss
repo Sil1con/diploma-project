@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+@use './app/shared/styles/variables/colors';
+
+body {
+    margin: 30px 0 0 0;
+    
+    width: 100%;
+    min-height: 100vh;
+
+    background-color: colors.$main-background;
+}

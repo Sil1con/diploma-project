@@ -1,0 +1,65 @@
+@use '../../../shared/styles/mixins/position';
+@use '../../../shared/styles/mixins/shadows';
+@use '../../../shared/styles/variables/fonts';
+@use '../../../shared/styles/variables/colors';
+@use '../../../shared/styles/variables/dimensions';
+
+:host {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+header {
+    @include position.horizontally-centered-content;
+    @include shadows.shadow;
+    justify-content: space-between;
+
+    padding: 10px;
+    width: 100%;
+    max-width: (dimensions.$maximum-width - (2 * dimensions.$component-padding));
+    
+    border-radius: 25px;
+    background-color: colors.$component-background;
+}
+
+.header-left-section {
+    @include position.horizontally-centered-content;
+}
+
+.logo {
+    height: 85px;
+    border-radius: 20px;
+}
+
+.header-title {
+    @include fonts.customize-text($size: 35px, $weight: 700);
+    
+    margin-left: 15px;
+
+}
+
+.header-right-section {
+    @include position.fully-centered-content;
+}
+
+.login-btn {
+    height: 60px;
+    width: 80px;
+
+    @include position.fully-centered-content;
+
+    background-color: transparent;
+    border: transparent;
+    cursor: pointer;
+
+    transition: height 200ms
+}
+
+.login-btn:hover {
+    height: 50px;
+}
+
+.login-btn-img {
+    height: 100%;
+}

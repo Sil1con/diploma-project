@@ -1,0 +1,19 @@
+@mixin fully-centered-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin horizontally-centered-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+@mixin vertically-centered-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

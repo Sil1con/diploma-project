@@ -1,0 +1,155 @@
+@use '../../shared/styles/mixins/position';
+@use '../../shared/styles/mixins/shadows';
+@use '../../shared/styles/mixins/custom';
+@use '../../shared/styles/variables/fonts';
+@use '../../shared/styles/variables/time';
+@use '../../shared/styles/variables/colors';
+@use '../../shared/styles/variables/dimensions';
+
+$domain-page-padding: 75px;
+$domain-page-padding-top: 135px;
+$domain-page-padding-bottom: 165px;
+
+$domain-width: 510px;
+$domain-height: 670px;
+
+$domain-radius: 35px;
+$investment-background: #F6FAF8;
+$income-background: #F8FAFD;
+$expenditures-background: #FDF9F6;
+
+:host {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+main {
+    @include position.horizontally-centered-content;
+    @include shadows.shadow;
+    justify-content: space-between;
+
+    width: 100%;
+    max-width: (dimensions.$maximum-width - (2 * $domain-page-padding));
+
+    margin: 30px 0;
+    padding: 0 $domain-page-padding;
+    padding-top: $domain-page-padding-top;
+    padding-bottom: $domain-page-padding-bottom;
+
+    background-color: colors.$component-background;
+    border-radius: dimensions.$component-radius;
+}
+
+.domain {
+    @include position.fully-centered-content;
+    flex-direction: column;
+
+    width: 100%;
+    max-width: $domain-width;
+    height: $domain-height;
+
+    transition: transform time.$transition-time;
+}
+
+.domain:hover {
+    transform: scale(1.05);
+}
+
+.domain-title {
+    @include fonts.customize-text($size: 40px, $weight: 700);
+    margin: 80px 0 65px 0;
+}
+
+.domain-btn {
+    width: 70px;
+    height: 70px;
+
+    border: 0px solid;
+    border-radius: 50%;
+    cursor: pointer;
+
+    @include position.fully-centered-content;
+}
+
+.domain-icon {
+    transition: transform time.$transition-time;
+}
+
+.domain-icon:hover {
+    transform: scale(1.1);
+}
+
+.icon-div {
+    width: 180px;
+    height: 180px;
+
+    @include position.fully-centered-content;
+}
+
+.arrow-icon {
+    height: 30px;
+}
+
+.investments-domain {
+    @include custom.customize-background-border($investment-background, 3px, #B7E6CF, $domain-radius);
+}
+
+.investments-domain .icon-div {
+    @include custom.customize-background-border(white, 1px, #B7E6CF, $domain-radius);
+}
+
+.investments-domain .domain-btn {
+    background-color: #E2F3EC;
+}
+
+.investments-domain .domain-btn {
+    background-color: #E2F3EC;
+
+    transition: background-color time.$transition-time;
+}
+
+.investments-domain .domain-btn:hover {
+    background-color: #B7E6CF;
+}
+
+
+.income-domain {
+    @include custom.customize-background-border($income-background, 3px, #B5CAEA, $domain-radius);
+}
+
+.income-domain .icon-div {
+    @include custom.customize-background-border(white, 1px, #B5CAEA, $domain-radius);
+}
+
+.income-domain .domain-btn {
+    background-color: #EBF2FA;
+}
+
+.income-domain .domain-btn {
+    background-color: #EBF2FA;
+
+    transition: background-color 500ms;
+}
+
+.income-domain .domain-btn:hover {
+    background-color: #B5CAEA;
+}
+
+.expenditures-domain {
+    @include custom.customize-background-border($expenditures-background, 3px, #F2BF99, $domain-radius);
+}
+
+.expenditures-domain .icon-div {
+    @include custom.customize-background-border(white, 1px, #F2BF99, $domain-radius);
+}
+
+.expenditures-domain .domain-btn {
+    background-color: #FCF0E1;
+
+    transition: background-color 500ms;
+}
+
+.expenditures-domain .domain-btn:hover {
+    background-color: #f9d0b1;
+}

@@ -20,7 +20,7 @@ header {
     width: 100%;
     max-width: (dimensions.$maximum-width - (2 * dimensions.$component-padding));
     
-    border-radius: 25px;
+    border-radius: dimensions.$component-radius;
     background-color: colors.$component-background;
 }
 

@@ -15,14 +15,13 @@ footer {
     @include position.horizontally-centered-content;
     @include shadows.shadow;
     justify-content: space-between;
-    margin-top: 1000px;
     padding: dimensions.$component-padding;
     
     height: 60px;
     width: 100%;
     max-width: (dimensions.$maximum-width - (2 * dimensions.$component-padding));
     
-    border-radius: 25px;
+    border-radius: dimensions.$component-radius;
     background-color: colors.$component-background;
 }
 

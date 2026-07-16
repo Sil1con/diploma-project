@@ -1,0 +1,26 @@
+@use '../../../shared/styles/variables/dimensions';
+@use '../../../shared/styles/mixins/shadows';
+@use '../../../shared/styles/mixins/position';
+
+$layout-height: 1000px;
+$layout-padding: 10px;
+
+:host {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    margin: dimensions.$component-margin 0px;
+}
+
+.navigation-layout {
+    @include position.horizontally-centered-content;
+    @include shadows.shadow;
+
+    width: 100%;
+    height: $layout-height;
+    padding: 0 $layout-padding;
+    max-width: (dimensions.$maximum-width - (2 * $layout-padding));
+
+    background-color: wheat;
+}

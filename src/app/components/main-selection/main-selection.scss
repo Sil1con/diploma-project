@@ -12,11 +12,7 @@ $domain-page-padding-bottom: 165px;
 
 $domain-width: 510px;
 $domain-height: 670px;
-
 $domain-radius: 35px;
-$investment-background: #F6FAF8;
-$income-background: #F8FAFD;
-$expenditures-background: #FDF9F6;
 
 :host {
     width: 100%;
@@ -70,6 +66,8 @@ main {
     cursor: pointer;
 
     @include position.fully-centered-content;
+
+    transition: background-color time.$transition-time;
 }
 
 .domain-icon {
@@ -92,7 +90,7 @@ main {
 }
 
 .investments-domain {
-    @include custom.customize-background-border($investment-background, 3px, #B7E6CF, $domain-radius);
+    @include custom.customize-background-border(colors.$investment-background, 3px, #B7E6CF, $domain-radius);
 }
 
 .investments-domain .icon-div {
@@ -105,17 +103,14 @@ main {
 
 .investments-domain .domain-btn {
     background-color: #E2F3EC;
-
-    transition: background-color time.$transition-time;
 }
 
 .investments-domain .domain-btn:hover {
     background-color: #B7E6CF;
 }
 
-
 .income-domain {
-    @include custom.customize-background-border($income-background, 3px, #B5CAEA, $domain-radius);
+    @include custom.customize-background-border(colors.$income-background, 3px, #B5CAEA, $domain-radius);
 }
 
 .income-domain .icon-div {
@@ -128,8 +123,6 @@ main {
 
 .income-domain .domain-btn {
     background-color: #EBF2FA;
-
-    transition: background-color 500ms;
 }
 
 .income-domain .domain-btn:hover {
@@ -137,7 +130,7 @@ main {
 }
 
 .expenditures-domain {
-    @include custom.customize-background-border($expenditures-background, 3px, #F2BF99, $domain-radius);
+    @include custom.customize-background-border(colors.$expenditures-background, 3px, #F2BF99, $domain-radius);
 }
 
 .expenditures-domain .icon-div {
@@ -146,8 +139,6 @@ main {
 
 .expenditures-domain .domain-btn {
     background-color: #FCF0E1;
-
-    transition: background-color 500ms;
 }
 
 .expenditures-domain .domain-btn:hover {

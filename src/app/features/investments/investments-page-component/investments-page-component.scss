@@ -1,0 +1,16 @@
+@use '../../../shared/styles/variables/dimensions';
+@use '../../../shared/styles/mixins/shadows';
+@use '../../../shared/styles/mixins/position';
+@use '../../../shared/styles/variables/colors';
+
+$component-padding: 40px;
+
+:host {
+    @include position.vertically-centered-content;
+
+    width: 100%;
+    height: 100%;
+    max-width: dimensions.$maximum-width - (2 * $component-padding);
+
+    background-color: colors.$component-background;
+}

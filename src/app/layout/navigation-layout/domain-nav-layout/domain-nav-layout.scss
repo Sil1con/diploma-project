@@ -21,6 +21,7 @@ $layout-padding: 10px;
     height: $layout-height;
     padding: 0 $layout-padding;
     max-width: (dimensions.$maximum-width - (2 * $layout-padding));
+    column-gap: 10px;
 
     background-color: wheat;
 }

@@ -21,6 +21,7 @@ nav {
     @include position.vertically-centered-content;
     @include custom.customize-background-border(colors.$component-background, 0px, transparent, dimensions.$border-radius);
     justify-content: start;
+    row-gap: 10px;
 
     padding: $navigation-padding;
 }

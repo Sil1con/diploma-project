@@ -18,6 +18,15 @@
     align-items: center;
 }
 
-// @mixin custom-positioning($direction, $placement) {
-
-// }
+@mixin custom-positioning($direction, $vertical-position, $horizontal-position) {
+    display: flex;
+    flex-direction: $direction;
+    
+    @if $direction == row {
+        justify-content: $horizontal-position;
+        align-items: $vertical-position;
+    } @else if $direction == column {
+        justify-content: $vertical-position;
+        align-items: $horizontal-position;
+    }
+}

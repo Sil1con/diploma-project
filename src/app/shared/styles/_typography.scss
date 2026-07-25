@@ -1,0 +1,13 @@
+@use '../styles/variables/fonts';
+
+.titles {
+    @include fonts.customize-text($text-color: black, $size: 33px, $weight: 600);
+}
+
+.green-text {
+    @include fonts.customize-text($text-color: #40C057, $size: 25px, $weight: 500);
+}
+
+.grey-title {
+    @include fonts.customize-text($text-color: #656565, $size: 22px, $weight: 500);
+}

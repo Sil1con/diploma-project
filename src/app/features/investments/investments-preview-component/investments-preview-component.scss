@@ -1,0 +1,87 @@
+@use '../../../shared/styles/variables/dimensions';
+@use '../../../shared/styles/variables/colors';
+@use '../../../shared/styles/variables/fonts';
+@use '../../../shared/styles/mixins/shadows';
+@use '../../../shared/styles/mixins/position';
+@use '../../../shared/styles/mixins/custom';
+@use '../../../shared/styles/typography';
+
+$component-padding: 25px;
+$investments-list-width: 610px;
+$investments-list-height: 550px;
+$investments-list-padding: 30px;
+$investment-list-height: 450px;
+
+.investments-block {
+    @include custom.customize-background-border(transparent, 1px, colors.$component-border-color, dimensions.$border-radius);
+    @include position.custom-positioning(column, space-between, space-between);
+    box-sizing: border-box;
+    row-gap: 35px;
+    width: 100%;
+    height: $investments-list-height;
+    padding: $investments-list-padding;
+}
+
+.list-title-block {
+    @include position.custom-positioning(row, center, space-between);
+}
+
+.view-all-btn {
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+}
+
+.investments-list {
+    @include position.custom-positioning(column, space-between, space-between);
+    width: 100%;
+    height: 100%;
+}
+
+.investment {
+    @include position.custom-positioning(row, center, space-between);
+    column-gap: 30px
+}
+
+.investment-icon-block {
+    @include custom.customize-background-border(white, 0, transparent, 20px);
+    @include position.fully-centered-content;
+    @include shadows.shadow;
+    width: 100%;
+    height: 95px;
+    max-width: 95px;
+}
+
+.investment-icon {
+    height: 65px
+}
+
+.investment-description {
+    @include position.custom-positioning(row, center, space-between);
+    width: 100%;
+}
+
+.investment-title {
+    @include fonts.customize-text($size: 25px, $weight: 600);
+}
+
+.investment-subtitle {
+    @include fonts.customize-text($text-color: #434343, $size: 18px, $weight: 400);
+}
+
+.current-value-block .cash-value {
+    @include fonts.customize-text($text-color: black, $size: 25px, $weight: 600);
+}
+
+.current-value-block div {
+    @include position.custom-positioning(row, center, end);
+}
+
+.current-value-block div .gain-icon {
+    height: 12px;
+}
+
+.current-value-block div .percent-value {
+    margin-left: 10px;
+    font-size: 20px;
+}

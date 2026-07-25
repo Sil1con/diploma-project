@@ -1,6 +1,6 @@
-@use '../../../shared/styles/variables/dimensions';
 @use '../../../shared/styles/mixins/shadows';
 @use '../../../shared/styles/mixins/position';
+@use '../../../shared/styles/variables/dimensions';
 
 $layout-height: 1000px;
 $layout-padding: 10px;
@@ -15,13 +15,9 @@ $layout-padding: 10px;
 
 .navigation-layout {
     @include position.horizontally-centered-content;
-    @include shadows.shadow;
 
     width: 100%;
     height: $layout-height;
-    padding: 0 $layout-padding;
     max-width: (dimensions.$maximum-width - (2 * $layout-padding));
     column-gap: 10px;
-
-    background-color: wheat;
 }

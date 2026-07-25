@@ -1,0 +1,149 @@
+@use '../../../shared/styles/variables/dimensions';
+@use '../../../shared/styles/variables/colors';
+@use '../../../shared/styles/variables/fonts';
+@use '../../../shared/styles/variables/time';
+@use '../../../shared/styles/mixins/shadows';
+@use '../../../shared/styles/mixins/position';
+@use '../../../shared/styles/mixins/custom';
+@use '../../../shared/styles/typography';
+
+$component-padding: 30px;
+$component-border-radius: 20px;
+
+:host {
+    @include custom.customize-background-border(transparent, 1px, colors.$component-border-color, dimensions.$border-radius);
+    @include position.custom-positioning(column, space-between, space-between);
+    box-sizing: border-box;
+    width: 100%;
+    padding: $component-padding;
+}
+
+.grey-title {
+    margin-top: 15px;
+}
+
+.plus-sign {
+    height: 40px;
+}
+
+.green-text {
+    font-weight: 600;
+}
+
+.category-btns-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    column-gap: 30px;
+    row-gap: 30px;
+}
+
+.category-btn {
+    //@include custom.customize-background-border(colors.$investment-background, 3px, colors.$investment-border-color, 18px);
+    @include custom.customize-background-border(white, 1px, colors.$component-border-color, $component-border-radius);
+    @include position.custom-positioning(row, center, start);
+    box-sizing: border-box;
+    column-gap: 35px;
+    cursor: pointer;
+    padding: 20px;
+    height: 165px;
+
+    transition:
+    background-color 200ms ease,
+    border-color 200ms ease,
+    transform 200ms ease;
+
+    &:active {
+        transform: scale(0.98);
+    }
+}
+
+.category-icon-block {
+    //@include custom.customize-background-border(colors.$investment-border-color, 0, transparent, 15px);
+    @include position.fully-centered-content;
+    box-sizing: border-box;
+    width: 85px;
+    height: 85px;
+    flex-shrink: 0;
+    
+    transition: background-color time.$transition-time;
+}
+
+.stock-icon {
+    @include custom.customize-background-border(#d0f7e3, 0, transparent, 15px);
+}
+
+.category-btn.stock.selected {
+    @include custom.customize-background-border(#f0faf5, 3px, #c1f8dc, $component-border-radius);
+} 
+
+.etf-icon {
+    @include custom.customize-background-border(#d8e8ff, 0, transparent, 15px);
+}
+
+.category-btn.etf.selected {
+    @include custom.customize-background-border(#F2F7FE, 3px, #bbd5fa, $component-border-radius);
+} 
+
+.crypto-icon {
+    @include custom.customize-background-border(#ffefd6, 0, transparent, 15px);
+}
+
+.category-btn.crypto.selected {
+    @include custom.customize-background-border(#fff9f2, 3px, #f7daa8, $component-border-radius);
+}
+
+.commodity-icon {
+    @include custom.customize-background-border(#fff7af, 0, transparent, 15px);
+}
+
+.category-btn.commodity.selected {
+    @include custom.customize-background-border(#fffde8, 3px, #f8ee95, $component-border-radius);
+}
+
+.bond-icon {
+    @include custom.customize-background-border(#F3EDFE, 0, transparent, 15px);
+}
+
+.category-btn.bond.selected {
+    @include custom.customize-background-border(#f9f6ff, 3px, #dac7fc, $component-border-radius);
+}
+
+.cash-icon {
+    @include custom.customize-background-border(#dcfac7, 0, transparent, 15px);
+}
+
+.category-btn.cash.selected {
+    @include custom.customize-background-border(#f4ffee, 3px, #c6f5a5, $component-border-radius);
+}
+
+.category-icon {
+    height: 70px;
+}
+
+.category-btn-info {
+    text-align: left;
+}
+
+.category-title {
+    font-size: 28px;
+}
+
+.category-descr {
+    font-weight: 450;
+    font-size: 22px;
+}
+
+.create-investment-btn {
+    @include custom.customize-background-border(#ccfac7, 0, transparent, 18px);
+    @include position.custom-positioning(row, center, center);
+    column-gap: 40px;
+    padding: 0;
+
+    height: 65px;
+    transition: background-color time.$transition-time;
+}
+
+.create-investment-btn:hover {
+    background-color: #b1ffa8;
+}

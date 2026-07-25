@@ -1,5 +1,6 @@
 @use '../../../shared/styles/mixins/position';
 @use '../../../shared/styles/mixins/custom';
+@use '../../../shared/styles/mixins/shadows';
 @use '../../../shared/styles/variables/time';
 @use '../../../shared/styles/variables/colors';
 @use '../../../shared/styles/variables/dimensions';
@@ -11,15 +12,15 @@ $nav-btn-dimension: 100px;
 :host {
     width: $navigation-width;
     height: 100%;
-    max-width: ($navigation-width - (2 * $navigation-padding));
+    max-width: $navigation-width;
     
     display: flex;
-    justify-content: center;
 }
 
 nav {
     @include position.vertically-centered-content;
     @include custom.customize-background-border(colors.$component-background, 0px, transparent, dimensions.$border-radius);
+    @include shadows.shadow;
     justify-content: start;
     row-gap: 10px;
 
@@ -31,7 +32,11 @@ nav {
     height: $nav-btn-dimension;
 
     cursor: pointer;
-    transition: background-color time.$transition-time;
+    transition: background-color time.$transition-time, transform 150ms ease;
+
+    &:active {
+        transform: scale(0.96);
+    }
 }
 
 .investment-btn {

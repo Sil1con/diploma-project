@@ -1,0 +1,88 @@
+<div class="title-block">
+    <p class="titles">Add Investment</p>
+    <p class="grey-title">Choose an asset type to get started</p>
+</div>
+<div class="category-btns-block">
+    <button 
+        class="category-btn stock"
+        [class.selected]="selectedCategory === 'stock'"
+        (click)="selectCategory('stock')"
+    >
+        <div class="category-icon-block stock-icon">
+            <img class="category-icon" src="assets/icons/investment_icon.png" alt="">
+        </div>
+        <div class="category-btn-info">
+            <p class="titles category-title">Stock</p>
+            <p class="grey-title category-descr">Invest in company shares</p>
+        </div>
+    </button>
+    <button 
+        class="category-btn etf"
+        [class.selected]="selectedCategory === 'etf'"
+        (click)="selectCategory('etf')"
+    >
+        <div class="category-icon-block etf-icon">
+            <img class="category-icon" src="assets/category_icons/etf.png" alt="">
+        </div>
+        <div class="category-btn-info">
+            <p class="titles category-title">ETF</p>
+            <p class="grey-title category-descr">Diversified ETF portfolios</p>
+        </div>
+    </button>
+    <button 
+        class="category-btn crypto"
+        [class.selected]="selectedCategory === 'crypto'"
+        (click)="selectCategory('crypto')"
+    >
+        <div class="category-icon-block crypto-icon">
+            <img class="category-icon" src="assets/category_icons/bitcoin.png" alt="">
+        </div>
+        <div class="category-btn-info">
+            <p class="titles category-title">Crypto</p>
+            <p class="grey-title category-descr">Digital currencies</p>
+        </div>
+    </button>
+    <button 
+        class="category-btn commodity"
+        [class.selected]="selectedCategory === 'commodity'"
+        (click)="selectCategory('commodity')"
+    >
+        <div class="category-icon-block commodity-icon">
+            <img class="category-icon" src="assets/category_icons/gold.png" alt="">
+        </div>
+        <div class="category-btn-info">
+            <p class="titles category-title">Commodity</p>
+            <p class="grey-title category-descr">Precious metals, oil, etc.</p>
+        </div>
+    </button>
+    <button 
+        class="category-btn bond"
+        [class.selected]="selectedCategory === 'bond'"
+        (click)="selectCategory('bond')"
+    >
+        <div class="category-icon-block bond-icon">
+            <img class="category-icon" src="assets/category_icons/bonds.png" alt="">
+        </div>
+        <div class="category-btn-info">
+            <p class="titles category-title">Bond</p>
+            <p class="grey-title category-descr">Government or corporate bonds</p>
+        </div>
+    </button>
+    <button 
+        class="category-btn cash"
+        [class.selected]="selectedCategory === 'cash'"
+        (click)="selectCategory('cash')"
+    >
+        <div class="category-icon-block cash-icon">
+            <img class="category-icon" src="assets/category_icons/bill.png" alt="">
+        </div>
+        <div class="category-btn-info">
+            <p class="titles category-title">Cash</p>
+            <p class="grey-title category-descr">Cash or money market</p>
+        </div>
+    </button>
+</div>
+<button class="create-investment-btn">
+    <img class="plus-sign" src="assets/icons/plus.png" alt="">
+    <p class="green-text">Create Investment</p>
+</button>

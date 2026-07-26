@@ -10,7 +10,10 @@ $component-padding: 25px;
 $investments-list-width: 610px;
 $investments-list-height: 550px;
 $investments-list-padding: 30px;
-$investment-list-height: 450px;
+
+:host {
+    height: 100%
+}
 
 .investments-block {
     @include custom.customize-background-border(transparent, 1px, colors.$component-border-color, dimensions.$border-radius);
@@ -18,7 +21,7 @@ $investment-list-height: 450px;
     box-sizing: border-box;
     row-gap: 35px;
     width: 100%;
-    height: $investments-list-height;
+    height: 100%;
     padding: $investments-list-padding;
 }
 

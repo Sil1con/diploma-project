@@ -1,0 +1,51 @@
+<div class="form-layout">
+    <div class="title-block">
+        <p class="titles">Create Investment</p>
+        <p class="grey-title">Set up a new asset in your portfolio</p>
+    </div>
+    <form [formGroup]="commodityForm">
+        <div class="field-block type-block">
+            <label>Type</label>
+            <input formControlName="type" readonly>
+        </div>
+        <div class="fields-flexbox">
+            <div class="field-block">
+                <label>Investment Name</label>
+                <input formControlName="investmentName" placeholder="e.g., Gold">    
+            </div>
+            <div class="field-block">
+                <label>Ticker / Symbol</label>
+                <input formControlName="symbol" placeholder="e.g., XAU">
+            </div>
+            <div class="field-block">
+                <label>Initial Value</label>
+                <input type="number" formControlName="initialValue" placeholder="0.00">
+            </div>
+            <div class="field-block">
+                <label>Quantity</label>
+                <input type="number" formControlName="quantity" placeholder="e.g., 10">
+            </div>
+            <div class="field-block">
+                <label>Purchase Date</label>
+                <input type="date" formControlName="purchaseDate">
+            </div>
+            <div class="field-block">
+                <label>Commodity Price</label>
+                <input type="number" formControlName="commodityPrice" placeholder="0.00">
+            </div>
+        </div>
+        <div class="field-block note-block">
+            <label>Notes <span class="optional">(optional)</span></label>
+            <textarea 
+                formControlName="notes"
+                placeholder="Add any additional notes about this investment..."
+                maxlength="100"
+            ></textarea>
+        </div>
+    </form>
+    <div class="buttons-block">
+        <button class="cancel-btn">Cancel</button>
+        <button class="create-btn">Create Investment</button>
+    </div>
+</div>
+

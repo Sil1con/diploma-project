@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
   styleUrl: './add-investments-preview-component.scss',
 })
 export class AddInvestmentsPreviewComponent {
-  selectedCategory: string | null = null;
+  selectedCategory: string | null = 'stock';
 
   selectCategory(category: string): void {
     this.selectedCategory = category;

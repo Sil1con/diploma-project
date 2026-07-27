@@ -1,0 +1,151 @@
+@use '../../../shared/styles/mixins/custom';
+@use '../../../shared/styles/mixins/position';
+@use '../../../shared/styles/variables/fonts';
+@use '../../../shared/styles/variables/colors';
+@use '../../../shared/styles/variables/dimensions';
+@use '../../../shared/styles/typography';
+
+
+$form-padding: 25px;
+$form-width: 700px;
+$form-height: 800px;
+$border-radius: 15px;
+
+:host {
+    @include position.fully-centered-content;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba($color: black, $alpha: 0.1); 
+    z-index: 1000;
+}
+
+label {
+    @include fonts.customize-text($size: 17px, $weight: 600);
+    margin-bottom: 8px;
+}
+
+input {
+    box-sizing: border-box;
+    height: 65px;
+    padding: 15px;
+    font-size: 16px;
+    font-weight: 500;
+    border: solid;
+    border-color: rgb(222, 221, 221);
+    border-width: 1px;
+    border-radius: 10px;
+    transition: box-shadow 200ms ease;
+
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(90, 90, 90, 0.15);
+    }
+}
+
+textarea {
+    resize: none;
+    box-sizing: border-box;
+    height: 90px;
+    padding: 15px;
+    font-size: 16px;
+    font-weight: 500;
+    border: solid;
+    border-color: rgb(222, 221, 221);
+    border-width: 1px;
+    border-radius: 10px;
+    transition: box-shadow 200ms ease;
+
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(90, 90, 90, 0.15);
+    }
+}
+
+form {
+    @include position.custom-positioning(column, space-around, space-between);
+    height: 100%
+}
+
+.form-layout {
+    @include position.custom-positioning(column, space-between, space-between);
+    box-sizing: border-box;
+    width: $form-width;
+    height: $form-height;
+
+    padding: $form-padding;
+    border-radius: $border-radius;
+    background-color: colors.$component-background;
+}
+
+.titles {
+    font-size: 25px;
+}
+
+.grey-title {
+    margin-top: 5px;
+    font-size: 18px;
+}
+
+.optional {
+    @include fonts.customize-text($text-color: grey, $size: 17px, $weight: 500);
+}
+
+.fields-flexbox {
+    @include position.custom-positioning(row, space-between, space-between);
+    flex-wrap: wrap;
+    row-gap: 30px;
+    width: 100%;
+}
+
+.field-block {
+    @include position.custom-positioning(column, space-between, space-between);
+    width: 205px;
+}
+
+.type-block, .note-block {
+    width: 100%;
+}
+
+.buttons-block-delimeter {
+    position: absolute;
+    margin: 0px;
+    top: 0;
+    left: -$form-padding;
+    height: 1px;
+    border: none;
+    background-color: rgb(209, 209, 209);
+}
+
+.buttons-block {
+    @include position.custom-positioning(row, center, space-between);
+    height: 60px;
+}
+
+.cancel-btn {
+    @include fonts.customize-text($text-color: black, $size: 18px, $weight: 500);
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+}
+
+.create-btn {
+    @include custom.customize-background-border(#00A53F, 0, transparent, 8px);
+    @include fonts.customize-text($text-color: white, $size: 18px, $weight: 500);
+    box-sizing: border-box;
+    cursor: pointer;
+    height: 55px;
+    width: 200px;
+
+    transition: background-color 200ms ease, transform 200ms;
+
+    &:hover {
+        background-color: #0ab94d;
+    }
+
+    &:active {
+        transform: scale(0.97);
+    }
+}

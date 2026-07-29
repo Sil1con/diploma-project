@@ -14,12 +14,12 @@
 footer {
     @include position.horizontally-centered-content;
     @include shadows.shadow;
+    box-sizing: border-box;
     justify-content: space-between;
     padding: dimensions.$component-padding;
     
-    height: 60px;
-    width: 100%;
-    max-width: (dimensions.$maximum-width - (2 * dimensions.$component-padding));
+    height: 80px;
+    width: dimensions.$maximum-width;
     
     border-radius: dimensions.$component-radius;
     background-color: colors.$component-background;

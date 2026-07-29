@@ -1,0 +1,69 @@
+@use '../../../shared/styles/variables/dimensions';
+@use '../../../shared/styles/variables/colors';
+@use '../../../shared/styles/variables/fonts';
+@use '../../../shared/styles/mixins/position';
+@use '../../../shared/styles/mixins/custom';
+@use '../../../shared/styles/typography';
+
+$total-block-width: 775px;
+$total-block-padding: 30px;
+
+.icon {
+    width: 80px;
+}
+
+.total-block {
+    @include custom.customize-background-border(transparent, 1px, colors.$component-border-color, dimensions.$border-radius);
+    @include position.custom-positioning(row, space-between, start);
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    padding: $total-block-padding;
+    column-gap: 50px;
+}
+
+.total-icon-block {
+    @include custom.customize-background-border(#e5eefb, 0, transparent, dimensions.$border-radius);
+    @include position.fully-centered-content;
+    box-sizing: border-box;
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0;
+}
+
+.total-title {
+    font-weight: 600;
+}
+
+.total-income-value {
+    @include fonts.customize-text($size: 43px, $weight: 700);
+    margin-top: 20px;
+}
+
+.last-month-compare-block, .last-month-compare-block div {
+    @include position.custom-positioning(row, center, space-between);
+}
+
+.last-month-compare-block {
+    margin-top: 25px;
+}
+
+.last-month-compare-block div {
+    padding: 6px;
+    background-color: #e1f9ee;
+    border-radius: 6px;
+}
+
+.triangle-icon {
+    margin-top: 2px;
+    height: 16px;
+}
+
+.compare-percent {
+    font-size: 24px;
+    margin-left: 10px
+}
+
+.compare-text {
+    font-size: 18px;
+}

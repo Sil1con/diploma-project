@@ -1,0 +1,118 @@
+@use '../../../shared/styles/variables/dimensions';
+@use '../../../shared/styles/variables/colors';
+@use '../../../shared/styles/variables/fonts';
+@use '../../../shared/styles/mixins/position';
+@use '../../../shared/styles/mixins/custom';
+@use '../../../shared/styles/typography';
+
+$source-component-padding: 30px;
+
+.icon {
+    width: 80px;
+}
+
+.sources-block {
+    @include position.custom-positioning(column, space-between, space-between);
+    row-gap: 20px;
+}
+
+.source-title {
+    font-size: 30px;
+}
+
+.source-descr {
+    margin-top: 5px;
+    font-size: 20px;
+}
+
+.title-block {
+    position: relative;
+}
+
+.view-all-btn {
+    @include fonts.customize-text($text-color: #3086e1, $size: 24px, $weight: 600);
+    position: absolute;
+    background-color: transparent;
+    cursor: pointer;
+    border: none;
+    top: 0;
+    right: 0;
+
+    transition: transform 200ms;
+}
+
+.view-all-btn:active {
+    transform: scale(0.95);
+}
+
+.sources-block {
+    @include custom.customize-background-border(transparent, 1px, colors.$component-border-color, dimensions.$border-radius);
+    @include position.custom-positioning(column, space-between, space-between);
+    padding: $source-component-padding;
+    box-sizing: border-box;
+    height: 100%;
+}
+
+.sources-flexbox {
+    @include position.custom-positioning(row, center, space-around);
+    row-gap: 28px;
+}
+
+.source-icon-block {
+    @include custom.customize-background-border(#e5eefb, 0, transparent, dimensions.$border-radius);
+    @include position.fully-centered-content;
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0;
+}
+
+.source {
+    @include custom.customize-background-border(transparent, 1px, colors.$component-border-color, dimensions.$border-radius);
+    @include position.custom-positioning(column, space-between, center);
+    padding: $source-component-padding;
+    box-sizing: border-box;
+    height: 310px;
+    width: 330px;
+}
+
+.source-description {
+    @include position.custom-positioning(column, center, center);
+}
+
+.source-name {
+    font-size: 23px;
+    font-weight: 600;
+}
+
+.source-income {
+    margin: 10px 0;
+    font-size: 30px;
+}
+
+.source-note {
+    font-size: 17px
+}
+
+.add-btn {
+    @include custom.customize-background-border(transparent, 1px, colors.$component-border-color, 13px);
+    @include position.custom-positioning(row, center, center);
+    box-sizing: border-box;
+    height: 55px;
+    cursor: pointer;
+
+    transition: background-color 200ms ease, border 200ms ease;
+}
+
+.add-btn:hover {
+    border: transparent solid 1px;
+    background-color: #bad3f6;
+}
+
+.add-btn-plus {
+    height: 30px;
+}
+
+.add-btn-text {
+    @include fonts.customize-text($text-color: #3086e1, $size: 20px, $weight: 700);
+    margin-left: 15px;
+}

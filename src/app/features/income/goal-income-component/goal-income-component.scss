@@ -1,0 +1,80 @@
+@use '../../../shared/styles/variables/dimensions';
+@use '../../../shared/styles/variables/colors';
+@use '../../../shared/styles/variables/fonts';
+@use '../../../shared/styles/mixins/position';
+@use '../../../shared/styles/mixins/custom';
+@use '../../../shared/styles/typography';
+
+$goal-block-width: 775px;
+$goal-block-padding: 30px;
+
+.icon {
+    width: 80px;
+}
+
+.goal-block {
+    @include custom.customize-background-border(transparent, 1px, colors.$component-border-color, dimensions.$border-radius);
+    @include position.custom-positioning(row, space-between, start);
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    padding: $goal-block-padding;
+    column-gap: 50px;
+}
+
+.goal-icon-block {
+    @include custom.customize-background-border(#e5eefb, 0, transparent, dimensions.$border-radius);
+    @include position.fully-centered-content;
+    box-sizing: border-box;
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0;
+}
+
+.goal-info-block {
+    width: 100%;
+}
+
+.goal-income-value {
+    @include fonts.customize-text($size: 43px, $weight: 700);
+    margin-top: 20px;
+}
+
+.goal-title {
+    font-weight: 600;
+}
+
+.progress-bar-block {
+    margin-top: 10px;
+}
+
+.progress-bar-block div {
+    @include position.custom-positioning(row, center, space-between);
+    column-gap: 15px;
+}
+
+.progress-percent-background {
+    padding: 8px;
+    background-color: #e5eefb;
+    border-radius: 6px;
+}
+
+.progress-bar-background {
+    height: 15px;
+    width: 100%;
+    background-color: #f0f5fb;
+    border-radius: 10px;
+}
+
+.progress-bar {
+    height: inherit;
+    width: 52.5%;
+    background-color: #2552f7;
+    border-radius: inherit;
+
+    transition: width 400ms ease;
+}
+
+.progress-percent {
+    @include fonts.customize-text($text-color: #3086e1, $size: 24px, $weight: 600);
+}

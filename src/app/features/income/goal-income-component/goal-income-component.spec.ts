@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DomainNavigationLayout } from './domain-nav-layout';
+import { GoalIncomeComponent } from './goal-income-component';
 
-describe('DomainNavLayout', () => {
-  let component: DomainNavigationLayout;
-  let fixture: ComponentFixture<DomainNavigationLayout>;
+describe('GoalIncomeComponent', () => {
+  let component: GoalIncomeComponent;
+  let fixture: ComponentFixture<GoalIncomeComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DomainNavigationLayout],
+      imports: [GoalIncomeComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(DomainNavigationLayout);
+    fixture = TestBed.createComponent(GoalIncomeComponent);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

@@ -1,5 +1,11 @@
 @use './shared/styles/mixins/position';
+@use './shared/styles/variables/dimensions';
 
 .app-root {
     @include position.vertically-centered-content;
+}
+
+main {
+    @include position.vertically-centered-content;
+    margin: dimensions.$component-margin 0;
 }

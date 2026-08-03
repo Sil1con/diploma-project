@@ -1,4 +1,5 @@
 @use '../styles/variables/fonts';
+@use '../styles/variables/colors';
 
 .titles {
     @include fonts.customize-text($text-color: black, $size: 33px, $weight: 600);
@@ -8,6 +9,48 @@
     @include fonts.customize-text($text-color: #40C057, $size: 25px, $weight: 500);
 }
 
+.white-text {
+    @include fonts.customize-text($text-color: white, $size: 20px, $weight: 500);
+}
+
+.orange-text {
+    @include fonts.customize-text($text-color: colors.$orange, $size: 20px, $weight: 500);
+}
+
+.lightorange-text {
+    @include fonts.customize-text($text-color: colors.$lightorange, $size: 20px, $weight: 500);
+}
+
+.purple-text {
+    @include fonts.customize-text($text-color: colors.$purple, $size: 20px, $weight: 500);
+}
+
+.pink-text {
+    @include fonts.customize-text($text-color: colors.$pink, $size: 20px, $weight: 500);
+}
+
+.blue-text {
+    @include fonts.customize-text($text-color: colors.$blue, $size: 20px, $weight: 500);
+}
+
+.grey-text {
+    @include fonts.customize-text($text-color: grey, $size: 20px, $weight: 500);
+}
+
 .grey-title {
     @include fonts.customize-text($text-color: #656565, $size: 22px, $weight: 500);
+}
+
+.text {
+    @include fonts.customize-text($text-color: black, $size: 20px, $weight: 500);
+}
+
+.sub-title {
+    margin-top: 10px;
+    font-size: 20px;
+}
+
+.component-title {
+    font-size: 20px;
+    font-weight: 600;
 }

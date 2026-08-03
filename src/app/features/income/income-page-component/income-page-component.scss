@@ -25,11 +25,6 @@ $overview-block-height: 250px;
     font-weight: 700;
 }
 
-.sub-title {
-    margin-top: 10px;
-    font-size: 20px;
-}
-
 .overview-block {
     @include position.custom-positioning(row, space-between, space-between);
     column-gap: 20px;

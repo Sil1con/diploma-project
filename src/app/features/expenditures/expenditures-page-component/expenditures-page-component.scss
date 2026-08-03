@@ -1,0 +1,84 @@
+@use '../../../shared/styles/variables/dimensions';
+@use '../../../shared/styles/variables/colors';
+@use '../../../shared/styles/variables/fonts';
+@use '../../../shared/styles/mixins/shadows';
+@use '../../../shared/styles/mixins/position';
+@use '../../../shared/styles/mixins/custom';
+@use '../../../shared/styles/typography';
+@use '../../../shared/styles/icons';
+
+$component-padding: 30px;
+$border-radius: 20px;
+$col-gap: 15px;
+
+$upper-block-height: 440px;
+
+$transactions-component-width: 100%;
+$transactions-component-padding: 25px;
+
+:host {
+    @include custom.customize-background-border(colors.$component-background, 0, transparent, dimensions.$border-radius);
+    @include position.custom-positioning(column, start, space-between);
+    @include shadows.shadow;
+    box-sizing: border-box;
+    padding: $component-padding;
+    width: 100%;
+    height: 100%;
+    row-gap: 15px;
+}
+
+.title-block, .buttons-block, .date-range-block {
+    @include position.custom-positioning(row, center, space-between);
+}
+
+.buttons-block {
+    column-gap: 30px;
+}
+
+.date-block {
+    @include position.custom-positioning(row, center, space-between);
+}
+
+.date-block label {
+    font-size: 18px;
+}
+
+#to-date, #from-date {
+    margin-left: 10px;
+    padding: 10px;
+    border: solid lightgray 1px;
+    border-radius: 10px;
+    font-size: 18px;
+}
+
+.add-btn {
+    @include custom.customize-background-border(colors.$orange, 1px, transparent, 10px);
+    @include position.custom-positioning(row, center, space-between);
+    padding: 10px 15px;
+    transition: transform 200ms ease;
+}
+
+.add-btn:active {
+    transform: scale(0.95);
+}
+
+.add-btn-plus {
+    margin-right: 10px;
+}
+
+.date-range-block {
+    column-gap: 60px;
+}
+
+.upper-block {
+    @include position.custom-positioning(row, center, space-between);
+    column-gap: $col-gap;
+    //box-sizing: border-box;
+    height: $upper-block-height;
+}
+
+.botton-block {
+    @include position.custom-positioning(row, center, space-between);
+    column-gap: $col-gap;
+    height: 100%;
+}

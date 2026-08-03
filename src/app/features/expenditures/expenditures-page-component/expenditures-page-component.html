@@ -1,0 +1,30 @@
+<div class="title-block">
+    <div class="title-part">
+        <p class="titles">Expenditures</p>
+        <p class="sub-title grey-title">Track your spending and manage your budget</p>
+    </div>
+    <div class="buttons-block">
+        <div class="date-range-block">
+            <div class="from-date-block date-block">
+                <label class="text">From date</label>
+                <input class="text" type="date" name="from-date" id="from-date">
+            </div>
+            <div class="to-date-block date-block">
+                <label class="text">To date</label>
+                <input class="text" type="date" name="to-date" id="to-date">
+            </div>
+        </div>
+        <button class="add-btn">
+            <img class="add-btn-plus icon-25px" src="assets/icons/white_plus.png" alt="white-plus-icon">
+            <span class="add-text white-text">Add Expense</span>
+        </button>
+    </div>
+</div>
+<div class="upper-block">
+    <app-overview-component></app-overview-component>
+    <app-spending-categories-preview></app-spending-categories-preview>
+</div>
+<div class="botton-block">
+    <app-budget-summary></app-budget-summary>
+    <app-recent-transactions-preview></app-recent-transactions-preview>
+</div>

@@ -1,0 +1,86 @@
+@use '../../../../shared/styles/variables/dimensions';
+@use '../../../../shared/styles/variables/colors';
+@use '../../../../shared/styles/variables/fonts';
+@use '../../../../shared/styles/mixins/shadows';
+@use '../../../../shared/styles/mixins/position';
+@use '../../../../shared/styles/mixins/custom';
+@use '../../../../shared/styles/typography';
+@use '../../../../shared/styles/icons';
+
+$border-radius: 20px;
+$overview-component-padding: 25px;
+$overview-component-width: 450px;
+
+:host {
+    height: 100%;
+    max-width: $overview-component-width;
+    width: 100%;
+}
+
+.overview-block {
+    @include custom.customize-background-border(transparent, 1px, colors.$component-border-color, $border-radius);
+    @include position.custom-positioning(column, space-between, space-between);
+    @include shadows.custom-shadow(0px, 0px, 5px, black, 0.1);
+    box-sizing: border-box;
+    padding: $overview-component-padding;
+    height: inherit;
+    width: 100%;
+}
+
+.icon-background {
+    @include position.fully-centered-content;
+    width: 50px;
+    height: 50px;
+    border-radius: 13px;
+    background-color: colors.$component-border-color;
+}
+
+.total-spent {
+    margin: 20px 0;
+    font-size: 40px;
+    font-weight: 600;
+}
+
+.comparison-block, .comparison-block div {
+    @include position.custom-positioning(row, center, start);
+}
+
+.comparison-block div {
+    padding: 6px;
+    @include custom.customize-background-border(#fff4ec, 0, transparent, 10px);
+}
+
+.compare-percent {
+    margin-left: 5px;
+    color: colors.$orange;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.compare-text {
+    margin-left: 10px;
+    font-size: 18px;
+}
+
+.overview-average {
+    @include position.custom-positioning(row, center, space-between);
+    column-gap: 20px;
+    padding: 30px 0;
+    border-top: rgb(234, 232, 232) solid 3px;
+}
+
+.stat {
+    @include position.custom-positioning(row, center, start);
+    column-gap: 15px;
+    height: 100%;
+}
+
+.stat-descr {
+    @include position.custom-positioning(column, space-between, start);
+    height: inherit;
+}
+
+.stat-text {
+    font-size: 16px;
+    font-weight: 600;
+}

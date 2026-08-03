@@ -4,10 +4,11 @@ import { DomainNavigationLayout } from './layout/navigation-layout/domain-nav-la
 import { ApplicationConfig } from '@angular/core';
 import { InvestmentsPageComponent } from './features/investments/investments-page-component/investments-page-component';
 import { IncomePageComponenet } from './features/income/income-page-component/income-page-component';
+import { ExpendituresPageComponent } from './features/expenditures/expenditures-page-component/expenditures-page-component';
 
 export const routes: Routes = [
   {
-    path: '',
+    path: 'menu',
     title: 'Devo',
     component: MainSelection
   },
@@ -27,12 +28,16 @@ export const routes: Routes = [
       {
         path: 'income',
         component: IncomePageComponenet
+      },
+      {
+        path: 'expenditures',
+        component: ExpendituresPageComponent
       }
     ]
   },
   {
     path: '**',
-    redirectTo: ''
+    redirectTo: 'menu'
   }
 ];
 

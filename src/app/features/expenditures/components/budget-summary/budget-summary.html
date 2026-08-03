@@ -1,0 +1,39 @@
+<div class="budget-summary">
+    <div class="component-title-block">
+        <p class="component-title text">Summary</p>
+        <select
+            id="budget-period"
+            class="budget-period-btn text"
+        >
+            <option value="this-month">This month</option>
+            <option value="last-month">Last month</option>
+            <option value="last-3-months">Last 3 months</option>
+            <option value="last-6-months">Last 6 months</option>
+            <option value="this-year">This year</option>
+            <option value="custom">Custom period</option>
+        </select>
+    </div>
+    <div class="summary-info-block">
+        <div class="summary-info">
+            <p class="summary-info-title budget text">Budget</p>
+            <span class="summary-info-value budget text">&euro; 5,000.00</span> 
+        </div>
+        <div class="summary-info">
+            <p class="summary-info-title spent text">Spent</p>
+            <span class="summary-info-value orange-text">&euro; 4,250.00</span> 
+        </div>
+        <div class="summary-info remaining">
+            <div class="info-part">
+                <p class="summary-info-title text">Remaining</p>
+                <span class="summary-info-value green-text">&euro; 749.25</span>
+            </div>
+            <div class="progress-spent-block">
+                <div class="progress-spent-bar other"></div>
+            </div>
+            <div class="remaining-info">
+                <span class="budget-used grey-text">85% of budget used</span>
+                <span class="budget-left grey-text">15% left</span> 
+            </div>
+        </div>
+    </div>
+</div>

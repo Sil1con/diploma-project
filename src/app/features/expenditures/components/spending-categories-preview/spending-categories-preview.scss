@@ -1,0 +1,132 @@
+@use '../../../../shared/styles/variables/dimensions';
+@use '../../../../shared/styles/variables/colors';
+@use '../../../../shared/styles/variables/fonts';
+@use '../../../../shared/styles/mixins/shadows';
+@use '../../../../shared/styles/mixins/position';
+@use '../../../../shared/styles/mixins/custom';
+@use '../../../../shared/styles/typography';
+@use '../../../../shared/styles/icons';
+@use '../styles.scss';
+
+$border-radius: 20px;
+$spendings-component-padding: 25px;
+$spendings-component-width: 100%;
+
+:host {
+    width: 100%;
+}
+
+.spendings-categories-block {
+    @include position.custom-positioning(column, start, space-between);
+    row-gap: 10px;
+    height: 100%;
+}
+
+.spendings-block {
+    @include custom.customize-background-border(transparent, 1px, colors.$component-border-color, $border-radius);
+    @include position.custom-positioning(column, start, space-between);
+    @include shadows.custom-shadow(0px, 0px, 5px, black, 0.1);
+    box-sizing: border-box;
+    padding: $spendings-component-padding;
+    max-width: $spendings-component-width;
+    width: 100%;
+    height: 100%;
+    row-gap: 10px;
+}
+
+.spending-category {
+    @include position.custom-positioning(row, center, space-between);
+    column-gap: 20px;
+    width: inherit;
+    height: 50px;
+}
+
+.spending-title-block {
+    width: 100%;
+    max-width: 250px;
+}
+
+.spening-title {
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.spending-progress-block {
+    @include position.custom-positioning(column, center, space-between);
+    position: relative;
+    width: 100%;
+    height: inherit;
+}
+
+.progress-percent {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+
+
+    color: grey;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.progress-bar-block {
+    height: 5px;
+    width: 100%;
+    background-color: #f0f5fb;
+    border-radius: 10px;
+}
+
+.progress-bar {
+    height: inherit;
+    width: 52.5%;
+    background-color: lightgray;
+    border-radius: inherit;
+
+    transition: width 400ms ease;
+}
+
+.progress-bar.housing {
+    width: 52.5%;
+    background-color: colors.$orange;
+}
+
+.progress-bar.food {
+    width: 20.3%;
+    background-color: #4292f9;
+}
+
+.progress-bar.transportation {
+    width: 12.7%;
+    background-color: #36d181;
+}
+
+.progress-bar.utilities {
+    width: 7.5%;
+    background-color: #9a5ff8;
+}
+
+.progress-bar.health {
+    width: 6%;
+    background-color: #fb708e;
+}
+
+.progress-bar.entertainment {
+    background-color: #fbf5db;
+}
+
+.progress-bar.other {
+    width: 5%;
+    background-color: gray;
+}
+
+.spending-value-block {
+    @include position.custom-positioning(row, center, end);
+    width: 100%;
+    max-width: 150px;
+}
+
+.spending-value {
+    font-size: 17px;
+    font-weight: 600;
+}

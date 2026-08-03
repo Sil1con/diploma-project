@@ -1,0 +1,39 @@
+@use '../../../shared/styles/mixins/position';
+@use '../../../shared/styles/variables/colors';
+
+.icon-background {
+    @include position.fully-centered-content;
+    width: 50px;
+    height: 50px;
+    border-radius: 13px;
+    background-color: colors.$component-border-color;
+    flex-shrink: 0
+}
+
+.icon-background.housing {
+    background-color: #fff4ec;
+}
+
+.icon-background.food {
+    background-color: #eaf0f8;
+}
+
+.icon-background.transportation {
+    background-color: #dff6ea;
+}
+
+.icon-background.utilities {
+    background-color: #ece5f7;
+}
+
+.icon-background.health {
+    background-color: #fceaee;
+}
+
+.icon-background.entertainment {
+    background-color: #fbf5db;
+}
+
+.icon-background.other {
+    background-color: rgb(243, 243, 243);
+}

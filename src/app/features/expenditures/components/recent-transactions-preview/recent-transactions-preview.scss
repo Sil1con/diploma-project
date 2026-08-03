@@ -1,0 +1,146 @@
+@use '../../../../shared/styles/variables/dimensions';
+@use '../../../../shared/styles/variables/colors';
+@use '../../../../shared/styles/variables/fonts';
+@use '../../../../shared/styles/mixins/shadows';
+@use '../../../../shared/styles/mixins/position';
+@use '../../../../shared/styles/mixins/custom';
+@use '../../../../shared/styles/typography';
+@use '../../../../shared/styles/icons';
+@use '../styles.scss';
+
+$border-radius: 20px;
+$transactions-component-width: 100%;
+$transactions-component-padding: 25px;
+
+:host {
+    height: 100%;
+    width: $transactions-component-width;
+}
+
+.transactions-block {
+    @include custom.customize-background-border(transparent, 1px, colors.$component-border-color, $border-radius);
+    @include position.custom-positioning(column, start, space-between);
+    @include shadows.custom-shadow(0px, 0px, 5px, black, 0.1);
+    box-sizing: border-box;
+    row-gap: 10px;
+    padding: $transactions-component-padding;
+    max-width: $transactions-component-width;
+    height: inherit;
+    width: 100%;
+}
+
+.component-title-block {
+    @include position.custom-positioning(row, center, space-between);
+}
+
+.view-all-btn {
+    @include custom.customize-background-border(transparent, 0, transparent, 0);
+    cursor: pointer;
+
+    transition: 200ms ease;
+}
+
+.view-all-btn:active {
+    transform: scale(0.90);
+}
+
+.view-all-btn span {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.transactions-list {
+    @include position.custom-positioning(column, start, space-between);
+    row-gap: 15px;
+}
+
+.transaction {
+    @include position.custom-positioning(row, center, start);
+    column-gap: 40px;
+}
+
+.transaction-title-block {
+    @include position.custom-positioning(column, space-around, space-between);
+    height: 100%;
+    max-width: 250px;
+    width: 100%;
+}
+
+.transaction-title {
+    font-size: 18px;
+    font-weight: 600
+}
+
+.transaction-date {
+    font-size: 16px;
+}
+
+.transaction-category-block {
+    @include position.fully-centered-content;
+    max-width: 400px;
+    width: 100%;
+}
+
+.transaction-category {
+    padding: 10px 15px;
+    border-radius: 10px;
+}
+
+.transaction-category span {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.transaction-category.housing {
+    background-color: #fff4ec;
+}
+
+.transaction-category.food {
+    background-color: #eaf0f8;
+}
+
+.transaction-category.transportation {
+    background-color: #dff6ea;
+}
+
+.transaction-category.utilities {
+    background-color: #ece5f7;
+}
+
+.transaction-category.health {
+    background-color: #fceaee;
+}
+
+.transaction-category.entertainment {
+    background-color: #fbf5db;
+}
+
+.transaction-category.other {
+    background-color: rgb(243, 243, 243);
+}
+
+.transaction-value-block {
+    @include position.custom-positioning(row, center, end);
+    max-width: 290px;
+    width: 100%;
+}
+
+.transaction-value {
+    font-weight: 600;
+}
+
+.transaction-details-btn {
+    width: 20px;
+    height: 20px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    margin-left: 20px;
+    padding: 0;
+
+    transition: transform 200ms ease;
+}
+
+.transaction-details-btn:hover {
+    transform: scale(0.9);
+}

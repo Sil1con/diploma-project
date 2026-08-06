@@ -1,5 +1,5 @@
-@mixin customize-background-border($background, $border-width, $border-color, $radius) {
+@mixin customize-background-border($background, $border-width, $border-color, $radius, $type: solid) {
     background-color: $background;
-    border: $border-width solid $border-color;
+    border: $border-width $type $border-color;
     border-radius: $radius;
 }

@@ -39,6 +39,7 @@ $overview-block-height: 250px;
 
 .add-btn {
     @include custom.customize-background-border(transparent, 1px, colors.$component-border-color, 13px);
+    @include shadows.custom-shadow(0px, 0px, 5px, black, 0.1);
     @include position.custom-positioning(row, center, center);
     box-sizing: border-box;
     height: 55px;

@@ -15,6 +15,7 @@ $investment-list-height: 450px;
 .overview-block {
     @include custom.customize-background-border(transparent, 1px, colors.$component-border-color, dimensions.$border-radius);
     @include position.custom-positioning(column, space-between, space-between);
+    @include shadows.custom-shadow(0px, 0px, 5px, black, 0.1);
     box-sizing: border-box;
     row-gap: 20px;
     width: 100%;

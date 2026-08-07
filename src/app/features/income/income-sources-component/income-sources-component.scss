@@ -2,17 +2,21 @@
 @use '../../../shared/styles/variables/colors';
 @use '../../../shared/styles/variables/fonts';
 @use '../../../shared/styles/mixins/position';
+@use '../../../shared/styles/mixins/shadows';
 @use '../../../shared/styles/mixins/custom';
 @use '../../../shared/styles/typography';
 
 $source-component-padding: 30px;
+$border-radius: 25px;
 
 .icon {
     width: 80px;
 }
 
 .sources-block {
+    @include custom.customize-background-border(transparent, 1px, colors.$component-border-color, $border-radius);
     @include position.custom-positioning(column, space-between, space-between);
+    @include shadows.custom-shadow(0px, 0px, 5px, black, 0.1);
     row-gap: 20px;
 }
 

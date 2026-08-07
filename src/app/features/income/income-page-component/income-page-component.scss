@@ -36,3 +36,27 @@ $overview-block-height: 250px;
 .overview-block > * {
   flex-grow: 1;
 }
+
+.add-btn {
+    @include custom.customize-background-border(transparent, 1px, colors.$component-border-color, 13px);
+    @include position.custom-positioning(row, center, center);
+    box-sizing: border-box;
+    height: 55px;
+    cursor: pointer;
+
+    transition: background-color 200ms ease, border 200ms ease;
+}
+
+.add-btn:hover {
+    border: transparent solid 1px;
+    background-color: #bad3f6;
+}
+
+.add-btn-plus {
+    height: 30px;
+}
+
+.add-btn-text {
+    @include fonts.customize-text($text-color: #3086e1, $size: 20px, $weight: 700);
+    margin-left: 15px;
+}

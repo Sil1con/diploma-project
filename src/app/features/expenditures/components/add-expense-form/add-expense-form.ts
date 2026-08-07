@@ -53,7 +53,6 @@ export class AddExpenseForm {
 
   onCancel(): void {
     this.cancelled.emit();
-    console.log(this.cancelled)
   }
 
   onSubmit(): void {

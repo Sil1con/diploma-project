@@ -9,3 +9,13 @@
     <app-goal-income-component></app-goal-income-component>
 </div>
 <app-income-sources-component></app-income-sources-component>
+<button class="add-btn" (click)="openAddIncomeForm()">
+    <img class="add-btn-plus" src="assets/icons/blue_plus.png" alt="add-button-icon">
+    <p class="add-btn-text">Add Source</p>
+</button>
+@if (isAddIncomeFormOpened) {
+    <app-add-income-form
+        (incomeSaved)="handleIncomeSubmitted($event)"
+        (cancelled)="closeAddIncomeForm()"
+    ></app-add-income-form>
+}

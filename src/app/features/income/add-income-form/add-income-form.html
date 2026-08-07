@@ -1,0 +1,51 @@
+<div class="form-layout">
+    <div class="title-block">
+        <p class="titles">Add Income</p>
+        <p class="grey-title">Add an income source</p>
+    </div>
+    <form [formGroup]="addIncomeForm">
+        <div class="fields-flexbox">
+            <div class="field-block">
+                <label>Income Source Name</label>
+                <input formControlName="incomeName" placeholder="e.g., Software Engineer Salary">    
+            </div>
+            <div class="field-block">
+                <label>Category</label>
+                <select
+                    formControlName="category"
+                    name="select-category"
+                    id="select-category"
+                >
+                    <option value="" disabled>Select category</option>
+                    <option
+                        *ngFor="let category of categories"
+                        [value]="category.value"
+                        >
+                        {{ category.label }}
+                    </option>
+                </select>
+            </div>
+            <div class="field-block">
+                <label>Amount</label>
+                <input min="0" max="10000" type="number" formControlName="amount" placeholder="0.00">
+            </div>
+            <div class="field-block">
+                <label>Start Date</label>
+                <input type="date" formControlName="startDate">
+            </div>
+            <div class="field-block note-block">
+                <label>Notes <span class="optional">(optional)</span></label>
+                <textarea 
+                    formControlName="notes"
+                    placeholder="Add any additional notes about this income source..."
+                    maxlength="100"
+                ></textarea>
+            </div>
+        </div>
+    </form>
+    <div class="buttons-block">
+        <button class="cancel-btn" (click)="onCancel()">Cancel</button>
+        <button class="add-btn white-text " (click)="onSubmit()">Save</button>
+    </div>
+</div>
+

@@ -1,14 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-bond-investment-form',
+  selector: 'bond-investment-form',
   imports: [ReactiveFormsModule],
   templateUrl: './bond-investment-form.html',
   styleUrl: './bond-investment-form.scss',
 })
 export class BondInvestmentForm {
   bondForm!: FormGroup;
+
+  @Output() cancelled = new EventEmitter<void>();
+  @Output() bondSaved = new EventEmitter<string>();
 
   constructor(private fb: FormBuilder) {}
 
@@ -24,5 +27,30 @@ export class BondInvestmentForm {
       purchaseDate: ['', Validators.required],
       notes: ['']
     });
+  }
+
+  onCancel(): void {
+    this.cancelled.emit();
+  }
+
+  onSubmit(): void {
+    this.bondForm.markAllAsTouched();
+
+    if (this.bondForm.invalid) {
+      return;
+    }
+
+    const formValue = this.bondForm.getRawValue();
+
+    if (formValue.amount === null) {
+      return;
+    }
+
+    const commodity: string = {
+      ...formValue,
+      amount: formValue.amount
+    };
+
+    this.bondSaved.emit(commodity);
   }
 }

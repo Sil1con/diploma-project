@@ -1,37 +1,37 @@
 <div class="form-layout">
     <div class="title-block">
-        <p class="titles">Add Commodity</p>
+        <p class="titles">Add Crypto</p>
         <p class="grey-title">Set up a new asset in your portfolio</p>
     </div>
-    <form [formGroup]="commodityForm">
+    <form [formGroup]="cryptoForm">
         <div class="field-block type-block static-block">
             <label>Type</label>
             <input class="static-input" formControlName="type" readonly>
         </div>
         <div class="fields-flexbox">
             <div class="field-block">
-                <label>Investment Name</label>
-                <input formControlName="investmentName" placeholder="e.g., Gold">    
+                <label>Cryptocurrency Name</label>
+                <input formControlName="cryptoName" placeholder="e.g., Bitcoin">    
             </div>
             <div class="field-block">
-                <label>Ticker / Symbol</label>
-                <input formControlName="ticker" placeholder="e.g., XAU">
-            </div>
-            <div class="field-block">
-                <label>Initial Value</label>
-                <input type="number" formControlName="initialValue" placeholder="0.00">
+                <label>Symbol</label>
+                <input formControlName="symbol" placeholder="e.g., BTC">
             </div>
             <div class="field-block">
                 <label>Quantity</label>
                 <input type="number" formControlName="quantity" placeholder="e.g., 10">
             </div>
             <div class="field-block">
+                <label>Purchase Price</label>
+                <input type="number" formControlName="purchasePrice" placeholder="0.00">
+            </div>
+            <div class="field-block">
                 <label>Purchase Date</label>
                 <input type="date" formControlName="purchaseDate">
             </div>
             <div class="field-block">
-                <label>Commodity Price</label>
-                <input type="number" formControlName="commodityPrice" placeholder="0.00">
+                <label>Exchange / Wallet</label>
+                <input type="text" formControlName="assetHoldingPlace" placeholder="e.g., Binance">
             </div>
         </div>
         <div class="field-block note-block">
@@ -45,7 +45,7 @@
     </form>
     <div class="buttons-block">
         <button class="cancel-btn" (click)="onCancel()">Cancel</button>
-        <button class="create-btn commodity" (click)="onSubmit()">Add Commodity</button>
+        <button class="create-btn crypto" (click)="onSubmit()">Add Crypto</button>
     </div>
 </div>
 

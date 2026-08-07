@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-add-investments-preview-component',
@@ -7,9 +7,24 @@ import { Component } from '@angular/core';
   styleUrl: './add-investments-preview-component.scss',
 })
 export class AddInvestmentsPreviewComponent {
-  selectedCategory: string | null = 'stock';
+  selectedCategory: string = 'stock';
+  isAddFormOpened: boolean = false;
+
+  @Output() selectedEvent = new EventEmitter<string>();
+  @Output() formOpened = new EventEmitter<boolean>();
 
   selectCategory(category: string): void {
     this.selectedCategory = category;
+    this.selectedEvent.emit(category);
+  }
+
+  openForm() {
+    this.isAddFormOpened = true;
+    this.formOpened.emit(this.isAddFormOpened);
+  }
+  
+  closeForm() {
+    this.isAddFormOpened = false;
+    this.formOpened.emit(this.isAddFormOpened);
   }
 }

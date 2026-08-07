@@ -1,7 +1,7 @@
 <div class="top-block">
     <div class="title-block">
         <p class="title">Investments</p>
-        <p class="sub-title">Manage your portfolio and track performance</p>
+        <p class="grey-title">Manage your portfolio and track performance</p>
     </div>
 </div>
 <div class="bottom-block">
@@ -9,5 +9,53 @@
         <app-portfolio-overview-component></app-portfolio-overview-component>
         <app-investments-preview-component></app-investments-preview-component>
     </div>
-    <app-add-investments-preview-component></app-add-investments-preview-component>
+    <app-add-investments-preview-component
+        (formOpened)="handleFormVisibility($event)"
+        (selectedEvent)="handleInvestmentCategory($event)"
+    ></app-add-investments-preview-component>
 </div>
+@if (isFormOpened) {
+  @switch (investmentSelected) {
+    @case ('stock') {
+      <stock-investment-form
+        (cancelled)="handleCancelledForm()"
+        (stockSaved)="handleSavedForm($event)"
+      ></stock-investment-form>
+    }
+
+    @case ('etf') {
+      <etf-investment-form
+        (cancelled)="handleCancelledForm()"
+        (etfSaved)="handleSavedForm($event)"
+      ></etf-investment-form>
+    }
+
+    @case ('crypto') {
+      <crypto-investment-form
+        (cancelled)="handleCancelledForm()"
+        (cryptoSaved)="handleSavedForm($event)"
+      ></crypto-investment-form>
+    }
+
+    @case ('commodity') {
+      <commodity-investment-form
+        (cancelled)="handleCancelledForm()"
+        (commoditySaved)="handleSavedForm($event)"
+      ></commodity-investment-form>
+    }
+
+    @case ('bond') {
+      <bond-investment-form
+        (cancelled)="handleCancelledForm()"
+        (bondSaved)="handleSavedForm($event)"
+      ></bond-investment-form>
+    }
+
+    @case ('cash') {
+      <cash-investment-form
+        (cancelled)="handleCancelledForm()"
+        (cashSaved)="handleSavedForm($event)"
+      ></cash-investment-form>
+    }
+  }
+}

@@ -136,7 +136,8 @@ $component-border-radius: 20px;
 }
 
 .create-investment-btn {
-    @include custom.customize-background-border(#ccfac7, 0, transparent, 18px);
+    @include custom.customize-background-border(transparent, 1px, colors.$component-border-color, 18px);
+    @include shadows.custom-shadow(0px, 0px, 5px, black, 0.1);
     @include position.custom-positioning(row, center, center);
     column-gap: 40px;
     padding: 0;
@@ -146,5 +147,5 @@ $component-border-radius: 20px;
 }
 
 .create-investment-btn:hover {
-    background-color: #b1ffa8;
+    background-color: #ccfac7;
 }

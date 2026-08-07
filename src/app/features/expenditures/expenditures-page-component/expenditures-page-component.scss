@@ -27,6 +27,11 @@ $transactions-component-padding: 25px;
     row-gap: 15px;
 }
 
+.titles {
+    font-size: 40px;
+    font-weight: 700;
+}
+
 .title-block, .buttons-block, .date-range-block {
     @include position.custom-positioning(row, center, space-between);
 }

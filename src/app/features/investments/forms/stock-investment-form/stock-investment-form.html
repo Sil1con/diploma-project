@@ -1,37 +1,37 @@
 <div class="form-layout">
     <div class="title-block">
-        <p class="titles">Add Commodity</p>
+        <p class="titles">Add Stock</p>
         <p class="grey-title">Set up a new asset in your portfolio</p>
     </div>
-    <form [formGroup]="commodityForm">
+    <form [formGroup]="stockForm">
         <div class="field-block type-block static-block">
             <label>Type</label>
             <input class="static-input" formControlName="type" readonly>
         </div>
         <div class="fields-flexbox">
             <div class="field-block">
-                <label>Investment Name</label>
-                <input formControlName="investmentName" placeholder="e.g., Gold">    
+                <label>Stock Name</label>
+                <input formControlName="stockName" placeholder="e.g., Apple Inc.">    
             </div>
             <div class="field-block">
                 <label>Ticker / Symbol</label>
-                <input formControlName="ticker" placeholder="e.g., XAU">
-            </div>
-            <div class="field-block">
-                <label>Initial Value</label>
-                <input type="number" formControlName="initialValue" placeholder="0.00">
+                <input formControlName="ticker" placeholder="e.g., AAPL">
             </div>
             <div class="field-block">
                 <label>Quantity</label>
                 <input type="number" formControlName="quantity" placeholder="e.g., 10">
             </div>
             <div class="field-block">
+                <label>Purchase Price</label>
+                <input type="number" formControlName="purchasePrice" placeholder="0.00">
+            </div>
+            <div class="field-block">
                 <label>Purchase Date</label>
                 <input type="date" formControlName="purchaseDate">
             </div>
             <div class="field-block">
-                <label>Commodity Price</label>
-                <input type="number" formControlName="commodityPrice" placeholder="0.00">
+                <label>Broker Account</label>
+                <input type="text" formControlName="brokerAccount" placeholder="e.g., Trading 212">
             </div>
         </div>
         <div class="field-block note-block">
@@ -45,7 +45,6 @@
     </form>
     <div class="buttons-block">
         <button class="cancel-btn" (click)="onCancel()">Cancel</button>
-        <button class="create-btn commodity" (click)="onSubmit()">Add Commodity</button>
+        <button class="create-btn stock" (click)="onSubmit()">Add Stock</button>
     </div>
 </div>
-

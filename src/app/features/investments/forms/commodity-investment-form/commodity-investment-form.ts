@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-commodity-investment-form',
+  selector: 'commodity-investment-form',
   standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './commodity-investment-form.html',
@@ -11,18 +11,46 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 export class CommodityInvestmentForm {
   commodityForm!: FormGroup;
 
+  @Output() cancelled = new EventEmitter<void>();
+  @Output() commoditySaved = new EventEmitter<string>();
+
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.commodityForm = this.fb.group({
       type: [{ value: 'Commodity', disabled: true }],
       investmentName: ['', Validators.required],
-      symbol: [''],
-      initialValue: [Validators.required],
-      quantity: [Validators.required],
+      ticker: ['', Validators.required],
+      initialValue: ['', Validators.required],
+      quantity: ['', Validators.required],
       purchaseDate: ['', Validators.required],
-      commodityPrice: [Validators.required],
+      commodityPrice: ['', Validators.required],
       notes: ['']
     });
+  }
+  
+  onCancel(): void {
+    this.cancelled.emit();
+  }
+
+  onSubmit(): void {
+    this.commodityForm.markAllAsTouched();
+
+    if (this.commodityForm.invalid) {
+      return;
+    }
+
+    const formValue = this.commodityForm.getRawValue();
+
+    if (formValue.amount === null) {
+      return;
+    }
+
+    const commodity: string = {
+      ...formValue,
+      amount: formValue.amount
+    };
+
+    this.commoditySaved.emit(commodity);
   }
 }

@@ -5,11 +5,12 @@
 @use '../../../shared/styles/variables/dimensions';
 @use '../../../shared/styles/typography';
 
-
 $form-padding: 25px;
 $form-width: 700px;
-$form-height: 800px;
+//$form-height: 800px;
 $border-radius: 15px;
+$field-width: 300px;
+$input-height: 65px;
 
 :host {
     @include position.fully-centered-content;
@@ -27,35 +28,37 @@ label {
     margin-bottom: 8px;
 }
 
-input {
+select, .field-block input {
+    @include custom.customize-background-border(transparent, 1px, rgb(222, 221, 221), 10px);
+    @include fonts.customize-text($text-color: grey, $size: 17px, $weight: 500);
     box-sizing: border-box;
-    height: 65px;
+    height: $input-height;
     padding: 15px;
-    font-size: 16px;
-    font-weight: 500;
-    border: solid;
-    border-color: rgb(222, 221, 221);
-    border-width: 1px;
-    border-radius: 10px;
-    transition: box-shadow 200ms ease;
+    transition: box-shadow 200ms ease, background-color 200ms ease, border-color 200ms ease;
 
     &:focus {
         outline: none;
-        box-shadow: 0 0 0 2px rgba(90, 90, 90, 0.15);
+        box-shadow: 0 0 0 1px rgba(90, 90, 90, 0.15);
+    }
+}
+
+.field-block input.ng-touched.ng-invalid, select.ng-touched.ng-invalid {
+    @include custom.customize-background-border(transparent, 1px, rgb(252, 116, 116), 10px);
+
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 0 1px rgba(255, 0, 0, 0.3);
     }
 }
 
 textarea {
+    @include custom.customize-background-border(transparent, 1px, rgb(222, 221, 221), 10px);
     resize: none;
     box-sizing: border-box;
     height: 90px;
     padding: 15px;
     font-size: 16px;
     font-weight: 500;
-    border: solid;
-    border-color: rgb(222, 221, 221);
-    border-width: 1px;
-    border-radius: 10px;
     transition: box-shadow 200ms ease;
 
     &:focus {
@@ -66,6 +69,7 @@ textarea {
 
 form {
     @include position.custom-positioning(column, space-around, space-between);
+    row-gap: 20px;
     height: 100%
 }
 
@@ -73,7 +77,8 @@ form {
     @include position.custom-positioning(column, space-between, space-between);
     box-sizing: border-box;
     width: $form-width;
-    height: $form-height;
+    //height: $form-height;
+    row-gap: 20px;
 
     padding: $form-padding;
     border-radius: $border-radius;
@@ -89,6 +94,17 @@ form {
     font-size: 18px;
 }
 
+.add-btn {
+    @include custom.customize-background-border(colors.$orange, 1px, transparent, 10px);
+    @include position.custom-positioning(row, center, space-between);
+    padding: 10px 15px;
+    transition: transform 200ms ease;
+}
+
+.add-btn:active {
+    transform: scale(0.95);
+}
+
 .optional {
     @include fonts.customize-text($text-color: grey, $size: 17px, $weight: 500);
 }
@@ -96,16 +112,37 @@ form {
 .fields-flexbox {
     @include position.custom-positioning(row, space-between, space-between);
     flex-wrap: wrap;
-    row-gap: 30px;
+    row-gap: 20px;
     width: 100%;
 }
 
 .field-block {
     @include position.custom-positioning(column, space-between, space-between);
-    width: 205px;
+    width: $field-width;
 }
 
-.type-block, .note-block {
+.static-block {
+    width: 100%;
+}
+
+.field-block.static-block input{
+    background-color: rgb(247, 246, 246);
+}
+
+.receipt-block {
+    @include position.custom-positioning(column, start, space-between);
+}
+
+.receipt-upload {
+    @include custom.customize-background-border(transparent, 3px, rgb(222, 221, 221), 10px, dashed);
+    @include position.custom-positioning(row, center, center);
+    width: $field-width;
+    box-sizing: border-box;
+    padding: 20px 0;
+    height: $input-height;
+}
+
+.note-block {
     width: 100%;
 }
 
@@ -136,16 +173,59 @@ form {
     @include fonts.customize-text($text-color: white, $size: 18px, $weight: 500);
     box-sizing: border-box;
     cursor: pointer;
-    height: 55px;
-    width: 200px;
+    padding: 15px 20px;
 
     transition: background-color 200ms ease, transform 200ms;
 
-    &:hover {
-        background-color: #0ab94d;
-    }
-
     &:active {
         transform: scale(0.97);
+    }
+}
+
+.create-btn.stock {
+    @include custom.customize-background-border(#62d79b, 0, transparent, 8px);
+
+    &:hover {
+        background-color: #8cdeb4;
+    }
+}
+
+.create-btn.etf {
+    @include custom.customize-background-border(#6ca0e8, 0, transparent, 8px);
+
+    &:hover {
+        background-color: #8db8f5;
+    }
+}
+
+.create-btn.crypto {
+    @include custom.customize-background-border(#edb450, 0, transparent, 8px);
+
+    &:hover {
+        background-color: #eebf6e;
+    }
+}
+
+.create-btn.commodity {
+    @include custom.customize-background-border(#eada4c, 0, transparent, 8px);
+
+    &:hover {
+        background-color: #f5e873;
+    }
+}
+
+.create-btn.bond {
+    @include custom.customize-background-border(#9b64f8, 0, transparent, 8px);
+
+    &:hover {
+        background-color: #b086f9;
+    }
+}
+
+.create-btn.cash {
+    @include custom.customize-background-border(#84df43, 0, transparent, 8px);
+
+    &:hover {
+        background-color: #aff57d;
     }
 }

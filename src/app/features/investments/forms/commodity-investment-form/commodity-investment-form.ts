@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CommodityInvestment } from '../../models/investments.model';
 
 @Component({
   selector: 'commodity-investment-form',
@@ -12,7 +13,7 @@ export class CommodityInvestmentForm {
   commodityForm!: FormGroup;
 
   @Output() cancelled = new EventEmitter<void>();
-  @Output() commoditySaved = new EventEmitter<string>();
+  @Output() commoditySaved = new EventEmitter<CommodityInvestment>();
 
   constructor(private fb: FormBuilder) {}
 
@@ -46,9 +47,9 @@ export class CommodityInvestmentForm {
       return;
     }
 
-    const commodity: string = {
+    const commodity: CommodityInvestment = {
       ...formValue,
-      amount: formValue.amount
+      type: formValue.type.toLowerCase(),
     };
 
     this.commoditySaved.emit(commodity);

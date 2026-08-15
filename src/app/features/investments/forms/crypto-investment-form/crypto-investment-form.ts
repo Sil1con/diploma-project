@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CryptoInvestment } from '../../models/investments.model';
 
 @Component({
   selector: 'crypto-investment-form',
@@ -11,14 +12,14 @@ export class CryptoInvestmentForm {
   cryptoForm!: FormGroup;
 
   @Output() cancelled = new EventEmitter<void>();
-  @Output() cryptoSaved = new EventEmitter<string>();
+  @Output() cryptoSaved = new EventEmitter<CryptoInvestment>();
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.cryptoForm = this.fb.group({
-      type: [{ value: 'Cryptocurrency', disabled: true }],
-      cryptoName: ['', Validators.required],
+      type: [{ value: 'crypto', disabled: true }],
+      investmentName: ['', Validators.required],
       symbol: ['', Validators.required],
       quantity: ['', Validators.required],
       purchasePrice: ['', Validators.required],
@@ -45,9 +46,9 @@ export class CryptoInvestmentForm {
       return;
     }
 
-    const crypto: string = {
+    const crypto: CryptoInvestment = {
       ...formValue,
-      amount: formValue.amount
+      type: formValue.type.toLowerCase()
     };
 
     this.cryptoSaved.emit(crypto);

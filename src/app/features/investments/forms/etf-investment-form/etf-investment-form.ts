@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { EtfInvestment } from '../../models/investments.model';
 
 @Component({
   selector: 'etf-investment-form',
@@ -11,14 +12,14 @@ export class EtfInvestmentForm {
   etfForm!: FormGroup;
 
   @Output() cancelled = new EventEmitter<void>();
-  @Output() etfSaved = new EventEmitter<string>();
+  @Output() etfSaved = new EventEmitter<EtfInvestment>();
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.etfForm = this.fb.group({
       type: [{ value: 'ETF', disabled: true }],
-      etfName: ['', Validators.required],
+      investmentName: ['', Validators.required],
       ticker: ['', Validators.required],
       quantity: ['', Validators.required],
       purchasePrice: ['', Validators.required],
@@ -45,9 +46,9 @@ export class EtfInvestmentForm {
       return;
     }
 
-    const etf: string = {
+    const etf: EtfInvestment = {
       ...formValue,
-      amount: formValue.amount
+      type: formValue.type.toLowerCase()
     };
 
     this.etfSaved.emit(etf);

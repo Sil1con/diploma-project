@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { BondInvestment } from '../../models/investments.model';
 
 @Component({
   selector: 'bond-investment-form',
@@ -11,14 +12,14 @@ export class BondInvestmentForm {
   bondForm!: FormGroup;
 
   @Output() cancelled = new EventEmitter<void>();
-  @Output() bondSaved = new EventEmitter<string>();
+  @Output() bondSaved = new EventEmitter<BondInvestment>();
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.bondForm = this.fb.group({
       type: [{ value: 'Bond', disabled: true }],
-      bondName: ['', Validators.required],
+      investmentName: ['', Validators.required],
       issuer: ['', Validators.required],
       faceValue: [[Validators.required, Validators.min(0)]],
       purchasePrice: [[Validators.required, Validators.min(0)]],
@@ -46,9 +47,9 @@ export class BondInvestmentForm {
       return;
     }
 
-    const commodity: string = {
+    const commodity: BondInvestment = {
       ...formValue,
-      amount: formValue.amount
+      type: formValue.type.toLowerCase(),
     };
 
     this.bondSaved.emit(commodity);

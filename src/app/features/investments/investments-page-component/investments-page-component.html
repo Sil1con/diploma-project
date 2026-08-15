@@ -7,7 +7,9 @@
 <div class="bottom-block">
     <div class="left-part">
         <app-portfolio-overview-component></app-portfolio-overview-component>
-        <app-investments-preview-component></app-investments-preview-component>
+        <app-investments-preview-component
+              [investments]="investments"
+        ></app-investments-preview-component>
     </div>
     <app-add-investments-preview-component
         (formOpened)="handleFormVisibility($event)"

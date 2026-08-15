@@ -1,9 +1,16 @@
-import { Component } from '@angular/core';
+import { CurrencyPipe } from '@angular/common';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-portfolio-overview-component',
-  imports: [],
+  imports: [
+    CurrencyPipe
+  ],
   templateUrl: './portfolio-overview-component.html',
   styleUrl: './portfolio-overview-component.scss',
 })
-export class PortfolioOverviewComponent {}
+export class PortfolioOverviewComponent {
+  @Input() totalPortfolioValue: number = 0;
+
+
+}

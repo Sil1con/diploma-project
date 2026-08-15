@@ -58,4 +58,15 @@ export class InvestmentsPageComponent {
     this.investments = [investment, ...this.investments];
     console.log(this.investments);
   }
+
+  calculatePortfolioTotalValue(): number {
+    let totalSum = 0;
+
+    this.investments.forEach((investment) => {
+      let totalInvestment = investment.purchasePrice * investment.quantity;
+      totalSum += totalInvestment;
+    })
+    
+    return totalSum;
+  }
 }

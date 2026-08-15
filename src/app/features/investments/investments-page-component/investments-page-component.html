@@ -6,7 +6,9 @@
 </div>
 <div class="bottom-block">
     <div class="left-part">
-        <app-portfolio-overview-component></app-portfolio-overview-component>
+        <app-portfolio-overview-component
+          [totalPortfolioValue]="calculatePortfolioTotalValue()"
+        ></app-portfolio-overview-component>
         <app-investments-preview-component
               [investments]="investments"
         ></app-investments-preview-component>

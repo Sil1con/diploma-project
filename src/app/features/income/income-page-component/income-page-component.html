@@ -5,7 +5,10 @@
     </div>
 </div>
 <div class="overview-block">
-    <app-total-income-component></app-total-income-component>
+    <app-total-income-component
+        [totalIncomeSourcesValue]="totalIncomesValue"
+        [previousMonthIncome]="previousMonthIncome"
+    ></app-total-income-component>
     <app-goal-income-component></app-goal-income-component>
 </div>
 <app-income-sources-component

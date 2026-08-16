@@ -6,8 +6,13 @@
 @use '../../../shared/styles/mixins/shadows';
 @use '../../../shared/styles/typography';
 
-$total-block-width: 775px;
+$total-block-width: 750px;
 $total-block-padding: 30px;
+
+:host {
+    max-width: 50%;
+    box-sizing: border-box;
+}
 
 .icon {
     width: 80px;
@@ -50,9 +55,21 @@ $total-block-padding: 30px;
     margin-top: 25px;
 }
 
-.last-month-compare-block div {
+.last-month-compare-block .positive {
     padding: 6px;
     background-color: #e1f9ee;
+    border-radius: 6px;
+}
+
+.last-month-compare-block .negative {
+    padding: 6px;
+    background-color: rgb(255, 208, 208);
+    border-radius: 6px;
+}
+
+.last-month-compare-block .default {
+    padding: 6px;
+    background-color: rgb(229, 229, 229);
     border-radius: 6px;
 }
 
@@ -68,4 +85,5 @@ $total-block-padding: 30px;
 
 .compare-text {
     font-size: 18px;
+    margin-left: 10px;
 }

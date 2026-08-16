@@ -18,13 +18,15 @@ import incomesJSON from '../../../data/incomes.json';
   styleUrl: './income-page-component.scss',
 })
 export class IncomePageComponenet {
-  totalIncomesValue = 0;
+  totalIncomesValue: number = 0;
+  previousMonthIncome: number = 2500;
   isAddIncomeFormOpened: boolean = false;
 
   incomeSources: IncomePayload[] = [];
 
   ngOnInit(): void {
     this.incomeSources = incomesJSON.incomes;
+    this.calculateTotalIncomesValue();
   }
 
   openAddIncomeForm() {
@@ -39,13 +41,14 @@ export class IncomePageComponenet {
     this.incomeSources.push(income);
 
     this.sortIncomeSources();
+    this.calculateTotalIncomesValue();
 
     this.closeAddIncomeForm();
   }
 
   sortIncomeSources() {
     this.incomeSources = [...this.incomeSources]
-      .sort((a, b) => (b.amount) - (a.amount))
+      .sort((a, b) => (b.amount) - (a.amount));
   }
 
   calculateTotalIncomesValue() {
@@ -54,5 +57,7 @@ export class IncomePageComponenet {
     this.incomeSources.forEach(income => {
       totalValue += income.amount;
     });
+
+    this.totalIncomesValue = totalValue;
   }
 }

@@ -9,6 +9,10 @@
     @include fonts.customize-text($text-color: #40C057, $size: 25px, $weight: 500);
 }
 
+.red-text {
+    @include fonts.customize-text($text-color: red, $size: 25px, $weight: 500);
+}
+
 .white-text {
     @include fonts.customize-text($text-color: white, $size: 20px, $weight: 500);
 }

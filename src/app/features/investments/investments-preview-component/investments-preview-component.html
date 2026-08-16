@@ -10,7 +10,7 @@
                     <img
                         class="investment-icon"
                         [src]="investmentIcons[investment.type]"
-                        [alt]="investment.type + ' icon'"
+                        [alt]="investment.type + '-icon'"
                     >
                 </div>
                 <div class="investment-description">
@@ -19,7 +19,7 @@
                         <p class="investment-subtitle">{{ investment.type | capitalLetterPipe }}</p>
                     </div>
                     <div class="current-value-block">
-                        <p class="cash-value">{{ investment.purchasePrice * investment.quantity | currency: 'EUR' : 'symbol-narrow' : '4.2-2' }}</p>
+                        <p class="cash-value">{{ investment.purchasePrice * investment.quantity | currency: 'EUR' : 'symbol-narrow' : '2.2-2' }}</p>
                         <div>
                             <img class="gain-icon" src="assets/icons/triangle_green.png" alt="percent-up-icon">
                             <p class="percent-value green-text">8.47%</p>

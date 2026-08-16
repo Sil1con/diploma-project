@@ -159,21 +159,16 @@ form {
     background-color: transparent;
 }
 
-.create-btn {
-    @include custom.customize-background-border(#00A53F, 0, transparent, 8px);
-    @include fonts.customize-text($text-color: white, $size: 18px, $weight: 500);
+.add-btn {
+    @include custom.customize-background-border(#3086e1, 0, transparent, 8px);
+    @include fonts.customize-text($text-color: white, $size: 22px, $weight: 500);
     box-sizing: border-box;
     cursor: pointer;
-    height: 55px;
-    width: 200px;
 
     transition: background-color 200ms ease, transform 200ms;
 
     &:hover {
-        background-color: #0ab94d;
-    }
-
-    &:active {
-        transform: scale(0.97);
+        transform: scale(0.95);
+        background-color: #9ac4f0;
     }
 }

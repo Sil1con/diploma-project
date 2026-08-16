@@ -1,0 +1,28 @@
+{
+    "incomes": [
+        {
+            "id": 1,
+            "name": "Computer Systems Technician",
+            "category": "salary",
+            "amount": 1100,
+            "startDate": "01.06.2025",
+            "notes": ""
+        },
+        {
+            "id": 2,
+            "name": "Real Estate Agent",
+            "category": "salary",
+            "amount": 500,
+            "startDate": "01.01.2025",
+            "notes": ""
+        },
+        {
+            "id": 3,
+            "name": "Investments | June",
+            "category": "investments",
+            "amount": 250,
+            "startDate": "01.07.2026",
+            "notes": ""
+        }
+    ]
+}

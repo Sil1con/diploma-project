@@ -1,5 +1,6 @@
 export interface IncomePayload {
-  incomeName: string;
+  id: number;
+  name: string;
   category: string;
   amount: number;
   startDate: string;

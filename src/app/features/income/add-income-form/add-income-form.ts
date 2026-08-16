@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { IncomePayload } from '../models/income-paylod.model';
+import { IncomePayload } from '../models/income-payload.model';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -22,14 +22,15 @@ export class AddIncomeForm {
     { value: 'salary', label: 'Salary' },
     { value: 'freelance', label: 'Freelance' },
     { value: 'investments', label: 'Investments' },
-    { value: 'rental', label: 'Rental' }
+    { value: 'rental', label: 'Rental' },
+    { value: 'scholarship', label: 'Scholarship' }
   ];
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.addIncomeForm = this.fb.group({
-      incomeName: ['', Validators.required],
+      name: ['', Validators.required],
       category: ['', Validators.required],
       amount: ['', Validators.required],
       startDate: ['', Validators.required],

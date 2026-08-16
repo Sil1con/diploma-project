@@ -38,10 +38,6 @@ export class InvestmentsPageComponent {
     this.investments = investmentsJSON.investments;
   }
 
-  ngOnDestroy(): void {
-
-  }
-
   handleInvestmentCategory(category: string) {
     this.investmentSelected = category;
   }

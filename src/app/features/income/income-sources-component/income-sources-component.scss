@@ -10,7 +10,7 @@ $source-component-padding: 30px;
 $border-radius: 25px;
 
 .icon {
-    width: 80px;
+    width: 70px;
 }
 
 .sources-block {
@@ -70,6 +70,22 @@ $border-radius: 25px;
     flex-shrink: 0;
 }
 
+.source-icon-block.investments {
+    background-color: #d0f7e3;
+}
+
+.source-icon-block.freelance {
+    background-color: #e9e9e9;
+}
+
+.source-icon-block.rental {
+    background-color: #e9dcfe;
+}
+
+.source-icon-block.scholarship {
+    background-color: #e4feff;
+}
+
 .source {
     @include custom.customize-background-border(transparent, 1px, colors.$component-border-color, dimensions.$border-radius);
     @include position.custom-positioning(column, space-between, center);
@@ -84,6 +100,7 @@ $border-radius: 25px;
 }
 
 .source-name {
+    text-align: center;
     font-size: 23px;
     font-weight: 600;
 }
@@ -93,6 +110,6 @@ $border-radius: 25px;
     font-size: 30px;
 }
 
-.source-note {
+.source-category {
     font-size: 17px
 }

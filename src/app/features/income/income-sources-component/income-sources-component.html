@@ -5,15 +5,23 @@
         <button class="view-all-btn">View all</button>
     </div>
     <div class="sources-flexbox">
-        <div class="source">
-            <div class="source-icon-block">
-                <img class="icon" src="assets/category_icons/briefcase_icon.png" alt="income-source-briefcase-icon">
+        @for (income of incomeSources.slice(0, 4); track income.id) {
+            <div class="source">
+                <div 
+                    class="source-icon-block"
+                    [class]="income.category"
+                >
+                    <img 
+                        class="icon"
+                        [src]="incomesIcons[income.category]" 
+                        [alt]="income.category + '-icon'">
+                </div>
+                <div class="source-description">
+                    <p class="source-name grey-title">{{ income.name }}</p>
+                    <p class="source-income titles">{{ income.amount | currency: 'EUR' : 'symbol-narrow' : '2.2-2'}}</p>
+                    <p class="source-category grey-title">{{ income.category | capitalLetterPipe }}</p>
+                </div>
             </div>
-            <div class="source-description">
-                <p class="source-name grey-title">Salary</p>
-                <p class="source-income titles">&euro; 3,200.00</p>
-                <p class="source-note grey-title">Primary Job</p>
-            </div>
-        </div>
+        }
     </div>
 </div>

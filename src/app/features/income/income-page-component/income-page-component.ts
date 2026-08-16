@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { TotalIncomeComponent } from '../total-income-component/total-income-component';
 import { GoalIncomeComponent } from '../goal-income-component/goal-income-component';
 import { IncomeSourcesComponent } from '../income-sources-component/income-sources-component';
-import { IncomePayload } from '../models/income-paylod.model';
+import { IncomePayload } from '../models/income-payload.model';
 import { AddIncomeForm } from '../add-income-form/add-income-form';
+import incomesJSON from '../../../data/incomes.json';
 
 @Component({
   selector: 'app-income-page-componenet',
@@ -17,9 +18,14 @@ import { AddIncomeForm } from '../add-income-form/add-income-form';
   styleUrl: './income-page-component.scss',
 })
 export class IncomePageComponenet {
+  totalIncomesValue = 0;
   isAddIncomeFormOpened: boolean = false;
 
   incomeSources: IncomePayload[] = [];
+
+  ngOnInit(): void {
+    this.incomeSources = incomesJSON.incomes;
+  }
 
   openAddIncomeForm() {
     this.isAddIncomeFormOpened = true;
@@ -30,8 +36,23 @@ export class IncomePageComponenet {
   }
 
   handleIncomeSubmitted(income: IncomePayload) {
-    this.incomeSources = [income, ...this.incomeSources];
+    this.incomeSources.push(income);
+
+    this.sortIncomeSources();
 
     this.closeAddIncomeForm();
+  }
+
+  sortIncomeSources() {
+    this.incomeSources = [...this.incomeSources]
+      .sort((a, b) => (b.amount) - (a.amount))
+  }
+
+  calculateTotalIncomesValue() {
+    let totalValue = 0;
+    
+    this.incomeSources.forEach(income => {
+      totalValue += income.amount;
+    });
   }
 }

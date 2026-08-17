@@ -18,8 +18,9 @@ import incomesJSON from '../../../data/incomes.json';
   styleUrl: './income-page-component.scss',
 })
 export class IncomePageComponenet {
+  incomeGoal: number = 10000;
   totalIncomesValue: number = 0;
-  previousMonthIncome: number = 2500;
+  previousMonthIncome: number = 1300;
   isAddIncomeFormOpened: boolean = false;
 
   incomeSources: IncomePayload[] = [];

@@ -8,7 +8,7 @@ import { CryptoInvestmentForm } from '../forms/crypto-investment-form/crypto-inv
 import { CommodityInvestmentForm } from '../forms/commodity-investment-form/commodity-investment-form';
 import { BondInvestmentForm } from '../forms/bond-investment-form/bond-investment-form';
 import { CashInvestmentForm } from '../forms/cash-investment-form/cash-investment-form';
-import { Investment } from '../models/investments.model';
+import { Investment, InvestmentType } from '../models/investments.model';
 import investmentsJSON from '../../../data/investments.json';
 
 @Component({
@@ -29,16 +29,16 @@ import investmentsJSON from '../../../data/investments.json';
   styleUrl: './investments-page-component.scss',
 })
 export class InvestmentsPageComponent {
-  investmentSelected: string = 'stock';
+  investmentSelected: InvestmentType = 'STOCK';
   isFormOpened: boolean = false;
   
   investments: Investment[] = [];
 
   ngOnInit(): void {
-    this.investments = investmentsJSON.investments;
+    this.investments = investmentsJSON.investments as Investment[];;
   }
 
-  handleInvestmentCategory(category: string) {
+  handleInvestmentCategory(category: InvestmentType) {
     this.investmentSelected = category;
   }
 
@@ -53,6 +53,7 @@ export class InvestmentsPageComponent {
   handleSavedForm(investment: Investment) {
     this.investments = [investment, ...this.investments];
     console.log(this.investments);
+    this.handleCancelledForm();
   }
 
   calculatePortfolioTotalValue(): number {

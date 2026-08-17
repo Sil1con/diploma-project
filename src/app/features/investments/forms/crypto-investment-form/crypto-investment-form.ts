@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CryptoInvestment } from '../../models/investments.model';
+import { CryptoInvestment, InvestmentType } from '../../models/investments.model';
 
 @Component({
   selector: 'crypto-investment-form',
@@ -18,7 +18,9 @@ export class CryptoInvestmentForm {
 
   ngOnInit(): void {
     this.cryptoForm = this.fb.group({
-      type: [{ value: 'crypto', disabled: true }],
+      type: this.fb.control<InvestmentType>(
+        { value: 'CRYPTO', disabled: true }
+      ),
       investmentName: ['', Validators.required],
       symbol: ['', Validators.required],
       quantity: ['', Validators.required],

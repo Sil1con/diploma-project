@@ -6,9 +6,17 @@ export type Investment =
   | BondInvestment
   | CashInvestment;
 
+export type InvestmentType =
+  | 'STOCK'
+  | 'ETF'
+  | 'CRYPTO'
+  | 'COMMODITY'
+  | 'BOND'
+  | 'CASH';
+
 export interface InvestmentBase {
   id: number;
-  type: string;
+  type: InvestmentType;
   investmentName: string;
   purchaseDate: string;
   purchasePrice: number;
@@ -17,11 +25,13 @@ export interface InvestmentBase {
 }
 
 export interface StockInvestment extends InvestmentBase {
+  type: 'STOCK';
   ticker: string;
   brokerAccount: string;
 }
 
 export interface EtfInvestment extends InvestmentBase {
+  type: 'ETF';
   ticker: string;
   brokerAccount: string;
 }
@@ -32,10 +42,12 @@ export interface CryptoInvestment extends InvestmentBase {
 }
 
 export interface CommodityInvestment extends InvestmentBase {
+  type: 'COMMODITY';
   symbol: string;
 }
 
 export interface BondInvestment extends InvestmentBase {
+  type: 'BOND';
   issuer: string;
   faceValue: number;
   couponRate: number;
@@ -43,5 +55,6 @@ export interface BondInvestment extends InvestmentBase {
 }
 
 export interface CashInvestment extends InvestmentBase {
+  type: 'CASH';
   amount: number;
 }

@@ -17,12 +17,12 @@ export class InvestmentsPreviewComponent {
   previewInvestments: Investment[] = [];
 
   investmentIcons: Record<string, string> = {
-    stock: 'assets/category_icons/stock.png',
-    etf: 'assets/category_icons/etf.png',
-    crypto: 'assets/category_icons/crypto.png',
-    commodity: 'assets/category_icons/commodity.png',
-    bond: 'assets/category_icons/bond.png',
-    cash: 'assets/category_icons/cash.png'
+    STOCK: 'assets/category_icons/stock.png',
+    ETF: 'assets/category_icons/etf.png',
+    CRYPTO: 'assets/category_icons/crypto.png',
+    COMMODITY: 'assets/category_icons/commodity.png',
+    BOND: 'assets/category_icons/bond.png',
+    CASH: 'assets/category_icons/cash.png'
   };
 
   ngOnChanges(changes: SimpleChanges): void {

@@ -2,7 +2,7 @@
   "investments": [
     {
         "id": 1,
-        "type": "stock",
+        "type": "STOCK",
         "investmentName": "Apple Inc.",
         "ticker": "AAPL",
         "quantity": 12,
@@ -13,7 +13,7 @@
     },
     {
         "id": 2,
-        "type": "stock",
+        "type": "STOCK",
         "investmentName": "Microsoft Corporation",
         "ticker": "MSFT",
         "quantity": 8,
@@ -24,7 +24,7 @@
     },
     {
         "id": 3,
-        "type": "stock",
+        "type": "STOCK",
         "investmentName": "NVIDIA Corporation",
         "ticker": "NVDA",
         "quantity": 20,
@@ -35,7 +35,7 @@
     },
     {
         "id": 4,
-        "type": "stock",
+        "type": "STOCK",
         "investmentName": "The Coca-Cola Company",
         "ticker": "KO",
         "quantity": 35,
@@ -46,7 +46,7 @@
     },
     {
         "id": 5,
-        "type": "stock",
+        "type": "STOCK",
         "investmentName": "Tesla Inc.",
         "ticker": "TSLA",
         "quantity": 6,
@@ -57,7 +57,7 @@
     },
     {
         "id": 6,
-        "type": "stock",
+        "type": "STOCK",
         "investmentName": "Amazon.com Inc.",
         "ticker": "AMZN",
         "quantity": 10,

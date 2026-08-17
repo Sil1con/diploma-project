@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { BondInvestment } from '../../models/investments.model';
+import { BondInvestment, InvestmentType } from '../../models/investments.model';
 
 @Component({
   selector: 'bond-investment-form',
@@ -18,7 +18,9 @@ export class BondInvestmentForm {
 
   ngOnInit(): void {
     this.bondForm = this.fb.group({
-      type: [{ value: 'Bond', disabled: true }],
+      type: this.fb.control<InvestmentType>(
+        { value: 'BOND', disabled: true }
+      ),
       investmentName: ['', Validators.required],
       issuer: ['', Validators.required],
       faceValue: [[Validators.required, Validators.min(0)]],

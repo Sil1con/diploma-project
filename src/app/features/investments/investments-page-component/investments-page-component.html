@@ -20,42 +20,42 @@
 </div>
 @if (isFormOpened) {
   @switch (investmentSelected) {
-    @case ('stock') {
+    @case ('STOCK') {
       <stock-investment-form
         (cancelled)="handleCancelledForm()"
         (stockSaved)="handleSavedForm($event)"
       ></stock-investment-form>
     }
 
-    @case ('etf') {
+    @case ('ETF') {
       <etf-investment-form
         (cancelled)="handleCancelledForm()"
         (etfSaved)="handleSavedForm($event)"
       ></etf-investment-form>
     }
 
-    @case ('crypto') {
+    @case ('CRYPTO') {
       <crypto-investment-form
         (cancelled)="handleCancelledForm()"
         (cryptoSaved)="handleSavedForm($event)"
       ></crypto-investment-form>
     }
 
-    @case ('commodity') {
+    @case ('COMMODITY') {
       <commodity-investment-form
         (cancelled)="handleCancelledForm()"
         (commoditySaved)="handleSavedForm($event)"
       ></commodity-investment-form>
     }
 
-    @case ('bond') {
+    @case ('BOND') {
       <bond-investment-form
         (cancelled)="handleCancelledForm()"
         (bondSaved)="handleSavedForm($event)"
       ></bond-investment-form>
     }
 
-    @case ('cash') {
+    @case ('CASH') {
       <cash-investment-form
         (cancelled)="handleCancelledForm()"
         (cashSaved)="handleSavedForm($event)"

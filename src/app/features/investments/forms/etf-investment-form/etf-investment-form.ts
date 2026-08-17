@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { EtfInvestment } from '../../models/investments.model';
+import { EtfInvestment, InvestmentType } from '../../models/investments.model';
 
 @Component({
   selector: 'etf-investment-form',
@@ -18,7 +18,9 @@ export class EtfInvestmentForm {
 
   ngOnInit(): void {
     this.etfForm = this.fb.group({
-      type: [{ value: 'ETF', disabled: true }],
+      type: this.fb.control<InvestmentType>(
+        { value: 'ETF', disabled: true }
+      ),
       investmentName: ['', Validators.required],
       ticker: ['', Validators.required],
       quantity: ['', Validators.required],

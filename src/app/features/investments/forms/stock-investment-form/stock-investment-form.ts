@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { StockInvestment } from '../../models/investments.model';
+import { InvestmentType, StockInvestment } from '../../models/investments.model';
 
 @Component({
   selector: 'stock-investment-form',
@@ -18,7 +18,9 @@ export class StockInvestmentForm {
 
   ngOnInit(): void {
     this.stockForm = this.fb.group({
-      type: [{ value: 'Stock', disabled: true }],
+      type: this.fb.control<InvestmentType>(
+        { value: 'STOCK', disabled: true }
+      ),
       investmentName: ['', Validators.required],
       ticker: ['', Validators.required],
       quantity: [Validators.required],

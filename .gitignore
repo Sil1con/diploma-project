@@ -7,9 +7,13 @@
 /bazel-out
 
 # Node
-/node_modules
+/frontend/node_modules
 npm-debug.log
 yarn-error.log
+
+# Backend - Spring Boot
+/backend/target/
+/backend/.idea/
 
 # IDEs and editors
 .idea/
@@ -21,16 +25,16 @@ yarn-error.log
 *.sublime-workspace
 
 # Visual Studio Code
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-!.vscode/mcp.json
-.history/*
+/frontend/.vscode/*
+!/frontend/.vscode/settings.json
+!/frontend/.vscode/tasks.json
+!/frontend/.vscode/launch.json
+!/frontend/.vscode/extensions.json
+!/frontend/.vscode/mcp.json
+/frontend/.history/*
 
 # Miscellaneous
-/.angular/cache
+/frontend/.angular/
 .sass-cache/
 /connect.lock
 /coverage

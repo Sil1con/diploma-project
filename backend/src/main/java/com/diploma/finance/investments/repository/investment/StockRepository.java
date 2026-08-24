@@ -1,0 +1,14 @@
+package com.diploma.finance.investments.repository.investment;
+
+import com.diploma.finance.investments.entity.investment_asset.InvestmentAsset;
+import com.diploma.finance.investments.entity.investment_asset.Stock;
+import com.diploma.finance.user.entity.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.Optional;
+
+public interface StockRepository
+        extends JpaRepository<Stock, Long> {
+
+    Optional<Stock> findByUserAndTicker(User user, String ticker);
+}

@@ -1,0 +1,14 @@
+Backend:
+    Investments:
+        +   InvestmentService -> Implement returning of DTOs rather than actual Entities
+        +   InvestmentRequestMapper -> Finish implementation
+        +-  InvestmentService -> Implement createInvestment method
+
+            TransactionController -> Implement it
+
+
+Frontend:
+    CashRequest -> Add json key "currency", so it can be processed by Jackson
+
+Database:
+    InvestmentAsset -> Add new Bond field "isin"

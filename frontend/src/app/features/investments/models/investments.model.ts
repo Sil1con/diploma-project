@@ -1,3 +1,5 @@
+import { InvestmentType } from "../types/investment-type";
+
 export type Investment =
   | StockInvestment
   | EtfInvestment
@@ -5,14 +7,6 @@ export type Investment =
   | CommodityInvestment
   | BondInvestment
   | CashInvestment;
-
-export type InvestmentType =
-  | 'STOCK'
-  | 'ETF'
-  | 'CRYPTO'
-  | 'COMMODITY'
-  | 'BOND'
-  | 'CASH';
 
 export interface InvestmentBase {
   id: number;
@@ -37,6 +31,7 @@ export interface EtfInvestment extends InvestmentBase {
 }
 
 export interface CryptoInvestment extends InvestmentBase {
+  type: 'CRYPTO';
   symbol: string;
   wallet: string;
 }
@@ -56,5 +51,4 @@ export interface BondInvestment extends InvestmentBase {
 
 export interface CashInvestment extends InvestmentBase {
   type: 'CASH';
-  amount: number;
 }

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CryptoInvestment, InvestmentType } from '../../models/investments.model';
+import { CryptoInvestment } from '../../models/investments.model';
+import { InvestmentType } from '../../types/investment-type';
 
 @Component({
   selector: 'crypto-investment-form',

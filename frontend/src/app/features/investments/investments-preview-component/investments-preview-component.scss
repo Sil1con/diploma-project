@@ -63,6 +63,7 @@ $investments-list-padding: 30px;
 .investment-description {
     @include position.custom-positioning(row, center, space-between);
     width: 100%;
+    column-gap: 15px;
 }
 
 .investment-title {

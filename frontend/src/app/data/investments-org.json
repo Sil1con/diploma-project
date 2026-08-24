@@ -1,0 +1,70 @@
+{
+  "investments": [
+    {
+        "id": 1,
+        "type": "STOCK",
+        "investmentName": "Apple Inc.",
+        "ticker": "AAPL",
+        "quantity": 12,
+        "purchasePrice": 184.50,
+        "purchaseDate": "2025-11-14",
+        "brokerAccount": "Interactive Brokers",
+        "notes": "Long-term technology investment"
+    },
+    {
+        "id": 2,
+        "type": "STOCK",
+        "investmentName": "Microsoft Corporation",
+        "ticker": "MSFT",
+        "quantity": 8,
+        "purchasePrice": 415.20,
+        "purchaseDate": "2026-01-20",
+        "brokerAccount": "Trading 212",
+        "notes": ""
+    },
+    {
+        "id": 3,
+        "type": "STOCK",
+        "investmentName": "NVIDIA Corporation",
+        "ticker": "NVDA",
+        "quantity": 20,
+        "purchasePrice": 132.75,
+        "purchaseDate": "2026-03-05",
+        "brokerAccount": "Interactive Brokers",
+        "notes": "AI and semiconductor exposure"
+    },
+    {
+        "id": 4,
+        "type": "STOCK",
+        "investmentName": "The Coca-Cola Company",
+        "ticker": "KO",
+        "quantity": 35,
+        "purchasePrice": 68.40,
+        "purchaseDate": "2025-09-18",
+        "brokerAccount": "Revolut",
+        "notes": "Dividend-focused investment"
+    },
+    {
+        "id": 5,
+        "type": "STOCK",
+        "investmentName": "Tesla Inc.",
+        "ticker": "TSLA",
+        "quantity": 6,
+        "purchasePrice": 287.30,
+        "purchaseDate": "2026-04-22",
+        "brokerAccount": "Trading 212",
+        "notes": "Higher-risk growth position"
+    },
+    {
+        "id": 6,
+        "type": "STOCK",
+        "investmentName": "Amazon.com Inc.",
+        "ticker": "AMZN",
+        "quantity": 10,
+        "purchasePrice": 196.80,
+        "purchaseDate": "2026-06-10",
+        "brokerAccount": "Interactive Brokers",
+        "notes": ""
+    }
+  ]
+}

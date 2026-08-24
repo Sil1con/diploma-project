@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { BondInvestment, InvestmentType } from '../../models/investments.model';
+import { BondInvestment } from '../../models/investments.model';
+import { InvestmentType } from '../../types/investment-type';
 
 @Component({
   selector: 'bond-investment-form',
@@ -18,15 +19,37 @@ export class BondInvestmentForm {
 
   ngOnInit(): void {
     this.bondForm = this.fb.group({
-      type: this.fb.control<InvestmentType>(
-        { value: 'BOND', disabled: true }
-      ),
+      type: this.fb.control<InvestmentType>({
+        value: 'BOND',
+        disabled: true
+      }),
+
       investmentName: ['', Validators.required],
       issuer: ['', Validators.required],
-      faceValue: [[Validators.required, Validators.min(0)]],
-      purchasePrice: [[Validators.required, Validators.min(0)]],
-      couponRate: [[Validators.required, Validators.min(0)]],
+      isin: ['', Validators.required],
+
+      faceValue: [
+        null,
+        [Validators.required, Validators.min(0.01)]
+      ],
+
+      couponRate: [
+        null,
+        [Validators.required, Validators.min(0)]
+      ],
+
       maturityDate: ['', Validators.required],
+
+      quantity: [
+        null,
+        [Validators.required, Validators.min(0.01)]
+      ],
+
+      purchasePrice: [
+        null,
+        [Validators.required, Validators.min(0.01)]
+      ],
+
       purchaseDate: ['', Validators.required],
       notes: ['']
     });

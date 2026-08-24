@@ -18,24 +18,32 @@
                 <input formControlName="issuer" placeholder="e.g., Government">
             </div>
             <div class="field-block">
-                <label>Face Value</label>
-                <input type="number" formControlName="faceValue" placeholder="0.00">
+                <label>ISIN</label>
+                <input formControlName="isin" placeholder="e.g., US0378331005">
             </div>
             <div class="field-block">
-                <label>Purchase Price</label>
-                <input type="number" formControlName="purchasePrice" placeholder="0.00">
+                <label>Face Value</label>
+                <input type="number" formControlName="faceValue" placeholder="0.00">
             </div>
             <div class="field-block">
                 <label>Coupon Rate (%)</label>
                 <input type="number" formControlName="couponRate" placeholder="e.g., 5">
             </div>
             <div class="field-block">
+                <label>Maturity Date</label>
+                <input type="date" formControlName="maturityDate">
+            </div>
+            <div class="field-block">
                 <label>Purchase Date</label>
                 <input type="date" formControlName="purchaseDate">
             </div>
             <div class="field-block">
-                <label>Maturity Date</label>
-                <input type="date" formControlName="maturityDate">
+                <label>Quantity</label>
+                <input type="number" formControlName="quantity" placeholder="0.00">
+            </div>
+            <div class="field-block">
+                <label>Purchase Price</label>
+                <input type="number" formControlName="purchasePrice" placeholder="0.00">
             </div>
         </div>
         <div class="field-block note-block">

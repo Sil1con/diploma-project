@@ -8,7 +8,8 @@ import { CryptoInvestmentForm } from '../forms/crypto-investment-form/crypto-inv
 import { CommodityInvestmentForm } from '../forms/commodity-investment-form/commodity-investment-form';
 import { BondInvestmentForm } from '../forms/bond-investment-form/bond-investment-form';
 import { CashInvestmentForm } from '../forms/cash-investment-form/cash-investment-form';
-import { Investment, InvestmentType } from '../models/investments.model';
+import { Investment } from '../models/investments.model';
+import { InvestmentType } from '../types/investment-type';
 import investmentsJSON from '../../../data/investments.json';
 
 @Component({

@@ -1,8 +1,9 @@
-package com.diploma.finance.investments.entity.investment_transaction;
+package com.diploma.finance.investments.entity.transaction;
 
 import com.diploma.finance.investments.entity.enums.TransactionType;
 import com.diploma.finance.investments.entity.investment_asset.InvestmentAsset;
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -32,16 +33,39 @@ public class InvestmentTransaction {
     @Column(name = "transaction_date", nullable = false)
     private LocalDate transactionDate;
 
-    @Column(name = "broker_account", length = 100)
+    @Column(name = "wallet", nullable = false, length = 255)
+    private String wallet;
+
+    @Column(name = "broker_account", nullable = false, length = 100)
     private String brokerAccount;
 
-    @Column(length = 255)
-    private String wallet;
 
     private String notes;
 
-    @Column(name = "created_at", nullable = false)
+    @CreationTimestamp
+    @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
+
+    protected InvestmentTransaction() {}
+    public InvestmentTransaction(
+            InvestmentAsset asset,
+            TransactionType transactionType,
+            BigDecimal quantity,
+            BigDecimal pricePerUnit,
+            LocalDate transactionDate,
+            String wallet,
+            String brokerAccount,
+            String notes
+    ) {
+        this.asset = asset;
+        this.transactionType = transactionType;
+        this.quantity = quantity;
+        this.pricePerUnit = pricePerUnit;
+        this.transactionDate = transactionDate;
+        this.wallet = wallet;
+        this.brokerAccount = brokerAccount;
+        this.notes = notes;
+    }
 
     public Long getId() {
         return id;
@@ -67,13 +91,14 @@ public class InvestmentTransaction {
         return transactionDate;
     }
 
+    public String getWallet() {
+        return wallet;
+    }
+
     public String getBrokerAccount() {
         return brokerAccount;
     }
 
-    public String getWallet() {
-        return wallet;
-    }
 
     public String getNotes() {
         return notes;
@@ -105,14 +130,6 @@ public class InvestmentTransaction {
 
     public void setTransactionDate(LocalDate transactionDate) {
         this.transactionDate = transactionDate;
-    }
-
-    public void setBrokerAccount(String brokerAccount) {
-        this.brokerAccount = brokerAccount;
-    }
-
-    public void setWallet(String wallet) {
-        this.wallet = wallet;
     }
 
     public void setNotes(String notes) {

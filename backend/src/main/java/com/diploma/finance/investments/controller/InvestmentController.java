@@ -1,14 +1,15 @@
 package com.diploma.finance.investments.controller;
 
 import com.diploma.finance.investments.dto.request.CreateInvestmentRequest;
-import com.diploma.finance.investments.dto.response.investment.InvestmentResponse;
+import com.diploma.finance.investments.dto.response.transaction.TransactionResponse;
 import com.diploma.finance.investments.entity.investment_asset.InvestmentAsset;
-import com.diploma.finance.investments.entity.investment_transaction.InvestmentTransaction;
-import com.diploma.finance.investments.mapper.InvestmentResponseMapper;
+import com.diploma.finance.investments.entity.transaction.InvestmentTransaction;
+import com.diploma.finance.investments.mapper.TransactionResponseMapper;
 import com.diploma.finance.investments.service.InvestmentService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -23,10 +24,10 @@ public class InvestmentController {
     }
 
     @PostMapping
-    public InvestmentResponse createInvestment(
+    public TransactionResponse createInvestment(
             @Valid @RequestBody CreateInvestmentRequest request
     ) {
-        return investmentService.createInvestment(request);
+        return investmentService.createInvestmentTransaction(request);
     }
 
     @GetMapping
@@ -34,20 +35,25 @@ public class InvestmentController {
         return investmentService.getInvestmentAssets();
     }
 
-    @GetMapping("/{id}")
-    public InvestmentResponse getInvestment(@PathVariable Long id) {
-        InvestmentAsset asset = investmentService.getInvestment(id);
+    @GetMapping("/{assetId}/transaction/{transactionId}")
+    public TransactionResponse getTransaction(
+            @PathVariable Long assetId,
+            @PathVariable Long transactionId
+    ) {
+        InvestmentTransaction transaction = investmentService.getTransaction(assetId, transactionId);
 
-        return InvestmentResponseMapper.toResponseDto(asset);
+        return TransactionResponseMapper.toResponseDto(transaction);
     }
 
-//    @GetMapping("/{id}/transaction")
-//    public InvestmentTransaction getTransaction(@PathVariable Long transactionId) {
-//        return investmentService.getTransaction(transactionId);
-//    }
-
     @GetMapping("/{id}/transactions")
-    public List<InvestmentTransaction> getTransactions(@PathVariable Long id) {
-        return investmentService.getTransactionsByAsset(id);
+    public List<TransactionResponse> getAssetTransactions(@PathVariable Long id) {
+        List <InvestmentTransaction> transactions = investmentService.getAllTransactions(id);
+        List <TransactionResponse> transactionResponses = new ArrayList<>();
+
+        for (InvestmentTransaction trans : transactions) {
+            transactionResponses.add(TransactionResponseMapper.toResponseDto(trans));
+        }
+
+        return transactionResponses;
     }
 }

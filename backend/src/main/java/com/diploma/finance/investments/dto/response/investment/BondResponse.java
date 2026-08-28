@@ -1,6 +1,7 @@
 package com.diploma.finance.investments.dto.response.investment;
 
 import com.diploma.finance.investments.entity.enums.InvestmentType;
+import com.diploma.finance.investments.entity.enums.TransactionType;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -8,16 +9,12 @@ import java.time.LocalDate;
 public class BondResponse extends InvestmentResponse {
     private String issuer;
     private String isin;
-
     private BigDecimal faceValue;
-
     private BigDecimal couponRate;
-
     private LocalDate maturityDate;
 
     public BondResponse(
-            Long id,
-            Long userId,
+            Long assetId,
             String investmentName,
             String issuer,
             String isin,
@@ -25,7 +22,7 @@ public class BondResponse extends InvestmentResponse {
             BigDecimal couponRate,
             LocalDate maturityDate
     ) {
-        super(id, userId, investmentName, InvestmentType.COMMODITY);
+        super(assetId, investmentName, InvestmentType.BOND);
         this.issuer = issuer;
         this.isin = isin;
         this.faceValue = faceValue;

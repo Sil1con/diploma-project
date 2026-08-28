@@ -2,6 +2,7 @@ package com.diploma.finance.investments.mapper;
 
 import com.diploma.finance.investments.dto.response.investment.*;
 import com.diploma.finance.investments.entity.investment_asset.*;
+import com.diploma.finance.investments.entity.transaction.InvestmentTransaction;
 
 public class InvestmentResponseMapper {
     public static InvestmentResponse toResponseDto(InvestmentAsset asset) {
@@ -9,7 +10,6 @@ public class InvestmentResponseMapper {
         if (asset instanceof Stock stock) {
             return new StockResponse(
                     stock.getId(),
-                    stock.getUser().getId(),
                     stock.getInvestmentName(),
                     stock.getTicker()
             );
@@ -18,7 +18,6 @@ public class InvestmentResponseMapper {
         if (asset instanceof ETF etf) {
             return new EtfResponse(
                     etf.getId(),
-                    etf.getUser().getId(),
                     etf.getInvestmentName(),
                     etf.getTicker()
             );
@@ -27,7 +26,6 @@ public class InvestmentResponseMapper {
         if (asset instanceof Crypto crypto) {
             return new CryptoResponse(
                     crypto.getId(),
-                    crypto.getUser().getId(),
                     crypto.getInvestmentName(),
                     crypto.getSymbol()
             );
@@ -36,7 +34,6 @@ public class InvestmentResponseMapper {
         if (asset instanceof Commodity commodity) {
             return new CommodityResponse(
                     commodity.getId(),
-                    commodity.getUser().getId(),
                     commodity.getInvestmentName(),
                     commodity.getSymbol()
             );
@@ -45,7 +42,6 @@ public class InvestmentResponseMapper {
         if (asset instanceof Bond bond) {
             return new BondResponse(
                     bond.getId(),
-                    bond.getUser().getId(),
                     bond.getInvestmentName(),
                     bond.getIssuer(),
                     bond.getIsin(),
@@ -58,7 +54,6 @@ public class InvestmentResponseMapper {
         if (asset instanceof Cash cash) {
             return new CashResponse(
                     cash.getId(),
-                    cash.getUser().getId(),
                     cash.getInvestmentName(),
                     cash.getCurrency()
             );

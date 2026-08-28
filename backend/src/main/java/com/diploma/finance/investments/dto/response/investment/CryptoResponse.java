@@ -6,11 +6,10 @@ public class CryptoResponse extends InvestmentResponse {
     private String symbol;
     public CryptoResponse(
             Long id,
-            Long userId,
             String investmentName,
             String symbol
     ) {
-        super(id, userId, investmentName, InvestmentType.CRYPTO);
+        super(id, investmentName, InvestmentType.CRYPTO);
         this.symbol = symbol;
     }
 

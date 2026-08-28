@@ -1,6 +1,7 @@
 package com.diploma.finance.investments.dto.request;
 
 import com.diploma.finance.investments.entity.enums.InvestmentType;
+import com.diploma.finance.investments.entity.enums.TransactionType;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.constraints.NotBlank;
@@ -35,6 +36,9 @@ public abstract class CreateInvestmentRequest {
     private InvestmentType type;
 
     @NotNull
+    private TransactionType transactionType;
+
+    @NotNull
     @Positive
     private BigDecimal quantity;
 
@@ -51,6 +55,7 @@ public abstract class CreateInvestmentRequest {
             Long userId,
             String name,
             InvestmentType type,
+            TransactionType transactionType,
             BigDecimal quantity,
             BigDecimal pricePerUnit,
             LocalDate purchaseDate,
@@ -59,6 +64,7 @@ public abstract class CreateInvestmentRequest {
         this.userId = userId;
         this.name = name;
         this.type = type;
+        this.transactionType = transactionType;
         this.quantity = quantity;
         this.pricePerUnit = pricePerUnit;
         this.purchaseDate = purchaseDate;
@@ -75,6 +81,10 @@ public abstract class CreateInvestmentRequest {
 
     public InvestmentType getType() {
         return type;
+    }
+
+    public TransactionType getTransactionType() {
+        return transactionType;
     }
 
     public BigDecimal getQuantity() {

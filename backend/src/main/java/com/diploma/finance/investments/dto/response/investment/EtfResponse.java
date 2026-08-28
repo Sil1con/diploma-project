@@ -6,11 +6,10 @@ public class EtfResponse extends InvestmentResponse {
     private String ticker;
     public EtfResponse(
             Long id,
-            Long userId,
             String investmentName,
             String ticker
     ) {
-        super(id, userId, investmentName, InvestmentType.ETF);
+        super(id, investmentName, InvestmentType.ETF);
         this.ticker = ticker;
     }
 

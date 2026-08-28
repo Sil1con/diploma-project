@@ -1,35 +1,30 @@
 package com.diploma.finance.investments.dto.response.investment;
 
 import com.diploma.finance.investments.entity.enums.InvestmentType;
+import com.diploma.finance.investments.entity.enums.TransactionType;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public abstract class InvestmentResponse {
-    private final Long id;
-    private final Long userId;
+    private final Long assetId;
     private final String investmentName;
     private final InvestmentType type;
 
     protected InvestmentResponse(
-            Long id,
-            Long userId,
+            Long assetId,
             String investmentName,
             InvestmentType type
     ) {
-        this.id = id;
-        this.userId = userId;
+        this.assetId = assetId;
         this.investmentName = investmentName;
         this.type = type;
     }
 
-    public Long getId() {
-        return id;
+    public Long getAssetId() {
+        return assetId;
     }
 
-    public Long getUserId() {
-        return userId;
-    }
 
     public String getInvestmentName() {
         return investmentName;

@@ -3,12 +3,15 @@ Backend:
         +   InvestmentService -> Implement returning of DTOs rather than actual Entities
         +   InvestmentRequestMapper -> Finish implementation
         +-  InvestmentService -> Implement createInvestment method
-
-            TransactionController -> Implement it
+        +   InvestmentService -> Implement transaction logic
+        -   TransactionController -> Implement it
 
 
 Frontend:
-    CashRequest -> Add json key "currency", so it can be processed by Jackson
+    -   CashRequest -> Add json key "currency", so it can be processed by Jackson
+    -   CreateRequest -> Add json key "transactionType"
 
 Database:
-    InvestmentAsset -> Add new Bond field "isin"
+    +   InvestmentAsset -> Add new Bond field "isin"
+    -   InvestmentTransaction -> Delete "amount" field
+    -   Transactions -> Solve the problem with Crypto and ETF

@@ -1,6 +1,7 @@
 package com.diploma.finance.investments.dto.request;
 
 import com.diploma.finance.investments.entity.enums.InvestmentType;
+import com.diploma.finance.investments.entity.enums.TransactionType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
 
@@ -18,6 +19,7 @@ public class CreateEtfRequest extends CreateInvestmentRequest {
             @JsonProperty("userId") Long userId,
             @JsonProperty("name") String name,
             @JsonProperty("type") InvestmentType type,
+            @JsonProperty("transactionType") TransactionType transactionType,
             @JsonProperty("quantity") BigDecimal quantity,
             @JsonProperty("pricePerUnit") BigDecimal pricePerUnit,
             @JsonProperty("purchaseDate") LocalDate purchaseDate,
@@ -25,7 +27,7 @@ public class CreateEtfRequest extends CreateInvestmentRequest {
             @JsonProperty("ticker") String ticker,
             @JsonProperty("brokerAccount") String brokerAccount
     ) {
-        super(userId, name, type, quantity, pricePerUnit, purchaseDate, notes);
+        super(userId, name, type, transactionType, quantity, pricePerUnit, purchaseDate, notes);
         this.ticker = ticker;
         this.brokerAccount = brokerAccount;
     }

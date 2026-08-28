@@ -6,11 +6,10 @@ public class StockResponse extends InvestmentResponse {
     private String ticker;
     public StockResponse(
             Long id,
-            Long userId,
             String investmentName,
             String ticker
     ) {
-        super(id, userId, investmentName, InvestmentType.STOCK);
+        super(id, investmentName, InvestmentType.STOCK);
         this.ticker = ticker;
     }
 

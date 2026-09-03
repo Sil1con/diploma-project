@@ -38,4 +38,8 @@ public class CryptoTransactionResponse extends TransactionResponse {
     public String getSymbol() {
         return symbol;
     }
+
+    public String getWallet() {
+        return wallet;
+    }
 }

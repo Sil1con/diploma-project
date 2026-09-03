@@ -1,16 +1,13 @@
 package com.diploma.finance.investments.service;
 
 import com.diploma.finance.investments.dto.request.*;
-import com.diploma.finance.investments.dto.response.investment.InvestmentResponse;
+import com.diploma.finance.investments.dto.response.summary.InvestmentSummaryResponse;
 import com.diploma.finance.investments.dto.response.transaction.TransactionResponse;
 import com.diploma.finance.investments.entity.enums.TransactionType;
 import com.diploma.finance.investments.entity.investment_asset.*;
 import com.diploma.finance.investments.entity.transaction.InvestmentTransaction;
 import com.diploma.finance.investments.finder.ExistingInvestmentFinder;
-import com.diploma.finance.investments.mapper.InvestmentRequestMapper;
-import com.diploma.finance.investments.mapper.InvestmentResponseMapper;
-import com.diploma.finance.investments.mapper.TransactionRequestMapper;
-import com.diploma.finance.investments.mapper.TransactionResponseMapper;
+import com.diploma.finance.investments.mapper.*;
 import com.diploma.finance.investments.repository.transaction.InvestmentTransactionRepository;
 import com.diploma.finance.investments.repository.investment.InvestmentsRepository;
 import com.diploma.finance.investments.validator.CreateInvestmentRequestValidator;
@@ -21,7 +18,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -96,8 +95,10 @@ public class InvestmentService {
                 );
     }
 
-    public List<InvestmentAsset> getInvestmentAssets() {
-        return investmentsRepository.findAll();
+    public List<InvestmentAsset> getInvestments(Long userId) {
+        User user = getUser(userId);
+
+        return investmentsRepository.findAllByUserId(user.getId());
     }
 
     public InvestmentTransaction getTransaction(Long assetId, Long transactionId) {
@@ -137,84 +138,73 @@ public class InvestmentService {
         return TransactionResponseMapper.toResponseDto(transaction);
     }
 
-//    @Transactional
-//    public InvestmentTransaction addTransaction(InvestmentTransaction transaction) {
-//        if (transaction.getId() != null) {
-//            throw new RuntimeException("New transaction should not already have an ID");
-//        }
-//
-//        if (transaction.getAsset() == null ||
-//                transaction.getAsset().getId() == null) {
-//            throw new RuntimeException("Investment asset is required");
-//        }
-//
-//        Long assetId = transaction.getAsset().getId();
-//        User user = getUser(transaction.getAsset().getUser().getId());
-//
-//        InvestmentAsset asset = investmentsRepository.findById(assetId)
-//                .orElseThrow(() ->
-//                        new RuntimeException("Investment not found")
-//                );
-//
-//        transaction.setAsset(asset);
-//
-//        if (transaction.getQuantity() == null ||
-//                transaction.getQuantity().compareTo(BigDecimal.ZERO) <= 0) {
-//            throw new RuntimeException(
-//                    "Investment quantity must be greater than zero"
-//            );
-//        }
-//
-//        if (transaction.getPricePerUnit() == null ||
-//                transaction.getPricePerUnit().compareTo(BigDecimal.ZERO) <= 0) {
-//
-//            throw new RuntimeException(
-//                    "Price per unit must be greater than zero"
-//            );
-//        }
-//
-//        if (transaction.getTransactionType() == null) {
-//            throw new RuntimeException("Transaction type is required");
-//        }
-//
-//        if (transaction.getTransactionType() != TransactionType.BUY &&
-//                transaction.getTransactionType() != TransactionType.SELL) {
-//
-//            throw new RuntimeException("Invalid transaction type");
-//        }
-//
-//        if (transaction.getTransactionType() == TransactionType.SELL) {
-//            BigDecimal currentlyOwned =
-//                    calculateCurrentQuantity(user.getId(), assetId);
-//
-//            if (transaction.getQuantity().compareTo(currentlyOwned) > 0) {
-//                throw new RuntimeException(
-//                        "Cannot sell more than currently owned"
-//                );
-//            }
-//        }
-//
-//        return transactionRepository.save(transaction);
-//    }
+    public BigDecimal calculatePortfolioTotalValue(Long userId) {
+        User user = getUser(userId);
+        BigDecimal totalValue = BigDecimal.ZERO;
 
-    private BigDecimal calculateCurrentQuantity(Long userId, Long assetId) {
+        List<InvestmentSummaryResponse> responses = calculatePreviewSummary(user.getId());
+
+        for (InvestmentSummaryResponse response : responses) {
+            totalValue = totalValue.add(response.getTotalValue());
+        }
+
+        return totalValue;
+    }
+
+    public List<InvestmentSummaryResponse> calculatePreviewSummary(Long userId) {
+        User user = getUser(userId);
+        List<InvestmentSummaryResponse> summaryResponses = new ArrayList<>();
+
+        List<InvestmentAsset> assets =
+                investmentsRepository.findAllByUserId(user.getId());
 
         List<InvestmentTransaction> transactions =
-                transactionRepository.findAllByAssetIdAndAssetUserId(assetId, userId);
+                transactionRepository.findAllByAssetUserId(user.getId());
 
-        BigDecimal quantity = BigDecimal.ZERO;
+        for (InvestmentAsset asset : assets) {
+            BigDecimal totalValue = calculateTotalAssetValue(asset, transactions);
+            
+            summaryResponses.add(InvestmentSummaryResponseMapper.toResponse(asset, totalValue));
+        }
+
+        sortSummaryResponses(summaryResponses);
+
+        return summaryResponses;
+    }
+
+    private BigDecimal calculateTotalAssetValue(InvestmentAsset asset, List<InvestmentTransaction> transactions) {
+        BigDecimal totalValue = BigDecimal.ZERO;
 
         for (InvestmentTransaction transaction : transactions) {
+            if (!Objects.equals(asset.getId(), transaction.getAsset().getId())) {
+                continue;
+            }
 
             if (transaction.getTransactionType() == TransactionType.BUY) {
-                quantity = quantity.add(transaction.getQuantity());
+                totalValue = totalValue.add(transaction.getQuantity().multiply(transaction.getPricePerUnit()));
             }
 
             if (transaction.getTransactionType() == TransactionType.SELL) {
-                quantity = quantity.subtract(transaction.getQuantity());
+                totalValue = totalValue.subtract(transaction.getQuantity().multiply(transaction.getPricePerUnit()));
             }
         }
 
-        return quantity;
+        return totalValue;
+    }
+
+    private void sortSummaryResponses(List<InvestmentSummaryResponse> summaryResponses) {
+        for (int i = 0; i < summaryResponses.size() - 1; i++) {
+            for (int j = i + 1; j < summaryResponses.size(); j++) {
+
+                if (summaryResponses.get(j).getTotalValue()
+                        .compareTo(summaryResponses.get(i).getTotalValue()) > 0) {
+
+                    InvestmentSummaryResponse temp = summaryResponses.get(i);
+
+                    summaryResponses.set(i, summaryResponses.get(j));
+                    summaryResponses.set(j, temp);
+                }
+            }
+        }
     }
 }

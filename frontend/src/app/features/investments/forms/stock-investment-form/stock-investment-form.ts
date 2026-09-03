@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { StockInvestment } from '../../models/investments.model';
-import { InvestmentType } from '../../types/investment-type';
+import { InvestmentType } from '../../utilities/types/investment-type';
+import { CreateStockRequest } from '../../utilities/models/requests/create-investment-requests.model';
 
 @Component({
   selector: 'stock-investment-form',
@@ -13,7 +13,7 @@ export class StockInvestmentForm {
   stockForm!: FormGroup;
 
   @Output() cancelled = new EventEmitter<void>();
-  @Output() stockSaved = new EventEmitter<StockInvestment>();
+  @Output() stockSaved = new EventEmitter<CreateStockRequest>();
 
   constructor(private fb: FormBuilder) {}
 
@@ -22,11 +22,10 @@ export class StockInvestmentForm {
       type: this.fb.control<InvestmentType>(
         { value: 'STOCK', disabled: true }
       ),
-      investmentName: ['', Validators.required],
+      name: ['', Validators.required],
       ticker: ['', Validators.required],
-      quantity: [Validators.required],
-      purchasePrice: [Validators.required],
-      brokerAccount: ['', Validators.required],
+      quantity: ['', Validators.required],
+      pricePerUnit: ['', Validators.required],
       purchaseDate: ['', Validators.required],
       notes: ['']
     });
@@ -45,9 +44,12 @@ export class StockInvestmentForm {
 
     const formValue = this.stockForm.getRawValue();
 
-    const stock: StockInvestment = {
-      ...formValue,
-      type: formValue.type.toLowerCase()
+    if (formValue.quantity === null) {
+      return;
+    }
+
+    const stock: CreateStockRequest = {
+      ...formValue
     };
 
     this.stockSaved.emit(stock);

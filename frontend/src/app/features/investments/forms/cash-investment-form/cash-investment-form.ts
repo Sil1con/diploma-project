@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CashInvestment } from '../../models/investments.model';
-import { InvestmentType } from '../../types/investment-type';
+import { InvestmentType } from '../../utilities/types/investment-type';
+import { CreateCashRequest } from '../../utilities/models/requests/create-investment-requests.model';
 
 @Component({
   selector: 'cash-investment-form',
@@ -13,7 +13,7 @@ export class CashInvestmentForm {
   cashForm!: FormGroup;
 
   @Output() cancelled = new EventEmitter<void>();
-  @Output() cashSaved = new EventEmitter<CashInvestment>();
+  @Output() cashSaved = new EventEmitter<CreateCashRequest>();
 
 
   constructor(private fb: FormBuilder) {}
@@ -23,7 +23,9 @@ export class CashInvestmentForm {
       type: this.fb.control<InvestmentType>(
         { value: 'CASH', disabled: true }
       ),
+      name: ['', Validators.required],
       quantity: ['', Validators.required],
+      pricePerUnit: [{ value: '1', disabled: true }, Validators.required],
       purchaseDate: ['', Validators.required],
       notes: ['']
     });
@@ -42,15 +44,13 @@ export class CashInvestmentForm {
 
     const formValue = this.cashForm.getRawValue();
 
-    if (formValue.amount === null) {
+    if (formValue.quantity === null) {
       return;
     }
 
-    const cash: CashInvestment = {
+    const cash: CreateCashRequest = {
       ...formValue,
-      investmentName: formValue.type,
-      purchasePrice: 1,
-      type: formValue.type.toLowerCase(),
+      currency: 'EUR'
     };
 
     console.log(cash);

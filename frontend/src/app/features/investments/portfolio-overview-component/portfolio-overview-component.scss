@@ -29,6 +29,7 @@ $investment-list-height: 450px;
 
 .total-value {
     @include fonts.customize-text($text-color: black, $size: 40px, $weight: 600);
+    height: 50px;
 }
 
 .gain-block {

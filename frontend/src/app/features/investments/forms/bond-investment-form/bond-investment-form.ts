@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { BondInvestment } from '../../models/investments.model';
-import { InvestmentType } from '../../types/investment-type';
+import { InvestmentType } from '../../utilities/types/investment-type';
+import { CreateBondRequest } from '../../utilities/models/requests/create-investment-requests.model';
 
 @Component({
   selector: 'bond-investment-form',
@@ -13,7 +13,7 @@ export class BondInvestmentForm {
   bondForm!: FormGroup;
 
   @Output() cancelled = new EventEmitter<void>();
-  @Output() bondSaved = new EventEmitter<BondInvestment>();
+  @Output() bondSaved = new EventEmitter<CreateBondRequest>();
 
   constructor(private fb: FormBuilder) {}
 
@@ -23,33 +23,14 @@ export class BondInvestmentForm {
         value: 'BOND',
         disabled: true
       }),
-
-      investmentName: ['', Validators.required],
+      name: ['', Validators.required],
       issuer: ['', Validators.required],
       isin: ['', Validators.required],
-
-      faceValue: [
-        null,
-        [Validators.required, Validators.min(0.01)]
-      ],
-
-      couponRate: [
-        null,
-        [Validators.required, Validators.min(0)]
-      ],
-
+      faceValue: ['', [Validators.required, Validators.min(0.01)]],
+      couponRate: ['', [Validators.required, Validators.min(0)]],
       maturityDate: ['', Validators.required],
-
-      quantity: [
-        null,
-        [Validators.required, Validators.min(0.01)]
-      ],
-
-      purchasePrice: [
-        null,
-        [Validators.required, Validators.min(0.01)]
-      ],
-
+      quantity: ['', [Validators.required, Validators.min(0.01)]],
+      pricePerUnit: ['', [Validators.required, Validators.min(0.01)]],
       purchaseDate: ['', Validators.required],
       notes: ['']
     });
@@ -68,13 +49,12 @@ export class BondInvestmentForm {
 
     const formValue = this.bondForm.getRawValue();
 
-    if (formValue.amount === null) {
+    if (formValue.quantity === null) {
       return;
     }
 
-    const commodity: BondInvestment = {
+    const commodity: CreateBondRequest = {
       ...formValue,
-      type: formValue.type.toLowerCase(),
     };
 
     this.bondSaved.emit(commodity);

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CommodityInvestment } from '../../models/investments.model';
-import { InvestmentType } from '../../types/investment-type';
+import { InvestmentType } from '../../utilities/types/investment-type';
+import { CreateCommodityRequest } from '../../utilities/models/requests/create-investment-requests.model';
 
 @Component({
   selector: 'commodity-investment-form',
@@ -14,7 +14,7 @@ export class CommodityInvestmentForm {
   commodityForm!: FormGroup;
 
   @Output() cancelled = new EventEmitter<void>();
-  @Output() commoditySaved = new EventEmitter<CommodityInvestment>();
+  @Output() commoditySaved = new EventEmitter<CreateCommodityRequest>();
 
   constructor(private fb: FormBuilder) {}
 
@@ -23,12 +23,11 @@ export class CommodityInvestmentForm {
       type: this.fb.control<InvestmentType>(
         { value: 'COMMODITY', disabled: true }
       ),
-      investmentName: ['', Validators.required],
-      ticker: ['', Validators.required],
-      initialValue: ['', Validators.required],
+      name: ['', Validators.required],
+      symbol: ['', Validators.required],
       quantity: ['', Validators.required],
       purchaseDate: ['', Validators.required],
-      commodityPrice: ['', Validators.required],
+      pricePerUnit: ['', Validators.required],
       notes: ['']
     });
   }
@@ -46,13 +45,12 @@ export class CommodityInvestmentForm {
 
     const formValue = this.commodityForm.getRawValue();
 
-    if (formValue.amount === null) {
+    if (formValue.quantity === null) {
       return;
     }
 
-    const commodity: CommodityInvestment = {
-      ...formValue,
-      type: formValue.type.toLowerCase(),
+    const commodity: CreateCommodityRequest = {
+      ...formValue
     };
 
     this.commoditySaved.emit(commodity);

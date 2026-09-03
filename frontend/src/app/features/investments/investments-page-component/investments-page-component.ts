@@ -8,9 +8,13 @@ import { CryptoInvestmentForm } from '../forms/crypto-investment-form/crypto-inv
 import { CommodityInvestmentForm } from '../forms/commodity-investment-form/commodity-investment-form';
 import { BondInvestmentForm } from '../forms/bond-investment-form/bond-investment-form';
 import { CashInvestmentForm } from '../forms/cash-investment-form/cash-investment-form';
-import { Investment } from '../models/investments.model';
-import { InvestmentType } from '../types/investment-type';
-import investmentsJSON from '../../../data/investments.json';
+import { Investment } from '../utilities/models/investments.model';
+import { InvestmentType } from '../utilities/types/investment-type';
+import { InvestmentService } from '../../../services/investments/investment-service';
+import { CreateInvestmentRequest } from '../utilities/models/requests/create-investment-requests.model';
+import { ChangeDetectorRef } from '@angular/core';
+import { map, Observable } from 'rxjs';
+import { InvestmentSummary } from '../utilities/models/investment-summary.model';
 
 @Component({
   selector: 'app-investments-page-component',
@@ -30,13 +34,22 @@ import investmentsJSON from '../../../data/investments.json';
   styleUrl: './investments-page-component.scss',
 })
 export class InvestmentsPageComponent {
+  protected readonly userId: string = '1';
   investmentSelected: InvestmentType = 'STOCK';
   isFormOpened: boolean = false;
   
-  investments: Investment[] = [];
+  investments$!: Observable<Investment[]>;
+  previewInvestments$!: Observable<InvestmentSummary[]>;
+
+  portfolioRefreshTrigger = 0;
+
+  constructor(
+    private investmentService: InvestmentService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
-    this.investments = investmentsJSON.investments as Investment[];;
+    this.refreshInvestmentData();
   }
 
   handleInvestmentCategory(category: InvestmentType) {
@@ -51,20 +64,27 @@ export class InvestmentsPageComponent {
     this.isFormOpened = false;
   }
 
-  handleSavedForm(investment: Investment) {
-    this.investments = [investment, ...this.investments];
-    console.log(this.investments);
-    this.handleCancelledForm();
+  handleSavedForm(investment: CreateInvestmentRequest) {
+    investment.userId = this.userId;
+    investment.transactionType = 'BUY';
+
+    this.investmentService.createInvestment(investment).subscribe({
+      next: () => {
+        this.refreshInvestmentData();
+
+        this.portfolioRefreshTrigger++;
+
+        this.handleCancelledForm();
+        this.cdr.markForCheck();
+      },
+      error: (error) => {
+        console.error('Failed to create investment', error);
+      }
+    });
   }
 
-  calculatePortfolioTotalValue(): number {
-    let totalSum = 0;
-
-    this.investments.forEach((investment) => {
-      let totalInvestment = investment.purchasePrice * investment.quantity;
-      totalSum += totalInvestment;
-    })
-    
-    return totalSum;
+  refreshInvestmentData(): void {
+    this.investments$ = this.investmentService.getInvestments(this.userId);
+    this.previewInvestments$ = this.investmentService.getPreviewSummary(this.userId);
   }
 }

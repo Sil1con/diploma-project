@@ -11,15 +11,11 @@
         <div class="fields-flexbox">
             <div class="field-block">
                 <label>Investment Name</label>
-                <input formControlName="investmentName" placeholder="e.g., Gold">    
+                <input formControlName="name" placeholder="e.g., Gold">    
             </div>
             <div class="field-block">
                 <label>Ticker / Symbol</label>
-                <input formControlName="ticker" placeholder="e.g., XAU">
-            </div>
-            <div class="field-block">
-                <label>Initial Value</label>
-                <input type="number" formControlName="initialValue" placeholder="0.00">
+                <input formControlName="symbol" placeholder="e.g., XAU">
             </div>
             <div class="field-block">
                 <label>Quantity</label>
@@ -30,8 +26,8 @@
                 <input type="date" formControlName="purchaseDate">
             </div>
             <div class="field-block">
-                <label>Commodity Price</label>
-                <input type="number" formControlName="commodityPrice" placeholder="0.00">
+                <label>Price Per Unit</label>
+                <input type="number" formControlName="pricePerUnit" placeholder="0.00">
             </div>
         </div>
         <div class="field-block note-block">

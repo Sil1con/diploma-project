@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CryptoInvestment } from '../../models/investments.model';
-import { InvestmentType } from '../../types/investment-type';
+
+import { InvestmentType } from '../../utilities/types/investment-type';
+import { CreateCryptoRequest } from '../../utilities/models/requests/create-investment-requests.model';
 
 @Component({
   selector: 'crypto-investment-form',
@@ -13,7 +14,7 @@ export class CryptoInvestmentForm {
   cryptoForm!: FormGroup;
 
   @Output() cancelled = new EventEmitter<void>();
-  @Output() cryptoSaved = new EventEmitter<CryptoInvestment>();
+  @Output() cryptoSaved = new EventEmitter<CreateCryptoRequest>();
 
   constructor(private fb: FormBuilder) {}
 
@@ -22,12 +23,12 @@ export class CryptoInvestmentForm {
       type: this.fb.control<InvestmentType>(
         { value: 'CRYPTO', disabled: true }
       ),
-      investmentName: ['', Validators.required],
+      name: ['', Validators.required],
       symbol: ['', Validators.required],
       quantity: ['', Validators.required],
-      purchasePrice: ['', Validators.required],
+      pricePerUnit: ['', Validators.required],
       purchaseDate: ['', Validators.required],
-      assetHoldingPlace: ['', Validators.required],
+      wallet: ['', Validators.required],
       notes: ['']
     });
   }
@@ -45,13 +46,12 @@ export class CryptoInvestmentForm {
 
     const formValue = this.cryptoForm.getRawValue();
 
-    if (formValue.amount === null) {
+    if (formValue.quantity === null) {
       return;
     }
 
-    const crypto: CryptoInvestment = {
-      ...formValue,
-      type: formValue.type.toLowerCase()
+    const crypto: CreateCryptoRequest = {
+      ...formValue
     };
 
     this.cryptoSaved.emit(crypto);

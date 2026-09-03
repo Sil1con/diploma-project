@@ -1,20 +1,27 @@
-import { Component, Input, SimpleChanges } from '@angular/core';
-import { Investment } from '../models/investments.model';
-import { CurrencyPipe } from '@angular/common';
+import { Component, Input, OnChanges, signal, SimpleChanges } from '@angular/core';
+import { AsyncPipe, CurrencyPipe } from '@angular/common';
 import { CapitalLetterPipe } from '../../../shared/pipes/capital-letter-pipe';
+import { InvestmentSummary } from '../utilities/models/investment-summary.model';
+import { map, Observable } from 'rxjs';
+import { Investment } from '../utilities/models/investments.model';
 
 @Component({
   selector: 'app-investments-preview-component',
   imports: [
+    AsyncPipe,
     CurrencyPipe,
     CapitalLetterPipe
   ],
   templateUrl: './investments-preview-component.html',
   styleUrl: './investments-preview-component.scss',
 })
-export class InvestmentsPreviewComponent {
-  @Input() investments: Investment[] = [];
-  previewInvestments: Investment[] = [];
+export class InvestmentsPreviewComponent implements OnChanges{
+  protected userId: string = '1';
+  @Input() previewInvestments$!: Observable<InvestmentSummary[]>;
+
+  displayedInvestments$!: Observable<InvestmentSummary[]>;
+
+  constructor() {}
 
   investmentIcons: Record<string, string> = {
     STOCK: 'assets/category_icons/stock.png',
@@ -25,19 +32,19 @@ export class InvestmentsPreviewComponent {
     CASH: 'assets/category_icons/cash.png'
   };
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['investments']) {
-      this.sortInvestmentsDecreasing();
+  ngOnInit() {
+    this.getDisplayedInvestments();
+  }
+
+   ngOnChanges(changes: SimpleChanges): void {
+    if (changes['previewInvestments$']) {
+      this.getDisplayedInvestments();
     }
   }
 
-  sortInvestmentsDecreasing(): void {
-    this.previewInvestments = [...this.investments]
-      .sort(
-        (a, b) =>
-          (b.quantity * b.purchasePrice) -
-          (a.quantity * a.purchasePrice)
-      )
-      .slice(0, 4);
+  getDisplayedInvestments() {
+    this.displayedInvestments$ = this.previewInvestments$.pipe(
+      map(investments => investments.slice(0, 4))
+    );
   }
 }

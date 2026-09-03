@@ -1,17 +1,20 @@
+import { Currency } from "../../types/currency-type";
 import { InvestmentType } from "../../types/investment-type";
+import { TransactionType } from "../../types/transaction-type";
 
-export type CreateRequest = 
+export type CreateInvestmentRequest = 
   | CreateStockRequest
   | CreateEtfRequest
   | CreateCryptoRequest
   | CreateCommodityRequest
-  | CreateCommodityRequest
-  | CreateBondRequest;
+  | CreateBondRequest
+  | CreateCashRequest;
 
 export interface CreateInvestmentRequestBase {
     userId: string;
+    name: string;
     type: InvestmentType;
-    investmentName: string;
+    transactionType: TransactionType;
     quantity: number;
     pricePerUnit: number;
     purchaseDate: string;
@@ -21,7 +24,6 @@ export interface CreateInvestmentRequestBase {
 export interface CreateStockRequest extends CreateInvestmentRequestBase {
   type: 'STOCK';
   ticker: string;
-  brokerAccount: string;
 }
 
 export interface CreateEtfRequest extends CreateInvestmentRequestBase {
@@ -51,4 +53,5 @@ export interface CreateBondRequest extends CreateInvestmentRequestBase {
 
 export interface CreateCashRequest extends CreateInvestmentRequestBase {
   type: 'CASH';
+  currency: Currency
 }

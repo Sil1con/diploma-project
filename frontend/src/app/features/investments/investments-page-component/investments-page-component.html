@@ -7,10 +7,10 @@
 <div class="bottom-block">
     <div class="left-part">
         <app-portfolio-overview-component
-          [totalPortfolioValue]="calculatePortfolioTotalValue()"
+          [refreshTrigger]="portfolioRefreshTrigger"
         ></app-portfolio-overview-component>
         <app-investments-preview-component
-              [investments]="investments"
+          [previewInvestments$]="previewInvestments$"
         ></app-investments-preview-component>
     </div>
     <app-add-investments-preview-component

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { EtfInvestment } from '../../models/investments.model';
-import { InvestmentType } from '../../types/investment-type';
+import { InvestmentType } from '../../utilities/types/investment-type';
+import { CreateEtfRequest } from '../../utilities/models/requests/create-investment-requests.model';
 
 @Component({
   selector: 'etf-investment-form',
@@ -13,7 +13,7 @@ export class EtfInvestmentForm {
   etfForm!: FormGroup;
 
   @Output() cancelled = new EventEmitter<void>();
-  @Output() etfSaved = new EventEmitter<EtfInvestment>();
+  @Output() etfSaved = new EventEmitter<CreateEtfRequest>();
 
   constructor(private fb: FormBuilder) {}
 
@@ -22,10 +22,10 @@ export class EtfInvestmentForm {
       type: this.fb.control<InvestmentType>(
         { value: 'ETF', disabled: true }
       ),
-      investmentName: ['', Validators.required],
+      name: ['', Validators.required],
       ticker: ['', Validators.required],
       quantity: ['', Validators.required],
-      purchasePrice: ['', Validators.required],
+      pricePerUnit: ['', Validators.required],
       purchaseDate: ['', Validators.required],
       brokerAccount: ['', Validators.required],
       notes: ['']
@@ -45,13 +45,12 @@ export class EtfInvestmentForm {
 
     const formValue = this.etfForm.getRawValue();
 
-    if (formValue.amount === null) {
+    if (formValue.quantity === null) {
       return;
     }
 
-    const etf: EtfInvestment = {
-      ...formValue,
-      type: formValue.type.toLowerCase()
+    const etf: CreateEtfRequest = {
+      ...formValue
     };
 
     this.etfSaved.emit(etf);

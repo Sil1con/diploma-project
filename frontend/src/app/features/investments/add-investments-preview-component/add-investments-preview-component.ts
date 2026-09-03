@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { InvestmentType } from '../types/investment-type';
+import { InvestmentType } from '../utilities/types/investment-type';
 
 @Component({
   selector: 'app-add-investments-preview-component',

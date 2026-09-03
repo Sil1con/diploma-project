@@ -2,7 +2,7 @@
     <div class="overview-title titles">Portfolio Overview</div>
     <div class="total-block">
         <p class="grey-title">Total Portfolio Value</p>
-        <p class="total-value">{{ totalPortfolioValue | currency: 'EUR' : 'symbol-narrow' : '4.2-2' }}</p>
+        <p class="total-value">{{ totalPortfolioValue$ | async | currency: 'EUR' : 'symbol-narrow' : '4.2-2' }}</p>
         <div class="gain-block">
             <div class="percent-value-block">
                 <img class="gain-icon" src="assets/icons/triangle_green.png" alt="percent-up-icon">

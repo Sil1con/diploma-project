@@ -4,22 +4,23 @@
         <button class="view-all-btn green-text">View all</button>
     </div>
     <div class="investments-list">
-        @for (investment of previewInvestments; track investment.id) {
+        @for (investment of displayedInvestments$ | async; track investment.investmentId) {
             <div class="investment">
                 <div class="investment-icon-block">
                     <img
                         class="investment-icon"
-                        [src]="investmentIcons[investment.type]"
-                        [alt]="investment.type + '-icon'"
+                        [src]="investmentIcons[investment.investmentType]"
+                        [alt]="investment.investmentType + '-icon'"
                     >
                 </div>
                 <div class="investment-description">
                     <div class="investment-title-block">
                         <p class="investment-title">{{ investment.investmentName }}</p>
-                        <p class="investment-subtitle">{{ investment.type | capitalLetterPipe }}</p>
+                        <p class="investment-subtitle">{{ investment.investmentType | capitalLetterPipe }}</p>
                     </div>
                     <div class="current-value-block">
-                        <p class="cash-value">{{ investment.purchasePrice * investment.quantity | currency: 'EUR' : 'symbol-narrow' : '2.2-2' }}</p>
+                        <!-- <p class="cash-value">{{ investment.purchasePrice * investment.quantity | currency: 'EUR' : 'symbol-narrow' : '2.2-2' }}</p> -->
+                         <p class="cash-value">{{ investment.totalValue | currency: 'EUR' : 'symbol-narrow' : '2.2-2' }}</p>
                         <div>
                             <img class="gain-icon" src="assets/icons/triangle_green.png" alt="percent-up-icon">
                             <p class="percent-value green-text">8.47%</p>

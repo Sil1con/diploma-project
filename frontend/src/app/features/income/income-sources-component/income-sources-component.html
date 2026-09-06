@@ -5,12 +5,12 @@
         <button class="view-all-btn">View all</button>
     </div>
     <div class="sources-flexbox">
-        @for (income of incomeSources.slice(0, 4); track income.id) {
+        @for (income of displayedIncomeSources$ | async; track income.id) {
             <div class="source">
                 <div 
                     class="source-icon-block"
                     [class]="income.category"
-                >
+                >   
                     <img 
                         class="icon"
                         [src]="incomesIcons[income.category]" 

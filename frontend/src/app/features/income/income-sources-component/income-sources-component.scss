@@ -7,6 +7,7 @@
 @use '../../../shared/styles/typography';
 
 $source-component-padding: 30px;
+$source-height: 310px;
 $border-radius: 25px;
 
 .icon {
@@ -54,7 +55,7 @@ $border-radius: 25px;
     @include position.custom-positioning(column, space-between, space-between);
     padding: $source-component-padding;
     box-sizing: border-box;
-    height: 100%;
+    height: 460px;
 }
 
 .sources-flexbox {
@@ -70,19 +71,19 @@ $border-radius: 25px;
     flex-shrink: 0;
 }
 
-.source-icon-block.investments {
+.source-icon-block.INVESTMENTS {
     background-color: #d0f7e3;
 }
 
-.source-icon-block.freelance {
+.source-icon-block.FREELANCE {
     background-color: #e9e9e9;
 }
 
-.source-icon-block.rental {
+.source-icon-block.RENTAL {
     background-color: #e9dcfe;
 }
 
-.source-icon-block.scholarship {
+.source-icon-block.SCHOLARSHIP {
     background-color: #e4feff;
 }
 
@@ -91,7 +92,7 @@ $border-radius: 25px;
     @include position.custom-positioning(column, space-between, center);
     padding: $source-component-padding;
     box-sizing: border-box;
-    height: 310px;
+    height: $source-height;
     width: 330px;
 }
 

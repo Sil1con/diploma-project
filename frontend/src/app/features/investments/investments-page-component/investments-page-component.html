@@ -23,42 +23,42 @@
     @case ('STOCK') {
       <stock-investment-form
         (cancelled)="handleCancelledForm()"
-        (stockSaved)="handleSavedForm($event)"
+        (stockSaved)="handleInvestmentSubmitted($event)"
       ></stock-investment-form>
     }
 
     @case ('ETF') {
       <etf-investment-form
         (cancelled)="handleCancelledForm()"
-        (etfSaved)="handleSavedForm($event)"
+        (etfSaved)="handleInvestmentSubmitted($event)"
       ></etf-investment-form>
     }
 
     @case ('CRYPTO') {
       <crypto-investment-form
         (cancelled)="handleCancelledForm()"
-        (cryptoSaved)="handleSavedForm($event)"
+        (cryptoSaved)="handleInvestmentSubmitted($event)"
       ></crypto-investment-form>
     }
 
     @case ('COMMODITY') {
       <commodity-investment-form
         (cancelled)="handleCancelledForm()"
-        (commoditySaved)="handleSavedForm($event)"
+        (commoditySaved)="handleInvestmentSubmitted($event)"
       ></commodity-investment-form>
     }
 
     @case ('BOND') {
       <bond-investment-form
         (cancelled)="handleCancelledForm()"
-        (bondSaved)="handleSavedForm($event)"
+        (bondSaved)="handleInvestmentSubmitted($event)"
       ></bond-investment-form>
     }
 
     @case ('CASH') {
       <cash-investment-form
         (cancelled)="handleCancelledForm()"
-        (cashSaved)="handleSavedForm($event)"
+        (cashSaved)="handleInvestmentSubmitted($event)"
       ></cash-investment-form>
     }
   }

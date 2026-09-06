@@ -6,16 +6,16 @@
 </div>
 <div class="overview-block">
     <app-total-income-component
-        [totalIncomeSourcesValue]="totalIncomesValue"
+        [totalIncomeValue$]="totalIncomeValue$"
         [previousMonthIncome]="previousMonthIncome"
     ></app-total-income-component>
     <app-goal-income-component
+        [totalIncomeValue$]="totalIncomeValue$"
         [incomeGoal]="incomeGoal"
-        [totalIncomeSourcesValue]="totalIncomesValue"
     ></app-goal-income-component>
 </div>
 <app-income-sources-component
-    [incomeSources]="incomeSources"
+    [incomeSources$]="incomeSources$"
 ></app-income-sources-component>
 <button class="add-btn" (click)="openAddIncomeForm()">
     <img class="add-btn-plus" src="assets/icons/blue_plus.png" alt="add-button-icon">

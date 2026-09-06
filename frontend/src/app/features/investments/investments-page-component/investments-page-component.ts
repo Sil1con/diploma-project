@@ -64,7 +64,7 @@ export class InvestmentsPageComponent {
     this.isFormOpened = false;
   }
 
-  handleSavedForm(investment: CreateInvestmentRequest) {
+  handleInvestmentSubmitted(investment: CreateInvestmentRequest) {
     investment.userId = this.userId;
     investment.transactionType = 'BUY';
 

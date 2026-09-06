@@ -4,24 +4,24 @@
     </div>
     <div class="total-info-block">
         <p class="grey-title total-title">Total Income</p>
-        <p class="total-income-value">{{ totalIncomeSourcesValue | currency: 'EUR' : 'symbol-narrow' : '2.2-2' }}</p>
+        <p class="total-income-value">{{ (totalIncomeValue$ | async) ?? 0 | currency: 'EUR' : 'symbol-narrow' : '2.2-2' }}</p>
         <div class="last-month-compare-block">
-            @if (prevMonthDifference > 0) {
+            @if ((prevMonthDifference$ | async) ?? 0 > 0) {
                 <div class="positive">
                     <img class="triangle-icon" src="assets/icons/triangle_green.png" alt="increased-income-sign">
-                    <p class="compare-percent green-text">{{ prevMonthDifference | percent }}</p>
+                    <p class="compare-percent green-text">{{ (prevMonthDifference$ | async) ?? 0 | percent }}</p>
                 </div>
             }
-            @else if (prevMonthDifference < 0) {
+            @else if ((prevMonthDifference$ | async) ?? 0 < 0) {
                 <div class="negative">
                     <img class="triangle-icon" src="assets/icons/triangle_red.png" alt="decreased-income-sign">
-                    <p class="compare-percent red-text">{{ prevMonthDifference | percent }}</p>
+                    <p class="compare-percent red-text">{{ (prevMonthDifference$ | async) ?? 0 | percent }}</p>
                 </div>
             }
             @else {
                 <div class="default">
                     <img class="triangle-icon" src="assets/icons/triangle_grey.png" alt="unchanged-income-sign">
-                    <p class="compare-percent grey-text">{{ prevMonthDifference | percent }}</p>
+                    <p class="compare-percent grey-text">{{ (prevMonthDifference$ | async) ?? 0 | percent }}</p>
                 </div>
             }
             <span class="grey-title compare-text">vs previous month</span>

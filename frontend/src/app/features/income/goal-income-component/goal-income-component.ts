@@ -1,10 +1,12 @@
-import { CurrencyPipe } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { AsyncPipe, CurrencyPipe } from '@angular/common';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CustomPercentPipe } from '../../../shared/pipes/percent-pipe';
+import { map, Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-goal-income-component',
   imports: [
+    AsyncPipe,
     CurrencyPipe,
     CustomPercentPipe
   ],
@@ -13,21 +15,22 @@ import { CustomPercentPipe } from '../../../shared/pipes/percent-pipe';
 })
 export class GoalIncomeComponent {
   @Input() incomeGoal: number = 0;
-  @Input() totalIncomeSourcesValue: number = 0;
+  @Input() totalIncomeValue$!: Observable<number>;
 
-  goalPercent!: number;
+  goalPercent$!: Observable<number>;
 
   ngOnInit() {
     this.calculateGoalPercent();
   }
 
-  ngOnChanges() {
-    this.calculateGoalPercent();
-  }
-
   calculateGoalPercent() {
-    const percent = ((this.totalIncomeSourcesValue / this.incomeGoal) * 100);
+    this.goalPercent$ = this.totalIncomeValue$.pipe(
+      map(totalIncome => {
+        const percent = (totalIncome / this.incomeGoal) * 100;
 
-    this.goalPercent = percent;
+        if (percent > 100) return 100;
+        else return percent;
+      })
+    );
   }
 }

@@ -10,11 +10,11 @@
                 <div class="progress-bar-background">
                     <div 
                         class="progress-bar"
-                        [style.width.%]="goalPercent"
+                        [style.width.%]="goalPercent$ | async"
                     ></div>
                 </div>
                 <span class="progress-percent-background">
-                    <p class="progress-percent">{{ goalPercent | percent }}</p>
+                    <p class="progress-percent">{{ (goalPercent$ | async) ?? 0 | percent }}</p>
                 </span>
             </div>
             <p class="grey-title goal-text">of {{ incomeGoal | currency: 'EUR' : 'symbol-narrow' : '2.2-2' }} goal</p>

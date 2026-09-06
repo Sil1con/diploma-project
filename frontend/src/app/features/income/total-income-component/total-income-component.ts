@@ -1,10 +1,12 @@
-import { CurrencyPipe } from '@angular/common';
+import { AsyncPipe, CurrencyPipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { CustomPercentPipe } from '../../../shared/pipes/percent-pipe';
+import { map, Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-total-income-component',
   imports: [
+    AsyncPipe,
     CurrencyPipe,
     CustomPercentPipe
   ],
@@ -12,21 +14,28 @@ import { CustomPercentPipe } from '../../../shared/pipes/percent-pipe';
   styleUrl: './total-income-component.scss',
 })
 export class TotalIncomeComponent {
-  @Input() totalIncomeSourcesValue: number = 0;
-  @Input() previousMonthIncome: number = 0;
-  prevMonthDifference: number = 0;
+  @Input() totalIncomeValue$!: Observable<number>;
+  @Input() previousMonthIncome!: number;
+
+  prevMonthDifference$!: Observable<number>;
+
+  constructor() {}
 
   ngOnInit() {
-    this.calculatePrevMonthDifference();  
+    this.calculatePrevMonthDiff();
   }
 
-  ngOnChanges() {
-    this.calculatePrevMonthDifference();
-  }
+  calculatePrevMonthDiff() {
+    this.prevMonthDifference$ = this.totalIncomeValue$.pipe(
+      map(totalIncome => {
+        if (this.previousMonthIncome === 0) {
+          return 0;
+        }
 
-  calculatePrevMonthDifference() {
-    let difference = (((this.totalIncomeSourcesValue / this.previousMonthIncome) * 100) - 100);
+        const percent = ((totalIncome - this.previousMonthIncome) / this.previousMonthIncome) * 100
 
-    this.prevMonthDifference = difference;
+        return percent;
+      })
+    );
   }
 }

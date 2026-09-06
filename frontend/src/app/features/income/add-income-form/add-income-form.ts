@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { IncomePayload } from '../models/income-payload.model';
 import { CommonModule } from '@angular/common';
+import { CreateIncomeRequest } from '../utilities/models/request/create-income-request';
 
 @Component({
   selector: 'app-add-income-form',
@@ -16,14 +16,14 @@ export class AddIncomeForm {
   addIncomeForm!: FormGroup;
 
   @Output() cancelled = new EventEmitter<void>();
-  @Output() incomeSaved = new EventEmitter<IncomePayload>();
+  @Output() incomeSaved = new EventEmitter<CreateIncomeRequest>();
 
   readonly categories = [
-    { value: 'salary', label: 'Salary' },
-    { value: 'freelance', label: 'Freelance' },
-    { value: 'investments', label: 'Investments' },
-    { value: 'rental', label: 'Rental' },
-    { value: 'scholarship', label: 'Scholarship' }
+    { value: 'SALARY', label: 'Salary' },
+    { value: 'FREELANCE', label: 'Freelance' },
+    { value: 'INVESTMENTS', label: 'Investments' },
+    { value: 'RENTAL', label: 'Rental' },
+    { value: 'SCHOLARSHIP', label: 'Scholarship' }
   ];
 
   constructor(private fb: FormBuilder) {}
@@ -33,8 +33,8 @@ export class AddIncomeForm {
       name: ['', Validators.required],
       category: ['', Validators.required],
       amount: ['', Validators.required],
-      startDate: ['', Validators.required],
-      notes: [''],
+      incomeDate: ['', Validators.required],
+      description: [''],
     });
   }
 
@@ -55,12 +55,9 @@ export class AddIncomeForm {
       return;
     }
 
-    const income: IncomePayload = {
+    const income: CreateIncomeRequest = {
       ...formValue,
-      amount: formValue.amount
     };
-
-    console.log(income);
 
     this.incomeSaved.emit(income);
   }

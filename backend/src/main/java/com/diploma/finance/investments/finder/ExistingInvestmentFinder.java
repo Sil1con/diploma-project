@@ -9,7 +9,6 @@ import java.util.Optional;
 
 @Component
 public class ExistingInvestmentFinder {
-
     private final StockRepository stockRepository;
     private final EtfRepository etfRepository;
     private final CryptoRepository cryptoRepository;

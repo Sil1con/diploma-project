@@ -55,18 +55,12 @@ public class InvestmentService {
     }
 
     private InvestmentAsset createAssetFromRequest(CreateInvestmentRequest request) {
-        CreateInvestmentRequestValidator.validate(request);
+        //CreateInvestmentRequestValidator.validate(request);
 
         User user = getUser(request.getUserId());
 
         return InvestmentRequestMapper.toAsset(request, user);
     }
-
-//    private InvestmentTransaction createTransactionFromRequestAndAsset(CreateInvestmentRequest request, InvestmentAsset asset) {
-//        CreateRequestTransactionValidator.validate(request);
-//
-//        return TransactionRequestMapper.toTransaction(request, asset);
-//    }
 
     private InvestmentAsset resolveAsset(
             CreateInvestmentRequest request,

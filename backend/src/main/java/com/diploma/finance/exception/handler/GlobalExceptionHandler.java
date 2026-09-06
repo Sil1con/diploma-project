@@ -4,6 +4,7 @@ import com.diploma.finance.exception.entity.request.InvalidRequestException;
 import com.diploma.finance.exception.entity.response.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -20,5 +21,19 @@ public class GlobalExceptionHandler {
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
                 .body(error);
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<ErrorResponse> handleHttpMessageNotReadable(
+            HttpMessageNotReadableException exception
+    ) {
+        return ResponseEntity
+                .badRequest()
+                .body(
+                        new ErrorResponse(
+                                400,
+                                "Invalid request body"
+                        )
+                );
     }
 }

@@ -97,5 +97,4 @@ public class TransactionResponseMapper {
                 "Unsupported investment type: " + transaction.getClass().getSimpleName()
         );
     }
-
 }

@@ -1,6 +1,6 @@
 package com.diploma.finance.income.mapper;
 
-import com.diploma.finance.income.dto.CreateIncomeRequest;
+import com.diploma.finance.income.dto.request.CreateIncomeRequest;
 import com.diploma.finance.income.entity.IncomeSource;
 import com.diploma.finance.user.entity.User;
 

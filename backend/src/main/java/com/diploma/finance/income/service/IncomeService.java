@@ -1,10 +1,10 @@
 package com.diploma.finance.income.service;
 
-import com.diploma.finance.exception.entity.request.InvalidRequestException;
-import com.diploma.finance.income.dto.CreateIncomeRequest;
-import com.diploma.finance.income.dto.IncomeResponse;
-import com.diploma.finance.income.entity.IncomeSource;
 import com.diploma.finance.income.entity.records.MonthBoundaries;
+import com.diploma.finance.utilities.exception.entity.request.InvalidRequestException;
+import com.diploma.finance.income.dto.request.CreateIncomeRequest;
+import com.diploma.finance.income.dto.response.IncomeResponse;
+import com.diploma.finance.income.entity.IncomeSource;
 import com.diploma.finance.income.finder.ExistingIncomeFinder;
 import com.diploma.finance.income.mapper.IncomeRequestMapper;
 import com.diploma.finance.income.mapper.IncomeResponseMapper;
@@ -37,9 +37,9 @@ public class IncomeService {
 
     private User getUser(Long userId) {
         return userRepository.findById(userId)
-            .orElseThrow(() ->
-                    new RuntimeException("User not found")
-            );
+                .orElseThrow(() ->
+                        new InvalidRequestException("User not found")
+                );
     }
 
     private MonthBoundaries getMonthBoundaries(YearMonth month) {
@@ -84,6 +84,16 @@ public class IncomeService {
         }
     }
 
+    public IncomeResponse createIncomeSource(CreateIncomeRequest incomeRequest) {
+        CreateIncomeRequestValidator.validate(incomeRequest);
+
+        IncomeSource incomingSource = createIncomeFromRequest(incomeRequest);
+
+        IncomeSource incomeSource = resolveIncomeSource(incomingSource);
+
+        return IncomeResponseMapper.toResponse(incomeSource);
+    }
+
     public List<IncomeResponse> getCurrentMonthIncomeSources(Long userId) {
         YearMonth currentMonth = YearMonth.now();
 
@@ -104,16 +114,6 @@ public class IncomeService {
         sortIncomeSourcesDesc(incomeSources);
 
         return IncomeResponseMapper.toResponses(incomeSources);
-    }
-
-    public IncomeResponse createIncomeSource(CreateIncomeRequest incomeRequest) {
-        CreateIncomeRequestValidator.validate(incomeRequest);
-
-        IncomeSource incomingSource = createIncomeFromRequest(incomeRequest);
-
-        IncomeSource incomeSource = resolveIncomeSource(incomingSource);
-
-        return IncomeResponseMapper.toResponse(incomeSource);
     }
 
     public BigDecimal calculateCurrentIncomeTotalValue(Long userId) {

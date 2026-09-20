@@ -1,7 +1,7 @@
 package com.diploma.finance.income.controller;
 
-import com.diploma.finance.income.dto.CreateIncomeRequest;
-import com.diploma.finance.income.dto.IncomeResponse;
+import com.diploma.finance.income.dto.request.CreateIncomeRequest;
+import com.diploma.finance.income.dto.response.IncomeResponse;
 import com.diploma.finance.income.service.IncomeService;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;

@@ -2,14 +2,20 @@ Backend:
     Investments:
         +   InvestmentService -> Implement returning of DTOs rather than actual Entities
         +   InvestmentRequestMapper -> Finish implementation
-        +-  InvestmentService -> Implement createInvestment method
+        + InvestmentService -> Implement createInvestment method
         +   InvestmentService -> Implement transaction logic
         -   TransactionController -> Implement it
 
+    Expenditures:
+        -   ExpenditureRequestMapper: I should implement ReceiptPathService, since the Expenditure contains receipt_path
+            variable and I cannot store the whole image
+        -   ExpenditureRequestMapper: do not forget to delete the null instead of a real image
+
+
 
 Frontend:
-    -   CashRequest -> Add json key "currency", so it can be processed by Jackson
-    -   CreateRequest -> Add json key "transactionType"
+    +   CashRequest -> Add json key "currency", so it can be processed by Jackson
+    +   CreateRequest -> Add json key "transactionType"
 
 Database:
     +   InvestmentAsset -> Add new Bond field "isin"

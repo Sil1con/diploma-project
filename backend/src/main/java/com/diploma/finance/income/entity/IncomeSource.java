@@ -18,10 +18,10 @@ public class IncomeSource {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "amount")
+    @Column(name = "amount", nullable = false)
     private BigDecimal amount;
 
     @Enumerated(EnumType.STRING)

@@ -1,10 +1,9 @@
 package com.diploma.finance.investments.validator;
 
-import com.diploma.finance.exception.entity.request.InvalidRequestException;
+import com.diploma.finance.utilities.exception.entity.request.InvalidRequestException;
 import com.diploma.finance.investments.dto.request.CreateCryptoRequest;
 import com.diploma.finance.investments.dto.request.CreateEtfRequest;
 import com.diploma.finance.investments.dto.request.CreateInvestmentRequest;
-import com.diploma.finance.investments.entity.enums.TransactionType;
 
 import java.math.BigDecimal;
 

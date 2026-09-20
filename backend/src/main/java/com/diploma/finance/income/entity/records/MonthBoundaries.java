@@ -5,6 +5,4 @@ import java.time.LocalDate;
 public record MonthBoundaries(
         LocalDate startOfMonth,
         LocalDate startOfNextMonth
-) {
-
-}
+) {}

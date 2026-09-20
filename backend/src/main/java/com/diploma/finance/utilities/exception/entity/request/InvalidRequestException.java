@@ -1,4 +1,4 @@
-package com.diploma.finance.exception.entity.request;
+package com.diploma.finance.utilities.exception.entity.request;
 
 public class InvalidRequestException extends RuntimeException {
     public InvalidRequestException(String message) {

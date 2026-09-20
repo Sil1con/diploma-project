@@ -1,7 +1,7 @@
 package com.diploma.finance.income.validator;
 
-import com.diploma.finance.exception.entity.request.InvalidRequestException;
-import com.diploma.finance.income.dto.CreateIncomeRequest;
+import com.diploma.finance.utilities.exception.entity.request.InvalidRequestException;
+import com.diploma.finance.income.dto.request.CreateIncomeRequest;
 
 import java.math.BigDecimal;
 

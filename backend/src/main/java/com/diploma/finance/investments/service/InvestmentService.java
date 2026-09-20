@@ -1,5 +1,6 @@
 package com.diploma.finance.investments.service;
 
+import com.diploma.finance.utilities.exception.entity.request.InvalidRequestException;
 import com.diploma.finance.investments.dto.request.*;
 import com.diploma.finance.investments.dto.response.summary.InvestmentSummaryResponse;
 import com.diploma.finance.investments.dto.response.transaction.TransactionResponse;
@@ -10,7 +11,6 @@ import com.diploma.finance.investments.finder.ExistingInvestmentFinder;
 import com.diploma.finance.investments.mapper.*;
 import com.diploma.finance.investments.repository.transaction.InvestmentTransactionRepository;
 import com.diploma.finance.investments.repository.investment.InvestmentsRepository;
-import com.diploma.finance.investments.validator.CreateInvestmentRequestValidator;
 import com.diploma.finance.investments.validator.CreateRequestTransactionValidator;
 import com.diploma.finance.user.entity.User;
 import com.diploma.finance.user.repository.UserRepository;
@@ -85,7 +85,7 @@ public class InvestmentService {
     public InvestmentAsset getInvestment(Long id) {
         return investmentsRepository.findById(id)
                 .orElseThrow(() ->
-                    new RuntimeException("Investment not found")
+                        new InvalidRequestException("User not found")
                 );
     }
 
@@ -100,7 +100,7 @@ public class InvestmentService {
 
         return transactionRepository.findByIdAndAssetIdAndAssetUserId(transactionId, assetId, asset.getUser().getId() )
                 .orElseThrow(() ->
-                        new RuntimeException("Transaction not found")
+                        new InvalidRequestException("Transaction not found")
                 );
     }
 

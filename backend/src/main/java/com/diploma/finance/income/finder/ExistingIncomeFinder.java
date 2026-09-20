@@ -1,9 +1,9 @@
 package com.diploma.finance.income.finder;
 
-import com.diploma.finance.exception.entity.request.InvalidRequestException;
+import com.diploma.finance.income.entity.records.MonthBoundaries;
+import com.diploma.finance.utilities.exception.entity.request.InvalidRequestException;
 import com.diploma.finance.income.entity.IncomeSource;
 import com.diploma.finance.income.entity.enums.IncomeCategory;
-import com.diploma.finance.income.entity.records.MonthBoundaries;
 import com.diploma.finance.income.repository.IncomeRepository;
 import org.springframework.stereotype.Component;
 

@@ -1,6 +1,6 @@
 package com.diploma.finance.income.mapper;
 
-import com.diploma.finance.income.dto.IncomeResponse;
+import com.diploma.finance.income.dto.response.IncomeResponse;
 import com.diploma.finance.income.entity.IncomeSource;
 
 import java.util.ArrayList;

@@ -39,7 +39,6 @@ public class InvestmentTransaction {
     @Column(name = "broker_account", nullable = false, length = 100)
     private String brokerAccount;
 
-
     private String notes;
 
     @CreationTimestamp

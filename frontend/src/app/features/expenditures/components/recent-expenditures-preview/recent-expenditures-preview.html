@@ -1,0 +1,47 @@
+<div class="transactions-block">
+    <div class="component-title-block">
+        <p class="component-title text">Recent Transactions</p>
+        <button class="view-all-btn">
+            <span class="orange-text">View all</span>
+        </button>
+    </div>
+    <div class="transactions-list">
+        @for (expenditure of displayedExpenditures$ | async; track expenditure.id) {
+            <div class="transaction">
+                <div 
+                    class="icon-background"
+                    [class]="expenditure.category"
+                >
+                    <img 
+                        class="icon-40px" 
+                        [src]="expenditureIcons[expenditure.category]" 
+                        [alt]="expenditure.category + '-icon'"
+                    >
+                </div>
+                <div class="transaction-title-block">
+                    <p class="transaction-title text">{{ expenditure.name }}</p>
+                    <span class="transaction-date grey-text">{{ expenditure.expenditureDate | date:'longDate' }}</span>
+                </div>
+                <div class="transaction-category-block">
+                    <div 
+                        class="transaction-category"
+                        [class]="expenditure.category"
+                    >
+                        <span
+                            class="text"
+                            [class]="expenditure.category"
+                        >
+                            {{ expenditure.category | capitalLetterPipe }}
+                        </span>
+                    </div>
+                </div>
+                <div class="transaction-value-block">
+                    <p class="transaction-value orange-text">&ndash; {{ expenditure.amount | currency: 'EUR' : 'symbol-narrow' : '1.2-2' }}</p>
+                    <button class="transaction-details-btn">
+                        <img class="details-icon icon-20px" src="assets/icons/grey_arrow.png" alt="transaction-details-icon">
+                    </button>
+                </div>
+            </div>
+        }
+    </div>
+</div>

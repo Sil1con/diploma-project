@@ -51,7 +51,7 @@ $transactions-component-padding: 25px;
 
 .transactions-list {
     @include position.custom-positioning(column, start, space-between);
-    row-gap: 15px;
+    row-gap: 10px;
 }
 
 .transaction {
@@ -91,32 +91,76 @@ $transactions-component-padding: 25px;
     font-weight: 600;
 }
 
-.transaction-category.housing {
+.transaction-category.HOUSING {
     background-color: #fff4ec;
+
+    .text {
+        color: #ff8f3f;
+    }   
 }
 
-.transaction-category.food {
+.transaction-category.FOOD {
     background-color: #eaf0f8;
+
+    .text {
+        color: #428dee;
+    }
 }
 
-.transaction-category.transportation {
+.transaction-category.TRANSPORTATION {
     background-color: #dff6ea;
+
+    .text {
+        color: #1c8a51;
+    }
 }
 
-.transaction-category.utilities {
+.transaction-category.UTILITIES {
     background-color: #ece5f7;
+
+    .text {
+        color: #873efd;
+    }
 }
 
-.transaction-category.health {
+.transaction-category.HEALTHCARE {
     background-color: #fceaee;
+
+    .text {
+        color: #fa3f67;
+    }
 }
 
-.transaction-category.entertainment {
+.transaction-category.ENTERTAINMENT {
     background-color: #fbf5db;
+
+    .text {
+        color: #fdd41e;
+    }
 }
 
-.transaction-category.other {
+.transaction-category.EDUCATION {
+    background-color: #e2f9fa;
+
+    .text {
+        color: #1da9ad;
+    }
+}
+
+.transaction-category.SHOPPING {
+    background-color: rgba(205, 221, 255, 0.607);
+
+    .text {
+        color: rgb(45, 45, 201);
+    }
+}
+
+.transaction-category.OTHER {
     background-color: rgb(243, 243, 243);
+
+    .text {
+        color: grey;
+    }
 }
 
 .transaction-value-block {

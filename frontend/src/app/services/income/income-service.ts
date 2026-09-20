@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IncomeSource } from '../../features/income/utilities/models/income-source';
 import { CreateIncomeRequest } from '../../features/income/utilities/models/request/create-income-request';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -17,13 +18,13 @@ export class IncomeService {
     )
   }
 
-  getCurrentMonthIncomeSources(userId: string) {
+  getCurrentMonthIncomeSources(userId: string): Observable<IncomeSource[]> {
     return this.httpClient.get<IncomeSource[]>(
       `${this.apiUrl}/${userId}/current-month`
     );
   }
 
-  getCurrentMonthTotalIncome(userId: string) {
+  getCurrentMonthTotalIncome(userId: string): Observable<number> {
     return this.httpClient.get<number>(
       `${this.apiUrl}/${userId}/current-total`
     );

@@ -19,7 +19,7 @@ export class IncomeSourcesComponent implements OnChanges{
 
   displayedIncomeSources$!: Observable<IncomeSource[]>;
 
-   incomesIcons: Record<string, string> = {
+  incomesIcons: Record<string, string> = {
     SALARY: 'assets/category_icons/salary.png',
     FREELANCE: 'assets/category_icons/freelance.png',
     INVESTMENTS: 'assets/category_icons/investments.png',

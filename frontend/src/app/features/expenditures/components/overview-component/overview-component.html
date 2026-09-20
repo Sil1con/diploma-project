@@ -2,7 +2,7 @@
     <p class="component-title text">Overview</p>
     <div class="total-spent-block">
         <p class="component-title grey-title ">Total Spent</p>
-        <p class="total-spent text">&euro; 4,250.75</p>
+        <p class="total-spent text">{{ (totalSpent$ | async) ?? 0 | currency: 'EUR' : 'symbol-narrow' : '2.2-2' }}</p>
         <div class="comparison-block">
             <div>
                 <img class="icon-25px" src="assets/icons/orange_arrow_top.png" alt="increased-expense-sign">
@@ -18,7 +18,7 @@
             </div>
             <div class="stat-descr">
                 <p class="daily-average stat-text grey-title">Daily Average</p>
-                <p class="daily-average-spending stat-text text">&euro; 141.69</p>
+                <p class="daily-average-spending stat-text text">{{ (dailyAverage$ | async) ?? 0 | currency: 'EUR' : 'symbol-narrow' : '2.2-2' }}</p>
             </div>
         </div>
         <div class="stat daily-transaction-block">
@@ -26,8 +26,8 @@
                 <img class="icon-40px" src="assets/icons/list.png" alt="daily-transaction-list-icon">
             </div>
             <div class="stat-descr">
-                <p class="daily-transaction stat-text grey-title">Transaction</p>
-                <p class="daily-transaction-spending stat-text text">32</p>
+                <p class="daily-transaction stat-text grey-title">Transactions</p>
+                <p class="daily-transaction-spending stat-text text">{{ transactions$ | async }}</p>
             </div>
         </div>
     </div>

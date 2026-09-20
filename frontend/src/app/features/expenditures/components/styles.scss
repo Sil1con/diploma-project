@@ -10,30 +10,38 @@
     flex-shrink: 0
 }
 
-.icon-background.housing {
+.icon-background.HOUSING {
     background-color: #fff4ec;
 }
 
-.icon-background.food {
+.icon-background.FOOD {
     background-color: #eaf0f8;
 }
 
-.icon-background.transportation {
+.icon-background.TRANSPORTATION {
     background-color: #dff6ea;
 }
 
-.icon-background.utilities {
-    background-color: #ece5f7;
-}
-
-.icon-background.health {
-    background-color: #fceaee;
-}
-
-.icon-background.entertainment {
+.icon-background.ENTERTAINMENT {
     background-color: #fbf5db;
 }
 
-.icon-background.other {
+.icon-background.UTILITIES {
+    background-color: #ece5f7;
+}
+
+.icon-background.HEALTHCARE {
+    background-color: #fceaee;
+}
+
+.icon-background.EDUCATION {
+    background-color: #e8fbfc;
+}
+
+.icon-background.SHOPPING {
+    background-color: rgba(205, 221, 255, 0.607);
+}
+
+.icon-background.OTHER {
     background-color: rgb(243, 243, 243);
 }

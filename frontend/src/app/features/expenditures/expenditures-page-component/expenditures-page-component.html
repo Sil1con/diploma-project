@@ -21,12 +21,24 @@
     </div>
 </div>
 <div class="upper-block">
-    <app-overview-component></app-overview-component>
-    <app-spending-categories-preview></app-spending-categories-preview>
+    <app-overview-component
+        [totalSpent$]="calculateTotalSpent()"
+        [dailyAverage$]="calculateDailyAverage(getDaysPassedInCurrentMonth())"
+        [transactions$]="getTransactionsQuantity()"
+    ></app-overview-component>
+    <app-spending-categories-preview
+        [categoriesSummary$]="categoriesSummary$"
+        [expenditureIcons]="expenditureIcons"
+    ></app-spending-categories-preview>
 </div>
 <div class="botton-block">
-    <app-budget-summary></app-budget-summary>
-    <app-recent-transactions-preview></app-recent-transactions-preview>
+    <app-budget-summary
+        [totalSpent$]="calculateTotalSpent()"
+    ></app-budget-summary>
+    <app-recent-expenditures-preview
+        [expenditures$]="expenditures$"
+        [expenditureIcons]="expenditureIcons"
+    ></app-recent-expenditures-preview>
     @if (isAddExpenseFormOpened) {
         <app-add-expense-form
             (expenseSaved)="handleExpenseSubmitted($event)"

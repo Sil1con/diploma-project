@@ -1,27 +1,54 @@
-import { Component, output } from '@angular/core';
+import { Component } from '@angular/core';
 import { OverviewComponent } from '../components/overview-component/overview-component';
 import { SpendingCategoriesPreview } from '../components/spending-categories-preview/spending-categories-preview';
 import { BudgetSummary } from '../components/budget-summary/budget-summary';
-import { RecentTransactionsPreview } from '../components/recent-transactions-preview/recent-transactions-preview';
+import { RecentExpendituresPreview } from '../components/recent-expenditures-preview/recent-expenditures-preview';
 import { AddExpenseForm } from '../components/add-expense-form/add-expense-form';
-import { ExpensePayload } from '../models/expense-payload.model';
+import { Expenditure } from '../utilities/models/expenditure';
+import { ExpenditureService } from '../../../services/expenditures/expenditure-service';
+import { BehaviorSubject, map, Observable } from 'rxjs';
+import { CategorySummary } from '../utilities/models/category-summary';
+import { CreateExpenditureRequest } from '../utilities/models/request/create-expenditure-request';
 
 @Component({
   selector: 'app-expenditures-page-component',
   imports: [
+    BudgetSummary, 
     OverviewComponent,
     SpendingCategoriesPreview,
-    BudgetSummary,
-    RecentTransactionsPreview,
+    RecentExpendituresPreview,
     AddExpenseForm
   ],
   templateUrl: './expenditures-page-component.html',
   styleUrl: './expenditures-page-component.scss',
 })
 export class ExpendituresPageComponent {
+  private readonly userId: string = '1';
   isAddExpenseFormOpened = false;
 
-  expenses: ExpensePayload[] = [];
+  private expendituresSubject$$ = new BehaviorSubject<Expenditure[]>([]);
+  private categoriesSummarySubject$$ = new BehaviorSubject<CategorySummary[]>([]);
+
+  expenditures$: Observable<Expenditure[]> = this.expendituresSubject$$.asObservable();
+  categoriesSummary$: Observable<CategorySummary[]> = this.categoriesSummarySubject$$.asObservable();
+
+  expenditureIcons: Record<string, string> = {
+    FOOD: 'assets/category_icons/food.png',
+    HOUSING: 'assets/category_icons/housing.png',
+    TRANSPORTATION: 'assets/category_icons/transportation.png',
+    ENTERTAINMENT: 'assets/category_icons/entertainment.png',
+    UTILITIES: 'assets/category_icons/utilities.png',
+    HEALTHCARE: 'assets/category_icons/healthcare.png',
+    EDUCATION: 'assets/category_icons/education.png',
+    SHOPPING: 'assets/category_icons/shopping.png',
+    OTHER: 'assets/category_icons/other.png'
+  };
+
+  constructor(private expenditureService: ExpenditureService) {}
+
+  ngOnInit() {
+    this.refreshExpendituresData();
+  }
 
   openAddExpenseForm(): void {
     this.isAddExpenseFormOpened = true;
@@ -31,13 +58,63 @@ export class ExpendituresPageComponent {
     this.isAddExpenseFormOpened = false;
   }
 
-  handleExpenseSubmitted(expense: ExpensePayload): void {
-    // Demo implementation:
-    this.expenses = [expense, ...this.expenses];
+  handleExpenseSubmitted(expenditure: CreateExpenditureRequest) {
+    expenditure.userId = this.userId;
 
-    // Later:
-    // this.expenseService.createExpense(expense).subscribe(...);
+    this.expenditureService.createExpenditure(expenditure).subscribe({
+      next: (expenditureResponse) => {
+        console.log(expenditureResponse);
 
-    this.closeAddExpenseForm();
+        this.refreshExpendituresData();
+        this.closeAddExpenseForm();
+      }
+    })
+  }
+
+  refreshExpendituresData() {
+    this.getCurrentMonthExpenditures();
+    this.getCurrentMonthCategoriesSummary();
+  }
+
+  getCurrentMonthExpenditures() {
+    this.expenditureService.getCurrentMonthExpenditures(this.userId)
+      .subscribe(expenditures => 
+        this.expendituresSubject$$.next(expenditures)
+      );
+  }
+
+  getCurrentMonthCategoriesSummary() {
+    this.expenditureService.getCurrentMonthCategoriesSummary(this.userId)
+      .subscribe(categoriesSummary => 
+        this.categoriesSummarySubject$$.next(categoriesSummary)
+      );
+  }
+
+  calculateTotalSpent(): Observable<number> {
+    return this.expenditures$.pipe(
+      map(expenditures => 
+        expenditures.reduce(
+          (total, expenditure) => total + expenditure.amount, 0
+        )
+      )
+    )
+  }
+
+  getTransactionsQuantity(): Observable<number> {
+    return this.expenditures$.pipe(
+      map(expenditures => expenditures.length)
+    )
+  }
+
+  calculateDailyAverage(period: number): Observable<number> {
+    return this.calculateTotalSpent().pipe(
+      map(totalSpent =>
+        totalSpent / period
+      )
+    );
+  }
+
+  getDaysPassedInCurrentMonth(): number {
+    return new Date().getDate();
   }
 }

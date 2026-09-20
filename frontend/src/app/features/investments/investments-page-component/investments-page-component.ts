@@ -72,8 +72,6 @@ export class InvestmentsPageComponent {
       next: () => {
         this.refreshInvestmentData();
 
-        this.portfolioRefreshTrigger++;
-
         this.handleCancelledForm();
         this.cdr.markForCheck();
       },

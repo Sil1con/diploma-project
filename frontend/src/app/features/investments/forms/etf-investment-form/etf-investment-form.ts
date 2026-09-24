@@ -12,7 +12,7 @@ import { CreateEtfRequest } from '../../utilities/models/requests/create-investm
 export class EtfInvestmentForm {
   etfForm!: FormGroup;
 
-  @Output() cancelled = new EventEmitter<void>();
+  @Output() cancelled = new EventEmitter<boolean>();
   @Output() etfSaved = new EventEmitter<CreateEtfRequest>();
 
   constructor(private fb: FormBuilder) {}
@@ -33,7 +33,7 @@ export class EtfInvestmentForm {
   }
 
   onCancel(): void {
-    this.cancelled.emit();
+    this.cancelled.emit(false);
   }
 
   onSubmit(): void {

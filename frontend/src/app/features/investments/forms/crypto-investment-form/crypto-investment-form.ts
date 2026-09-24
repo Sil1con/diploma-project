@@ -13,7 +13,7 @@ import { CreateCryptoRequest } from '../../utilities/models/requests/create-inve
 export class CryptoInvestmentForm {
   cryptoForm!: FormGroup;
 
-  @Output() cancelled = new EventEmitter<void>();
+  @Output() cancelled = new EventEmitter<boolean>();
   @Output() cryptoSaved = new EventEmitter<CreateCryptoRequest>();
 
   constructor(private fb: FormBuilder) {}
@@ -34,7 +34,7 @@ export class CryptoInvestmentForm {
   }
 
   onCancel(): void {
-    this.cancelled.emit();
+    this.cancelled.emit(false);
   }
 
   onSubmit(): void {

@@ -12,9 +12,9 @@ import { Investment } from '../utilities/models/investments.model';
 import { InvestmentType } from '../utilities/types/investment-type';
 import { InvestmentService } from '../../../services/investments/investment-service';
 import { CreateInvestmentRequest } from '../utilities/models/requests/create-investment-requests.model';
-import { ChangeDetectorRef } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable, reduce } from 'rxjs';
 import { InvestmentSummary } from '../utilities/models/investment-summary.model';
+import { ViewAllComponent } from '../view-all-component/view-all-component';
 
 @Component({
   selector: 'app-investments-page-component',
@@ -28,7 +28,8 @@ import { InvestmentSummary } from '../utilities/models/investment-summary.model'
     CryptoInvestmentForm,
     CommodityInvestmentForm,
     BondInvestmentForm,
-    CashInvestmentForm
+    CashInvestmentForm,
+    ViewAllComponent
   ],
   templateUrl: './investments-page-component.html',
   styleUrl: './investments-page-component.scss',
@@ -37,31 +38,37 @@ export class InvestmentsPageComponent {
   protected readonly userId: string = '1';
   investmentSelected: InvestmentType = 'STOCK';
   isFormOpened: boolean = false;
-  
-  investments$!: Observable<Investment[]>;
-  previewInvestments$!: Observable<InvestmentSummary[]>;
+  isViewAllOpened: boolean = false;
 
-  portfolioRefreshTrigger = 0;
+  private investments$$ = new BehaviorSubject<Investment[]>([]);
+  private investmentSummaries$$ = new BehaviorSubject<InvestmentSummary[]>([]);
+  
+  investments$: Observable<Investment[]> = this.investments$$.asObservable();
+  investmentSummaries$: Observable<InvestmentSummary[]> = this.investmentSummaries$$.asObservable();
+  portfolioTotalValue$!: Observable<number>;
 
   constructor(
     private investmentService: InvestmentService,
-    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
     this.refreshInvestmentData();
   }
 
+  handleViewAllVisibility(isOpened: boolean): void {
+    this.isViewAllOpened = isOpened;
+    
+    document.body.style.overflow = isOpened ? 'hidden' : 'auto';
+  }
+
   handleInvestmentCategory(category: InvestmentType) {
     this.investmentSelected = category;
   }
 
-  handleFormVisibility(isOpened: boolean) {
+  handleFormVisibility(isOpened: boolean): void {
     this.isFormOpened = isOpened;
-  }
-  
-  handleCancelledForm() {
-    this.isFormOpened = false;
+
+    //document.body.style.overflow = isOpened ? 'hidden' : 'auto';
   }
 
   handleInvestmentSubmitted(investment: CreateInvestmentRequest) {
@@ -72,8 +79,7 @@ export class InvestmentsPageComponent {
       next: () => {
         this.refreshInvestmentData();
 
-        this.handleCancelledForm();
-        this.cdr.markForCheck();
+        this.handleFormVisibility(false);
       },
       error: (error) => {
         console.error('Failed to create investment', error);
@@ -82,7 +88,33 @@ export class InvestmentsPageComponent {
   }
 
   refreshInvestmentData(): void {
-    this.investments$ = this.investmentService.getInvestments(this.userId);
-    this.previewInvestments$ = this.investmentService.getPreviewSummary(this.userId);
+    this.getInvestments();
+    this.getInvestmentSummaries();
+    this.calculateTotalPortfolio();
+  }
+
+  getInvestments() {
+    this.investmentService.getInvestments(this.userId)
+      .subscribe(investments => 
+        this.investments$$.next(investments)
+      );
+  }
+
+  getInvestmentSummaries() {
+    this.investmentService.getPreviewSummary(this.userId)
+      .subscribe(investmentSummaries => 
+        this.investmentSummaries$$.next(investmentSummaries)
+      );
+  }
+
+  calculateTotalPortfolio() {
+    this.portfolioTotalValue$ = this.investmentSummaries$.pipe(
+      map(investments =>
+        investments.reduce(
+          (total, investment) => total + investment.totalValue,
+          0
+        )
+      )
+    );
   }
 }

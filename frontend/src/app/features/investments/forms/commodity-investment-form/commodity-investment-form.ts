@@ -13,7 +13,7 @@ import { CreateCommodityRequest } from '../../utilities/models/requests/create-i
 export class CommodityInvestmentForm {
   commodityForm!: FormGroup;
 
-  @Output() cancelled = new EventEmitter<void>();
+  @Output() cancelled = new EventEmitter<boolean>();
   @Output() commoditySaved = new EventEmitter<CreateCommodityRequest>();
 
   constructor(private fb: FormBuilder) {}
@@ -33,7 +33,7 @@ export class CommodityInvestmentForm {
   }
   
   onCancel(): void {
-    this.cancelled.emit();
+    this.cancelled.emit(false);
   }
 
   onSubmit(): void {

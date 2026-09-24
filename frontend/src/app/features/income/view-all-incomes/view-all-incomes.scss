@@ -1,0 +1,159 @@
+@use '../../../shared/styles/variables/dimensions';
+@use '../../../shared/styles/variables/colors';
+@use '../../../shared/styles/variables/fonts';
+@use '../../../shared/styles/mixins/shadows';
+@use '../../../shared/styles/mixins/position';
+@use '../../../shared/styles/mixins/custom';
+@use '../../../shared/styles/typography';
+@use '../../../shared/styles/icons';
+
+$main-padding: 30px;
+
+:host {
+    @include position.fully-centered-content;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba($color: black, $alpha: 0.1); 
+    z-index: 1000;
+}
+
+.view-all-block {
+    @include custom.customize-background-border(transparent, 1px, colors.$component-border-color, dimensions.$border-radius);
+    @include position.custom-positioning(column, space-between, space-between);
+    row-gap: 20px;
+    width: 1300px;
+    height: 900px;
+    padding: $main-padding;
+    box-sizing: border-box;
+    background-color: colors.$component-background;
+}
+
+.green-text {
+    font-size: 20px
+}
+
+.btn {
+    @include position.fully-centered-content;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    transition: transform 200ms ease;
+
+    &:active {
+        transform: scale(0.9);
+    }
+}
+
+.top-block {
+    @include position.custom-positioning(row, space-between, space-between);
+}
+
+.sources-list-block {
+    @include custom.customize-background-border(transparent, 1px, colors.$component-border-color, dimensions.$border-radius);
+    @include position.custom-positioning(column, start, space-between);
+    @include shadows.custom-shadow(0px, 0px, 5px, black, 0.1);
+    box-sizing: border-box;
+    row-gap: 12.5px;
+    padding: 10px;
+    height: 100%;
+}
+
+.source {
+  display: grid;
+  grid-template-columns:
+    70px
+    minmax(100px, 300px)
+    minmax(100px, 200px)
+    minmax(120px, 200px)
+    minmax(100px, 210px)
+    minmax(100px, 155px);
+
+  align-items: center;
+  text-wrap: inherit;
+  column-gap: 20px;
+}
+
+.icon-background {
+    @include custom.customize-background-border(transparent, 1px, transparent, 17px);
+    @include position.fully-centered-content;
+}
+
+.icon-background.SALARY {
+    background-color: #e5eefb;
+}
+
+.icon-background.INVESTMENTS {
+    background-color: #d0f7e3;
+}
+
+.icon-background.FREELANCE {
+    background-color: #e9e9e9;
+}
+
+.icon-background.RENTAL {
+    background-color: #e9dcfe;
+}
+
+.icon-background.SCHOLARSHIP {
+    background-color: #e4feff;
+}
+
+.cash-value-block .cash-value  {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.date-block .date-value {
+    font-size: 19px;
+}
+
+.actions-block {
+    @include position.custom-positioning(row, center, space-around);
+}
+
+.edit-btn {
+    width: 40px;
+    height: 40px;
+}
+
+.delete-btn {
+    @include custom.customize-background-border(transparent, 1px, transparent, 10px);
+    background-color: rgb(235, 21, 21);
+    width: 40px;
+    height: 40px;
+}
+
+.bottom-block {
+    @include position.custom-positioning(row, center, space-between);
+}
+
+.segregation-block {
+    @include position.custom-positioning(row, center, space-between);
+}
+
+.segregation-block span {
+    font-size: 22px;
+}
+
+.current-page-btn {
+    @include custom.customize-background-border(transparent, 2px, #c9c9c9, 11px);
+    margin: 0 10px;
+    width: 50px;
+}
+
+.prev-btn, .next-btn {
+    @include custom.customize-background-border(transparent, 2px, #c9c9c9, 11px);
+    width: 45px;
+    transition: transform 100ms ease, background-color 200ms ;
+
+    &:active {
+        transform: scale(0.85);
+    }
+
+    &:hover {
+        background-color: #e3e3e3;
+    }
+}

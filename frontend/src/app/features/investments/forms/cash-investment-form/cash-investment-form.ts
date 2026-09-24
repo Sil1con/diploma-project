@@ -12,7 +12,7 @@ import { CreateCashRequest } from '../../utilities/models/requests/create-invest
 export class CashInvestmentForm {
   cashForm!: FormGroup;
 
-  @Output() cancelled = new EventEmitter<void>();
+  @Output() cancelled = new EventEmitter<boolean>();
   @Output() cashSaved = new EventEmitter<CreateCashRequest>();
 
 
@@ -32,7 +32,7 @@ export class CashInvestmentForm {
   }
 
   onCancel(): void {
-    this.cancelled.emit();
+    this.cancelled.emit(false);
   }
 
   onSubmit(): void {

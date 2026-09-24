@@ -2,7 +2,7 @@
     <div class="title-block">
         <p class="source-title titles">Source Categories</p>
         <p class="source-descr grey-title">Breakdown of your income sources</p>
-        <button class="view-all-btn">View all</button>
+        <button class="view-all-btn" (click)="openViewAll()">View all</button>
     </div>
     <div class="sources-flexbox">
         @for (income of displayedIncomeSources$ | async; track income.id) {
@@ -13,7 +13,7 @@
                 >   
                     <img 
                         class="icon"
-                        [src]="incomesIcons[income.category]" 
+                        [src]="incomeIcons[income.category]" 
                         [alt]="income.category + '-icon'">
                 </div>
                 <div class="source-description">

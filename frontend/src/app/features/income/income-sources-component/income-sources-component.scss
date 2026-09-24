@@ -64,11 +64,15 @@ $border-radius: 25px;
 }
 
 .source-icon-block {
-    @include custom.customize-background-border(#e5eefb, 0, transparent, dimensions.$border-radius);
+    @include custom.customize-background-border(transparent, 0, transparent, dimensions.$border-radius);
     @include position.fully-centered-content;
     width: 100px;
     height: 100px;
     flex-shrink: 0;
+}
+
+.source-icon-block.SALARY {
+    background-color: #e5eefb;
 }
 
 .source-icon-block.INVESTMENTS {

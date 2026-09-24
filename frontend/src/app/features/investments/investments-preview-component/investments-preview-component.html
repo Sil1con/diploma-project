@@ -1,7 +1,7 @@
 <div class="investments-block">
     <div class="list-title-block">
         <p class="titles">Investments</p>
-        <button class="view-all-btn green-text">View all</button>
+        <button class="view-all-btn green-text" (click)="openViewAll()">View all</button>
     </div>
     <div class="investments-list">
         @for (investment of displayedInvestments$ | async; track investment.investmentId) {

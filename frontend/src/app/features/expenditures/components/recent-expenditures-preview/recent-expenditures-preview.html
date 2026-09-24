@@ -1,7 +1,7 @@
 <div class="transactions-block">
     <div class="component-title-block">
         <p class="component-title text">Recent Transactions</p>
-        <button class="view-all-btn">
+        <button class="view-all-btn" (click)="openViewAll()">
             <span class="orange-text">View all</span>
         </button>
     </div>
@@ -9,7 +9,7 @@
         @for (expenditure of displayedExpenditures$ | async; track expenditure.id) {
             <div class="transaction">
                 <div 
-                    class="icon-background"
+                    class="icon-background icon-50px"
                     [class]="expenditure.category"
                 >
                     <img 

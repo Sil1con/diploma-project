@@ -1,0 +1,63 @@
+<div class="view-all-block">
+    <div class="top-block">
+        <div class="title-block">
+            <p class="titles">All Investments</p>
+            <p class="grey-title">Portfolio list and quick access</p>
+        </div>
+        <button class="close-btn btn" (click)="closeViewAll()">
+            <img class="icon-50px" src="assets/icons/close.png" alt="">
+        </button>
+    </div>
+    <div class="investments-list-block">
+        @for (investment of displayedInvestments$ | async; track investment.investmentId) {
+            <div class="investment">
+                <div class="investment-icon-block icon-70px">
+                    <img
+                        class="investment-icon icon-60px"
+                        [src]="investmentIcons[investment.investmentType]"
+                        [alt]="investment.investmentType + '-icon'"
+                    >
+                </div>
+                <div class="investment-title-block">
+                    <p class="investment-title text">{{ investment.investmentName }}</p>
+                </div>
+                <div class="investment-type-block">
+                    <p class="investment-type grey-text">{{ investment.investmentType | capitalLetterPipe }}</p>
+                </div>
+                <div class="current-value-block">
+                    <p class="cash-value text">{{ investment.totalValue | currency: 'EUR' : 'symbol-narrow' : '2.2-2' }}</p>
+                </div>
+                <div class="increase-decrease-block">
+                    <div>
+                        <img class="gain-icon icon-15px" src="assets/icons/triangle_green.png" alt="percent-up-icon">
+                        <p class="percent-value green-text">8.47%</p>
+                    </div>
+                </div>
+                <div class="actions-block">
+                    <button class="edit-btn btn">
+                        <img class="icon-30px" src="assets/icons/edit.png" alt="">
+                    </button>
+                    <button class="delete-btn btn">
+                        <img class="icon-30px" src="assets/icons/close-white.png" alt="">
+                    </button>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="bottom-block">
+        <div class="title-block">
+            <p class="grey-text">Showing {{calculateShownInvestments() | async }} of {{ (investmentSummaries$ | async)?.length ?? 0 }} investments</p>
+        </div>
+        <div class="segregation-block">
+            <button class="prev-btn btn icon-40px" (click)="previousPage()">
+                <img class="icon-20px" src="assets/icons/prev_btn.png" alt="previous-investment-button">
+            </button>
+            <button class="current-page-btn btn icon-40px">
+                <span class="grey-text">{{ currentPage$ | async }}</span>
+            </button>
+            <button class="next-btn btn icon-40px" (click)="nextPage()">
+                <img class="icon-20px" src="assets/icons/next_btn.png" alt="next-investment-button">
+            </button>
+        </div>
+    </div>
+</div>

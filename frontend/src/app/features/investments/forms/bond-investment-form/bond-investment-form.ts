@@ -12,7 +12,7 @@ import { CreateBondRequest } from '../../utilities/models/requests/create-invest
 export class BondInvestmentForm {
   bondForm!: FormGroup;
 
-  @Output() cancelled = new EventEmitter<void>();
+  @Output() cancelled = new EventEmitter<boolean>();
   @Output() bondSaved = new EventEmitter<CreateBondRequest>();
 
   constructor(private fb: FormBuilder) {}
@@ -37,9 +37,8 @@ export class BondInvestmentForm {
   }
 
   onCancel(): void {
-    this.cancelled.emit();
+    this.cancelled.emit(false);
   }
-
   onSubmit(): void {
     this.bondForm.markAllAsTouched();
 

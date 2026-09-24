@@ -7,6 +7,7 @@ import { AddIncomeForm } from '../add-income-form/add-income-form';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { IncomeService } from '../../../services/income/income-service';
 import { CreateIncomeRequest } from '../utilities/models/request/create-income-request';
+import { ViewAllIncomes } from '../view-all-incomes/view-all-incomes';
 
 @Component({
   selector: 'app-income-page-componenet',
@@ -14,7 +15,8 @@ import { CreateIncomeRequest } from '../utilities/models/request/create-income-r
     TotalIncomeComponent,
     GoalIncomeComponent,
     IncomeSourcesComponent,
-    AddIncomeForm
+    AddIncomeForm,
+    ViewAllIncomes
   ],
   templateUrl: './income-page-component.html',
   styleUrl: './income-page-component.scss',
@@ -25,12 +27,21 @@ export class IncomePageComponenet {
   incomeGoal: number = 10000;
   previousMonthIncome: number = 1300;
   isAddIncomeFormOpened: boolean = false;
+  isViewAllOpened: boolean = false;
   
   private totalIncomeValueSubject$$ = new BehaviorSubject<number>(0);
   private incomeSources$$ = new BehaviorSubject<IncomeSource[]>([]);
 
   totalIncomeValue$: Observable<number> = this.totalIncomeValueSubject$$.asObservable();
   incomeSources$: Observable<IncomeSource[]> = this.incomeSources$$.asObservable();
+
+  incomeIcons: Record<string, string> = {
+    SALARY: 'assets/category_icons/salary.png',
+    FREELANCE: 'assets/category_icons/freelance.png',
+    INVESTMENTS: 'assets/category_icons/investments.png',
+    RENTAL: 'assets/category_icons/rental.png',
+    SCHOLARSHIP: 'assets/category_icons/scholarship.png'
+  };
 
   constructor(
     private incomeService: IncomeService,
@@ -47,6 +58,12 @@ export class IncomePageComponenet {
 
   closeAddIncomeForm() {
     this.isAddIncomeFormOpened = false;
+  }
+
+  handleViewAllVisibility(isOpened: boolean) {
+    this.isViewAllOpened = isOpened;
+
+    document.body.style.overflow = isOpened ? 'hidden' : 'auto';
   }
 
   handleIncomeSubmitted(income: CreateIncomeRequest) {

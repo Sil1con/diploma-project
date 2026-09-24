@@ -12,7 +12,7 @@ import { CreateStockRequest } from '../../utilities/models/requests/create-inves
 export class StockInvestmentForm {
   stockForm!: FormGroup;
 
-  @Output() cancelled = new EventEmitter<void>();
+  @Output() cancelled = new EventEmitter<boolean>();
   @Output() stockSaved = new EventEmitter<CreateStockRequest>();
 
   constructor(private fb: FormBuilder) {}
@@ -32,7 +32,7 @@ export class StockInvestmentForm {
   }
 
   onCancel(): void {
-    this.cancelled.emit();
+    this.cancelled.emit(false);
   }
 
   onSubmit(): void {

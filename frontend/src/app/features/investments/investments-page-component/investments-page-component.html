@@ -7,10 +7,11 @@
 <div class="bottom-block">
     <div class="left-part">
         <app-portfolio-overview-component
-          [refreshTrigger]="portfolioRefreshTrigger"
+          [portfolioTotalValue$]="portfolioTotalValue$"
         ></app-portfolio-overview-component>
         <app-investments-preview-component
-          [previewInvestments$]="previewInvestments$"
+          (viewAllOpened)="handleViewAllVisibility($event)"
+          [investmentSummaries$]="investmentSummaries$"
         ></app-investments-preview-component>
     </div>
     <app-add-investments-preview-component
@@ -22,44 +23,50 @@
   @switch (investmentSelected) {
     @case ('STOCK') {
       <stock-investment-form
-        (cancelled)="handleCancelledForm()"
+        (cancelled)="handleFormVisibility($event)"
         (stockSaved)="handleInvestmentSubmitted($event)"
       ></stock-investment-form>
     }
 
     @case ('ETF') {
       <etf-investment-form
-        (cancelled)="handleCancelledForm()"
+        (cancelled)="handleFormVisibility($event)"
         (etfSaved)="handleInvestmentSubmitted($event)"
       ></etf-investment-form>
     }
 
     @case ('CRYPTO') {
       <crypto-investment-form
-        (cancelled)="handleCancelledForm()"
+        (cancelled)="handleFormVisibility($event)"
         (cryptoSaved)="handleInvestmentSubmitted($event)"
       ></crypto-investment-form>
     }
 
     @case ('COMMODITY') {
       <commodity-investment-form
-        (cancelled)="handleCancelledForm()"
+        (cancelled)="handleFormVisibility($event)"
         (commoditySaved)="handleInvestmentSubmitted($event)"
       ></commodity-investment-form>
     }
 
     @case ('BOND') {
       <bond-investment-form
-        (cancelled)="handleCancelledForm()"
+        (cancelled)="handleFormVisibility($event)"
         (bondSaved)="handleInvestmentSubmitted($event)"
       ></bond-investment-form>
     }
 
     @case ('CASH') {
       <cash-investment-form
-        (cancelled)="handleCancelledForm()"
+        (cancelled)="handleFormVisibility($event)"
         (cashSaved)="handleInvestmentSubmitted($event)"
       ></cash-investment-form>
     }
   }
+}
+@if (isViewAllOpened) {
+  <app-view-all-component
+    (closed)="handleViewAllVisibility($event)"
+    [investmentSummaries$]="investmentSummaries$"
+  ></app-view-all-component>
 }

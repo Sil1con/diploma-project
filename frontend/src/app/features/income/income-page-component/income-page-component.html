@@ -16,6 +16,8 @@
 </div>
 <app-income-sources-component
     [incomeSources$]="incomeSources$"
+    [incomeIcons]="incomeIcons"
+    (viewAllOpened)="handleViewAllVisibility($event)"
 ></app-income-sources-component>
 <button class="add-btn" (click)="openAddIncomeForm()">
     <img class="add-btn-plus" src="assets/icons/blue_plus.png" alt="add-button-icon">
@@ -26,4 +28,11 @@
         (incomeSaved)="handleIncomeSubmitted($event)"
         (cancelled)="closeAddIncomeForm()"
     ></app-add-income-form>
+}
+@if (isViewAllOpened) {
+    <app-view-all-incomes
+        [incomeSources$]="incomeSources$"
+        [incomeIcons]="incomeIcons"
+        (viewAllClosed)="handleViewAllVisibility($event)"
+    ></app-view-all-incomes>
 }

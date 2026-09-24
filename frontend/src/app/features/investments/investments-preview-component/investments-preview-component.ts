@@ -1,9 +1,8 @@
-import { Component, Input, OnChanges, signal, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, signal, SimpleChanges } from '@angular/core';
 import { AsyncPipe, CurrencyPipe } from '@angular/common';
 import { CapitalLetterPipe } from '../../../shared/pipes/capital-letter-pipe';
 import { InvestmentSummary } from '../utilities/models/investment-summary.model';
 import { map, Observable } from 'rxjs';
-import { Investment } from '../utilities/models/investments.model';
 
 @Component({
   selector: 'app-investments-preview-component',
@@ -17,7 +16,9 @@ import { Investment } from '../utilities/models/investments.model';
 })
 export class InvestmentsPreviewComponent implements OnChanges{
   protected userId: string = '1';
-  @Input() previewInvestments$!: Observable<InvestmentSummary[]>;
+
+  @Input() investmentSummaries$!: Observable<InvestmentSummary[]>;
+  @Output() viewAllOpened = new EventEmitter<boolean>();
 
   displayedInvestments$!: Observable<InvestmentSummary[]>;
 
@@ -43,8 +44,12 @@ export class InvestmentsPreviewComponent implements OnChanges{
   }
 
   getDisplayedInvestments() {
-    this.displayedInvestments$ = this.previewInvestments$.pipe(
+    this.displayedInvestments$ = this.investmentSummaries$.pipe(
       map(investments => investments.slice(0, 4))
     );
+  }
+
+  openViewAll() {
+    this.viewAllOpened.emit(true);
   }
 }

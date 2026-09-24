@@ -17,6 +17,10 @@
     @include fonts.customize-text($text-color: white, $size: 20px, $weight: 500);
 }
 
+.black-text {
+    @include fonts.customize-text($text-color: black, $size: 20px, $weight: 500);
+}
+
 .orange-text {
     @include fonts.customize-text($text-color: colors.$orange, $size: 20px, $weight: 500);
 }

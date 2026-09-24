@@ -1,0 +1,63 @@
+<div class="view-all-block">
+    <div class="top-block">
+        <div class="title-block">
+            <p class="titles">All Income Sources</p>
+            <p class="grey-title">Sources list and quick access</p>
+        </div>
+        <button class="close-btn btn" (click)="closeViewAll()">
+            <img class="icon-50px" src="assets/icons/close.png" alt="">
+        </button>
+    </div>
+    <div class="sources-list-block">
+        @for (incomeSource of displayedIncomeSources$ | async; track incomeSource.id) {
+            <div class="source">
+                <div 
+                    class="icon-background icon-70px"
+                    [class]="incomeSource.category"
+                >
+                    <img
+                        class="income-source-icon icon-55px"
+                        [src]="incomeIcons[incomeSource.category]"
+                        [alt]="incomeSource.category + '-icon'"
+                    >
+                </div>
+                <div class="income-title-block">
+                    <p class="income-title text">{{ incomeSource.name }}</p>
+                </div>
+                <div class="income-type-block">
+                    <p class="income-type grey-text">{{ incomeSource.category | capitalLetterPipe }}</p>
+                </div>
+                <div class="cash-value-block">
+                    <p class="cash-value black-text"> {{ incomeSource.amount | currency: 'EUR' : 'symbol-narrow' : '1.2-2' }}</p>
+                </div>
+                <div class="date-block">
+                    <p class="date-value grey-text">{{ incomeSource.incomeDate | date:'longDate' }}</p>
+                </div>
+                <div class="actions-block">
+                    <button class="edit-btn btn">
+                        <img class="icon-30px" src="assets/icons/edit.png" alt="">
+                    </button>
+                    <button class="delete-btn btn">
+                        <img class="icon-30px" src="assets/icons/close-white.png" alt="">
+                    </button>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="bottom-block">
+        <div class="title-block">
+            <p class="grey-text">Showing {{ calculateDisplayedIncomeSources() | async }} of {{ (incomeSources$ | async)?.length ?? 0 }} income sources</p>
+        </div>
+        <div class="segregation-block">
+            <button class="prev-btn btn icon-40px" (click)="previousPage()">
+                <img class="icon-20px" src="assets/icons/prev_btn.png" alt="previous-expenditure-page-button">
+            </button>
+            <button class="current-page-btn btn icon-40px">
+                <span class="grey-text">{{ currentPage$ | async }}</span>
+            </button>
+            <button class="next-btn btn icon-40px" (click)="nextPage()">
+                <img class="icon-20px" src="assets/icons/next_btn.png" alt="next-expenditure-page-button">
+            </button>
+        </div>
+    </div>
+</div>

@@ -38,6 +38,7 @@
     <app-recent-expenditures-preview
         [expenditures$]="expenditures$"
         [expenditureIcons]="expenditureIcons"
+        (viewAllOpened)="handleViewAllVisibility($event)"
     ></app-recent-expenditures-preview>
     @if (isAddExpenseFormOpened) {
         <app-add-expense-form
@@ -46,3 +47,10 @@
         ></app-add-expense-form>
     }
 </div>
+@if (isViewAllOpened) {
+    <app-view-all-component
+        [expenditures$]="expenditures$"
+        [expenditureIcons]="expenditureIcons"
+        (closed)="handleViewAllVisibility($event)"
+    ></app-view-all-component>
+}

@@ -1,0 +1,63 @@
+<div class="view-all-block">
+    <div class="top-block">
+        <div class="title-block">
+            <p class="titles">All Expenditures</p>
+            <p class="grey-title">Expenditures list and quick access</p>
+        </div>
+        <button class="close-btn btn" (click)="closeViewAll()">
+            <img class="icon-50px" src="assets/icons/close.png" alt="">
+        </button>
+    </div>
+    <div class="expenditure-list-block">
+        @for (expenditure of displayedExpenditures$ | async; track expenditure.id) {
+            <div class="expenditure">
+                <div 
+                    class="icon-background icon-70px"
+                    [class]="expenditure.category"
+                >
+                    <img
+                        class="expenditure-icon icon-60px"
+                        [src]="expenditureIcons[expenditure.category]"
+                        [alt]="expenditure.category + '-icon'"
+                    >
+                </div>
+                <div class="expenditure-title-block">
+                    <p class="expenditure-title text">{{ expenditure.name }}</p>
+                </div>
+                <div class="expenditure-type-block">
+                    <p class="expenditure-type grey-text">{{ expenditure.category | capitalLetterPipe }}</p>
+                </div>
+                <div class="cash-value-block">
+                    <p class="cash-value orange-text">&ndash; {{ expenditure.amount | currency: 'EUR' : 'symbol-narrow' : '1.2-2' }}</p>
+                </div>
+                <div class="date-block">
+                    <p class="date-value grey-text">{{ expenditure.expenditureDate | date:'longDate' }}</p>
+                </div>
+                <div class="actions-block">
+                    <button class="edit-btn btn">
+                        <img class="icon-30px" src="assets/icons/edit.png" alt="">
+                    </button>
+                    <button class="delete-btn btn">
+                        <img class="icon-30px" src="assets/icons/close-white.png" alt="">
+                    </button>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="bottom-block">
+        <div class="title-block">
+            <p class="grey-text">Showing {{calculateDisplayedExpenditures() | async }} of {{ (expenditures$ | async)?.length ?? 0 }} expenditures</p>
+        </div>
+        <div class="segregation-block">
+            <button class="prev-btn btn icon-40px" (click)="previousPage()">
+                <img class="icon-20px" src="assets/icons/prev_btn.png" alt="previous-expenditure-page-button">
+            </button>
+            <button class="current-page-btn btn icon-40px">
+                <span class="grey-text">{{ currentPage$ | async }}</span>
+            </button>
+            <button class="next-btn btn icon-40px" (click)="nextPage()">
+                <img class="icon-20px" src="assets/icons/next_btn.png" alt="next-expenditure-page-button">
+            </button>
+        </div>
+    </div>
+</div>

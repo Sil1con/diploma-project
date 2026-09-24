@@ -9,6 +9,7 @@ import { ExpenditureService } from '../../../services/expenditures/expenditure-s
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { CategorySummary } from '../utilities/models/category-summary';
 import { CreateExpenditureRequest } from '../utilities/models/request/create-expenditure-request';
+import { ViewAllComponent } from '../components/view-all-component/view-all-component';
 
 @Component({
   selector: 'app-expenditures-page-component',
@@ -17,14 +18,16 @@ import { CreateExpenditureRequest } from '../utilities/models/request/create-exp
     OverviewComponent,
     SpendingCategoriesPreview,
     RecentExpendituresPreview,
-    AddExpenseForm
+    AddExpenseForm,
+    ViewAllComponent
   ],
   templateUrl: './expenditures-page-component.html',
   styleUrl: './expenditures-page-component.scss',
 })
 export class ExpendituresPageComponent {
   private readonly userId: string = '1';
-  isAddExpenseFormOpened = false;
+  isAddExpenseFormOpened: boolean = false;
+  isViewAllOpened: boolean = false;
 
   private expendituresSubject$$ = new BehaviorSubject<Expenditure[]>([]);
   private categoriesSummarySubject$$ = new BehaviorSubject<CategorySummary[]>([]);
@@ -56,6 +59,12 @@ export class ExpendituresPageComponent {
 
   closeAddExpenseForm(): void {
     this.isAddExpenseFormOpened = false;
+  }
+
+  handleViewAllVisibility(isOpened: boolean): void {
+    this.isViewAllOpened = isOpened;
+    
+    document.body.style.overflow = isOpened ? 'hidden' : 'auto';
   }
 
   handleExpenseSubmitted(expenditure: CreateExpenditureRequest) {

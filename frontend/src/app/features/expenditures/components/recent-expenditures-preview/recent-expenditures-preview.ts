@@ -1,5 +1,5 @@
 import { AsyncPipe, CurrencyPipe, DatePipe } from '@angular/common';
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { Expenditure } from '../../utilities/models/expenditure';
 import { CapitalLetterPipe } from '../../../../shared/pipes/capital-letter-pipe';
@@ -19,6 +19,8 @@ export class RecentExpendituresPreview {
   @Input() expenditures$!: Observable<Expenditure[]>;
   @Input() expenditureIcons!: Record<string, string>;
 
+  @Output() viewAllOpened = new EventEmitter<boolean>();
+
   displayedExpenditures$!: Observable<Expenditure[]>;
 
   ngOnChanges(changes: SimpleChanges) {
@@ -31,5 +33,9 @@ export class RecentExpendituresPreview {
     this.displayedExpenditures$ = this.expenditures$.pipe(
       map(expenditures => expenditures.reverse().slice(0, 6))
     );
+  }
+
+  openViewAll() {
+    this.viewAllOpened.emit(true);
   }
 }

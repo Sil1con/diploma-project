@@ -9,6 +9,7 @@ import com.diploma.finance.investments.entity.transaction.InvestmentTransaction;
 import com.diploma.finance.investments.mapper.InvestmentResponseMapper;
 import com.diploma.finance.investments.mapper.TransactionResponseMapper;
 import com.diploma.finance.investments.service.InvestmentService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 
@@ -33,6 +34,13 @@ public class InvestmentController {
             @Valid @RequestBody CreateInvestmentRequest request
     ) {
         return investmentService.createInvestmentTransaction(request);
+    }
+
+    @DeleteMapping("/{userId}/delete/{assetId}")
+    public ResponseEntity<Void> deleteInvestment(@PathVariable Long userId, @PathVariable Long assetId) {
+        investmentService.deleteInvestment(userId, assetId);
+
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/{userId}")

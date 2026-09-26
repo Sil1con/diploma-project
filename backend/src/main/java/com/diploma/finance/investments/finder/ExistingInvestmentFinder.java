@@ -9,6 +9,7 @@ import java.util.Optional;
 
 @Component
 public class ExistingInvestmentFinder {
+    private final InvestmentsRepository investmentsRepository;
     private final StockRepository stockRepository;
     private final EtfRepository etfRepository;
     private final CryptoRepository cryptoRepository;
@@ -17,6 +18,7 @@ public class ExistingInvestmentFinder {
     private final CashRepository cashRepository;
 
     public ExistingInvestmentFinder(
+            InvestmentsRepository investmentsRepository,
             StockRepository stockRepository,
             EtfRepository etfRepository,
             CryptoRepository cryptoRepository,
@@ -24,6 +26,7 @@ public class ExistingInvestmentFinder {
             BondRepository bondRepository,
             CashRepository cashRepository
     ) {
+        this.investmentsRepository = investmentsRepository;
         this.stockRepository = stockRepository;
         this.etfRepository = etfRepository;
         this.cryptoRepository = cryptoRepository;
@@ -72,5 +75,9 @@ public class ExistingInvestmentFinder {
         throw new IllegalArgumentException(
                 "Unsupported investment type: " + asset.getType()
         );
+    }
+
+    public Optional<InvestmentAsset> findById(Long userId, Long assetId) {
+        return investmentsRepository.findById(assetId);
     }
 }

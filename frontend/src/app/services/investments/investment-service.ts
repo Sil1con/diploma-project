@@ -14,6 +14,18 @@ export class InvestmentService {
 
   constructor(private httpClient: HttpClient) {}
 
+  createInvestment(investment: CreateInvestmentRequest): Observable<TransactionResponse> {
+    return this.httpClient.post<TransactionResponse>(
+      this.apiUrl, investment
+    );
+  }
+
+  deleteInvestment(userId: string, assetId: string): Observable<void> {
+    return this.httpClient.delete<void>(
+      `${this.apiUrl}/${userId}/delete/${assetId}`
+    );
+  }
+
   getInvestments(userId: string): Observable<Investment[]> {
     return this.httpClient.get<Investment[]>(
       `${this.apiUrl}/${userId}`
@@ -30,11 +42,5 @@ export class InvestmentService {
     return this.httpClient.get<InvestmentSummary[]>(
       `${this.apiUrl}/preview/${userId}`
     )
-  }
-
-  createInvestment(investment: CreateInvestmentRequest): Observable<TransactionResponse> {
-    return this.httpClient.post<TransactionResponse>(
-      this.apiUrl, investment
-    );
   }
 }

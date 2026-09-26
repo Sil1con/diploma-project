@@ -5,6 +5,7 @@ import com.diploma.finance.expenditures.dto.response.CategorySummaryResponse;
 import com.diploma.finance.expenditures.dto.response.ExpenditureResponse;
 import com.diploma.finance.expenditures.service.ExpenditureService;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -65,5 +66,12 @@ public class ExpenditureController {
                 startDate,
                 endDate
         );
+    }
+
+    @DeleteMapping("/{userId}/delete/{expenditureId}")
+    public ResponseEntity<Void> deleteExpenditure(@PathVariable Long userId, @PathVariable Long expenditureId) {
+        expenditureService.deleteExpenditure(userId, expenditureId);
+
+        return ResponseEntity.noContent().build();
     }
 }

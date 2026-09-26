@@ -36,6 +36,12 @@ export class ExpenditureService {
     );
   }
 
+  deleteExpenditure(userId: string, expenditureId: string): Observable<void> {
+    return this.httpClient.delete<void>(
+      `${this.apiUrl}/${userId}/delete/${expenditureId}`
+    )
+  }
+
   getCurrentMonthExpenditures(userId: string): Observable<Expenditure[]> {
     return this.httpClient.get<Expenditure[]>(
       `${this.apiUrl}/current-month/${userId}`

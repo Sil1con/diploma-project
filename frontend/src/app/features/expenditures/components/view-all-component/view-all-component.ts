@@ -21,6 +21,7 @@ export class ViewAllComponent {
   @Input() expenditures$!: Observable<Expenditure[]>;
   @Input() expenditureIcons!: Record<string, string>;
   @Output() closed = new EventEmitter<boolean>();
+  @Output() deletedExpenditure = new EventEmitter<string>();
 
   private currentPage$$ = new BehaviorSubject<number>(1);
 
@@ -29,6 +30,20 @@ export class ViewAllComponent {
   totalPages$!: Observable<number>;
 
   ngOnInit() {
+    this.refreshExpenditureData();
+
+    this.totalPages$.subscribe(totalPages => {
+      const currentPage = this.currentPage$$.value;
+
+      if (currentPage > totalPages) {
+        this.currentPage$$.next(
+          currentPage - 1
+        );
+      }
+    });
+  }
+
+  refreshExpenditureData(): void {
     this.prepareDisplayedInvestments();
     this.calculatePagesQuantity();
   }
@@ -37,6 +52,10 @@ export class ViewAllComponent {
     let isOpened = false;
 
     this.closed.emit(isOpened);
+  }
+
+  deleteExpenditure(expenditureId: string) {
+    this.deletedExpenditure.emit(expenditureId);
   }
 
   prepareDisplayedInvestments() {

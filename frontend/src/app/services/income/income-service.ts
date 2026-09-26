@@ -29,4 +29,10 @@ export class IncomeService {
       `${this.apiUrl}/${userId}/current-total`
     );
   }
+
+  deletIncomeSource(userId: string, incomeId: string): Observable<void> {
+    return this.httpClient.delete<void>(
+      `${this.apiUrl}/${userId}/delete/${incomeId}`
+    );
+  }
 }

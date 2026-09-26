@@ -82,6 +82,42 @@ public class InvestmentService {
         return investmentsRepository.save(incomingAsset);
     }
 
+    private BigDecimal calculateTotalAssetValue(InvestmentAsset asset, List<InvestmentTransaction> transactions) {
+        BigDecimal totalValue = BigDecimal.ZERO;
+
+        for (InvestmentTransaction transaction : transactions) {
+            if (!Objects.equals(asset.getId(), transaction.getAsset().getId())) {
+                continue;
+            }
+
+            if (transaction.getTransactionType() == TransactionType.BUY) {
+                totalValue = totalValue.add(transaction.getQuantity().multiply(transaction.getPricePerUnit()));
+            }
+
+            if (transaction.getTransactionType() == TransactionType.SELL) {
+                totalValue = totalValue.subtract(transaction.getQuantity().multiply(transaction.getPricePerUnit()));
+            }
+        }
+
+        return totalValue;
+    }
+
+    private void sortSummaryResponses(List<InvestmentSummaryResponse> summaryResponses) {
+        for (int i = 0; i < summaryResponses.size() - 1; i++) {
+            for (int j = i + 1; j < summaryResponses.size(); j++) {
+
+                if (summaryResponses.get(j).getTotalValue()
+                        .compareTo(summaryResponses.get(i).getTotalValue()) > 0) {
+
+                    InvestmentSummaryResponse temp = summaryResponses.get(i);
+
+                    summaryResponses.set(i, summaryResponses.get(j));
+                    summaryResponses.set(j, temp);
+                }
+            }
+        }
+    }
+
     public InvestmentAsset getInvestment(Long id) {
         return investmentsRepository.findById(id)
                 .orElseThrow(() ->
@@ -166,39 +202,17 @@ public class InvestmentService {
         return summaryResponses;
     }
 
-    private BigDecimal calculateTotalAssetValue(InvestmentAsset asset, List<InvestmentTransaction> transactions) {
-        BigDecimal totalValue = BigDecimal.ZERO;
+    public void deleteInvestment(Long userId, Long assetId) {
+        User user = getUser(userId);
 
-        for (InvestmentTransaction transaction : transactions) {
-            if (!Objects.equals(asset.getId(), transaction.getAsset().getId())) {
-                continue;
-            }
+        Optional<InvestmentAsset> existingAsset = existingInvestmentFinder.findById(user.getId(), assetId);
 
-            if (transaction.getTransactionType() == TransactionType.BUY) {
-                totalValue = totalValue.add(transaction.getQuantity().multiply(transaction.getPricePerUnit()));
-            }
-
-            if (transaction.getTransactionType() == TransactionType.SELL) {
-                totalValue = totalValue.subtract(transaction.getQuantity().multiply(transaction.getPricePerUnit()));
-            }
+        if (existingAsset.isEmpty()) {
+            throw new InvalidRequestException(
+                    "Investment not found"
+            );
         }
 
-        return totalValue;
-    }
-
-    private void sortSummaryResponses(List<InvestmentSummaryResponse> summaryResponses) {
-        for (int i = 0; i < summaryResponses.size() - 1; i++) {
-            for (int j = i + 1; j < summaryResponses.size(); j++) {
-
-                if (summaryResponses.get(j).getTotalValue()
-                        .compareTo(summaryResponses.get(i).getTotalValue()) > 0) {
-
-                    InvestmentSummaryResponse temp = summaryResponses.get(i);
-
-                    summaryResponses.set(i, summaryResponses.get(j));
-                    summaryResponses.set(j, temp);
-                }
-            }
-        }
+        investmentsRepository.delete(existingAsset.get());
     }
 }

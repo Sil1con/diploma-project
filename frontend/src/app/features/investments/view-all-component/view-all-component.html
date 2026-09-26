@@ -37,7 +37,7 @@
                     <button class="edit-btn btn">
                         <img class="icon-30px" src="assets/icons/edit.png" alt="">
                     </button>
-                    <button class="delete-btn btn">
+                    <button class="delete-btn btn" (click)="deleteInvestment(investment.investmentId)">
                         <img class="icon-30px" src="assets/icons/close-white.png" alt="">
                     </button>
                 </div>
@@ -46,7 +46,7 @@
     </div>
     <div class="bottom-block">
         <div class="title-block">
-            <p class="grey-text">Showing {{calculateShownInvestments() | async }} of {{ (investmentSummaries$ | async)?.length ?? 0 }} investments</p>
+            <p class="grey-text">Showing {{ calculateShownInvestments() | async }} of {{ (investmentSummaries$ | async)?.length ?? 0 }} investments</p>
         </div>
         <div class="segregation-block">
             <button class="prev-btn btn icon-40px" (click)="previousPage()">

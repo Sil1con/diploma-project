@@ -70,15 +70,21 @@ export class IncomePageComponenet {
     income.userId = this.userId;
 
     this.incomeService.createIncomeSource(income).subscribe({
-      next: (incomeResponse) => {
-        console.log(incomeResponse);
-        
+      next: () => {  
         this.refreshIncomeData();
         this.closeAddIncomeForm();
         this.cdr.markForCheck();
       },
       error: (error) => {
         console.error('Failed to create income source', error);
+      }
+    })
+  }
+
+  handleIncomeDeleted(incomeId: string) {
+    this.incomeService.deletIncomeSource(this.userId, incomeId).subscribe({
+      next: () => {
+        this.refreshIncomeData();
       }
     })
   }

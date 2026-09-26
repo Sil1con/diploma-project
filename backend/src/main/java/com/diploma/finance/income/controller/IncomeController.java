@@ -3,6 +3,7 @@ package com.diploma.finance.income.controller;
 import com.diploma.finance.income.dto.request.CreateIncomeRequest;
 import com.diploma.finance.income.dto.response.IncomeResponse;
 import com.diploma.finance.income.service.IncomeService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 
@@ -56,6 +57,15 @@ public class IncomeController {
             @RequestParam int year,
             @RequestParam int month
     ) {
-        return incomeService.calculateCurrentIncomeTotalValue(userId);
+        YearMonth yearMonth = YearMonth.of(year, month);
+
+        return incomeService.calculateIncomeTotalValueForMonth(userId, yearMonth);
+    }
+
+    @DeleteMapping("/{userId}/delete/{incomeId}")
+    public ResponseEntity<Void> deleteIncome(@PathVariable Long userId, @PathVariable Long incomeId) {
+        incomeService.deleteIncome(userId, incomeId);
+
+        return ResponseEntity.noContent().build();
     }
 }

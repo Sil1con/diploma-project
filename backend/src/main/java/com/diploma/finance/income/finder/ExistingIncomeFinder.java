@@ -72,4 +72,8 @@ public class ExistingIncomeFinder {
                 monthBoundaries.startOfNextMonth()
         );
     }
+
+    public Optional<IncomeSource> findByIncomeId(Long userId, Long incomeId) {
+        return incomeRepository.findByUserIdAndId(userId, incomeId);
+    }
 }

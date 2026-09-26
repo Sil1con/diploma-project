@@ -23,6 +23,7 @@ import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ExpenditureService {
@@ -189,5 +190,19 @@ public class ExpenditureService {
         sortCategoriesSummaries(summaryResponses);
 
         return summaryResponses;
+    }
+
+    public void deleteExpenditure(Long userId, Long expenditureId) {
+        User user = getUser(userId);
+
+        Optional<Expenditure> existingExpenditure = expenditureFinder.findById(user.getId(), expenditureId);
+
+        if (existingExpenditure.isEmpty()) {
+            throw new InvalidRequestException(
+                    "Expenditure not found"
+            );
+        }
+
+        expenditureRepository.delete(existingExpenditure.get());
     }
 }

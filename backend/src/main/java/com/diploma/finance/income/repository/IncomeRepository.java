@@ -12,6 +12,8 @@ import java.util.Optional;
 public interface IncomeRepository extends JpaRepository<IncomeSource, Long> {
     List<IncomeSource> findAllByUserId(Long userId);
 
+    Optional<IncomeSource> findByUserIdAndId(Long userId, Long incomeId);
+
     Optional<IncomeSource> findByUserIdAndNameAndAmountAndCategory(Long userId, String name, BigDecimal amount, IncomeCategory category);
 
     List<IncomeSource> findByUserIdAndCategoryAndIncomeDateGreaterThanEqualAndIncomeDateLessThan(

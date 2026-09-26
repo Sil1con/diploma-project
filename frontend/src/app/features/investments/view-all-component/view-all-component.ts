@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { BehaviorSubject, combineLatest, map, Observable, take } from 'rxjs';
 import { AsyncPipe, CurrencyPipe } from '@angular/common';
 import { InvestmentSummary } from '../utilities/models/investment-summary.model';
@@ -19,6 +19,7 @@ export class ViewAllComponent {
 
   @Input() investmentSummaries$!: Observable<InvestmentSummary[]>;
   @Output() closed = new EventEmitter<boolean>();
+  @Output() deletedInvestment = new EventEmitter<string>();
 
   private currentPage$$ = new BehaviorSubject<number>(1);
 
@@ -36,6 +37,20 @@ export class ViewAllComponent {
   };
 
   ngOnInit() {
+    this.refreshInvestmentsData();
+    
+    this.totalPages$.subscribe(totalPages => {
+      const currentPage = this.currentPage$$.value;
+
+      if (currentPage > totalPages) {
+        this.currentPage$$.next(
+          currentPage - 1
+        );
+      }
+    });
+  }
+
+  refreshInvestmentsData() {
     this.prepareDisplayedInvestments();
     this.calculatePagesQuantity();
   }
@@ -46,7 +61,11 @@ export class ViewAllComponent {
     this.closed.emit(isOpened);
   }
 
-  prepareDisplayedInvestments() {
+  deleteInvestment(assetId: string): void {
+    this.deletedInvestment.emit(assetId);
+  }
+
+  prepareDisplayedInvestments(): void {
     this.displayedInvestments$ = combineLatest([
       this.investmentSummaries$,
       this.currentPage$

@@ -87,6 +87,14 @@ export class InvestmentsPageComponent {
     });
   }
 
+  handleInvestmentDeleted(assetId: string): void {
+    this.investmentService.deleteInvestment(this.userId, assetId).subscribe({
+      next: () => {
+        this.refreshInvestmentData();
+      }
+    })
+  }
+
   refreshInvestmentData(): void {
     this.getInvestments();
     this.getInvestmentSummaries();

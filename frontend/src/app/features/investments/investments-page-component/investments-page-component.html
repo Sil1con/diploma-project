@@ -66,7 +66,8 @@
 }
 @if (isViewAllOpened) {
   <app-view-all-component
-    (closed)="handleViewAllVisibility($event)"
-    [investmentSummaries$]="investmentSummaries$"
+  [investmentSummaries$]="investmentSummaries$"
+  (closed)="handleViewAllVisibility($event)"
+  (deletedInvestment)="handleInvestmentDeleted($event)"
   ></app-view-all-component>
 }

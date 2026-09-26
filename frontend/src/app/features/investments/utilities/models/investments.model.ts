@@ -9,7 +9,7 @@ export type Investment =
   | CashInvestment;
 
 export interface InvestmentBase {
-  id: number;
+  id: string;
   type: InvestmentType;
   investmentName: string;
 }

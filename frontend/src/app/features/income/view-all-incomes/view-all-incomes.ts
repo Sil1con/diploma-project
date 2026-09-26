@@ -21,6 +21,7 @@ export class ViewAllIncomes {
   @Input() incomeSources$!: Observable<IncomeSource[]>;
   @Input() incomeIcons!: Record<string, string>;
   @Output() viewAllClosed = new EventEmitter<boolean>();
+  @Output() deletedIncome = new EventEmitter<string>();
 
   private currentPage$$ = new BehaviorSubject<number>(1);
 
@@ -29,6 +30,20 @@ export class ViewAllIncomes {
   totalPages$!: Observable<number>;
 
   ngOnInit() {
+    this.refreshIncomeData();
+
+    this.totalPages$.subscribe(totalPages => {
+      const currentPage = this.currentPage$$.value;
+
+      if (currentPage > totalPages) {
+        this.currentPage$$.next(
+          currentPage - 1
+        );
+      }
+    });
+  }
+
+  refreshIncomeData(): void {
     this.prepareDisplayedSources();
     this.calculatePagesQuantity();
   }
@@ -37,6 +52,10 @@ export class ViewAllIncomes {
     let isOpened = false;
 
     this.viewAllClosed.emit(isOpened);
+  }
+
+  deleteIncome(incomeId: string) {
+    this.deletedIncome.emit(incomeId);
   }
 
   prepareDisplayedSources() {

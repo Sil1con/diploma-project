@@ -4,6 +4,8 @@ import com.diploma.finance.expenditures.entity.Expenditure;
 import com.diploma.finance.expenditures.repository.ExpenditureRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 public class ExistingExpenditureFinder {
     private ExpenditureRepository expenditureRepository;
@@ -25,5 +27,9 @@ public class ExistingExpenditureFinder {
                     expenditure.getPaymentMethod(),
                     expenditure.getVendor()
             );
+    }
+
+    public Optional<Expenditure> findById(Long userId, Long expenditureId) {
+        return this.expenditureRepository.findByUserIdAndId(userId, expenditureId);
     }
 }

@@ -71,11 +71,17 @@ export class ExpendituresPageComponent {
     expenditure.userId = this.userId;
 
     this.expenditureService.createExpenditure(expenditure).subscribe({
-      next: (expenditureResponse) => {
-        console.log(expenditureResponse);
-
+      next: () => {
         this.refreshExpendituresData();
         this.closeAddExpenseForm();
+      }
+    })
+  }
+
+  handleExpenditureDeleted(expenditureId: string) {
+    this.expenditureService.deleteExpenditure(this.userId, expenditureId).subscribe({
+      next: () => {
+        this.refreshExpendituresData();
       }
     })
   }

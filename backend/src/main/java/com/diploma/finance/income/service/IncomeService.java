@@ -141,4 +141,18 @@ public class IncomeService {
 
         return totalValue;
     }
+
+    public void deleteIncome(Long userId, Long incomeId) {
+        User user = getUser(userId);
+
+        Optional<IncomeSource> existingSource = incomeFinder.findByIncomeId(user.getId(), incomeId);
+
+        if (existingSource.isEmpty()) {
+            throw new InvalidRequestException(
+                    "Income source not found"
+            );
+        }
+
+        incomeRepository.delete(existingSource.get());
+    }
 }

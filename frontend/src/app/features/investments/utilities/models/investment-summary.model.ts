@@ -1,7 +1,7 @@
 import { InvestmentType } from "../types/investment-type";
 
 export interface InvestmentSummary {
-    investmentId: number;
+    investmentId: string;
     investmentName: string;
     investmentType: InvestmentType;
     totalValue: number;
